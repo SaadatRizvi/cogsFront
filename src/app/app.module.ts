@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
 import { HttpModule }    from '@angular/http';
 import {Token} from './token'
+import { CoolStorageModule } from 'angular2-cool-storage';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -23,7 +24,8 @@ import { AddressesComponent } from './dashboard/addresses/addresses.component';
     BrowserModule,
     FormsModule,
     HttpModule,
-    AppRoutingModule
+    AppRoutingModule,
+    CoolStorageModule
   ],
   declarations: [
     AppComponent,
