@@ -7,6 +7,7 @@ import { HeroDetailComponent } from './hero-detail.component';
 import { AuthenticateComponent } from './authenticate/authenticate.component';
 import {ProjectsComponent} from './dashboard/projects/projects.component'
 import {AddressesComponent} from './dashboard/addresses/addresses.component'
+import {ContactDetailsComponent} from './dashboard/contact-details/contact-details.component'
 
 
 

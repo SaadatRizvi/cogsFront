@@ -35,7 +35,10 @@ export class AddressesComponent implements OnInit {
 
     this.route.paramMap
       .switchMap((params: ParamMap) => this.addressService.getAddresses(+params.get('id')))
-      .subscribe(addresses => this.addresses = addresses);
+      .subscribe(addresses => {
+        console.log("addresses: "+addresses);
+        this.addresses = addresses});
+
   }
 
 }

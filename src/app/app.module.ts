@@ -18,6 +18,7 @@ import { HeroService }          from './hero.service';
 import { AuthenticateComponent } from './authenticate/authenticate.component';
 import { ProjectsComponent } from './dashboard/projects/projects.component';
 import { AddressesComponent } from './dashboard/addresses/addresses.component';
+import { ContactDetailsComponent } from './dashboard/contact-details/contact-details.component';
 
 @NgModule({
   imports: [
@@ -35,6 +36,7 @@ import { AddressesComponent } from './dashboard/addresses/addresses.component';
     AuthenticateComponent,
     ProjectsComponent,
     AddressesComponent,
+    ContactDetailsComponent,
   ],
   providers: [ HeroService, Token],
   bootstrap: [ AppComponent ]
