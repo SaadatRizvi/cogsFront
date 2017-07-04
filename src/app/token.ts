@@ -1,20 +1,22 @@
 import { OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 
-export class Token implements OnInit {
 
-  private static token: string;
-  static baseUrl='http://localhost:4100/';
+@Injectable()
+export class Token  {
 
-  ngOnInit(): void {
-    Token.token=null;
-   // Token.baseUrl=;
-  }
 
-  static  setToken(token: string){
-    Token.token=token;
-  }
-  static  getToken(){
-    return Token.token
-  }
+
+   // public   token: string = '';
+   baseUrl = 'http://localhost:4100/';
+
+
+  //
+  // setToken(token: string){
+  //   this.token = token;
+  // }
+  //   getToken(){
+  //   return this.token;
+  // }
 }

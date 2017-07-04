@@ -2,6 +2,9 @@ import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
 import { HttpModule }    from '@angular/http';
+import {Token} from './token'
+import { CoolStorageModule } from 'angular2-cool-storage';
+
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -14,13 +17,16 @@ import { HeroDetailComponent }  from './hero-detail.component';
 import { HeroService }          from './hero.service';
 import { AuthenticateComponent } from './authenticate/authenticate.component';
 import { ProjectsComponent } from './dashboard/projects/projects.component';
+import { EmployeeComponent } from './dashboard/employee/employee.component';
+import { AddressesComponent } from './dashboard/addresses/addresses.component';
 
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    AppRoutingModule
+    AppRoutingModule,
+    CoolStorageModule
   ],
   declarations: [
     AppComponent,
@@ -29,8 +35,10 @@ import { ProjectsComponent } from './dashboard/projects/projects.component';
     HeroesComponent,
     AuthenticateComponent,
     ProjectsComponent,
+    EmployeeComponent,
+    AddressesComponent,
   ],
-  providers: [ HeroService ],
+  providers: [ HeroService, Token],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
