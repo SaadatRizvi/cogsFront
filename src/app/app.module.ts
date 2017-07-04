@@ -2,6 +2,8 @@ import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
 import { HttpModule }    from '@angular/http';
+import {Token} from './token'
+
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -14,6 +16,7 @@ import { HeroDetailComponent }  from './hero-detail.component';
 import { HeroService }          from './hero.service';
 import { AuthenticateComponent } from './authenticate/authenticate.component';
 import { ProjectsComponent } from './dashboard/projects/projects.component';
+import { AddressesComponent } from './dashboard/addresses/addresses.component';
 
 @NgModule({
   imports: [
@@ -29,8 +32,9 @@ import { ProjectsComponent } from './dashboard/projects/projects.component';
     HeroesComponent,
     AuthenticateComponent,
     ProjectsComponent,
+    AddressesComponent,
   ],
-  providers: [ HeroService ],
+  providers: [ HeroService, Token],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

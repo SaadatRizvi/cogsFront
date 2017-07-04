@@ -23,6 +23,7 @@ export class AuthenticateComponent implements OnInit{
   constructor(
     private router: Router,
     private authenticateService: AuthenticateService,
+    private token: Token
     ) { }
 
 
@@ -51,7 +52,8 @@ export class AuthenticateComponent implements OnInit{
         }
         else {
           this.loginRes=loginRes;
-          Token.setToken(loginRes.token);
+          this.token.setToken(loginRes.token);
+
           this.failure = null;
           this.gotoDashboard();
 

@@ -6,11 +6,14 @@ import { HeroesComponent } from './heroes.component';
 import { HeroDetailComponent } from './hero-detail.component';
 import { AuthenticateComponent } from './authenticate/authenticate.component';
 import {ProjectsComponent} from './dashboard/projects/projects.component'
+import {AddressesComponent} from './dashboard/addresses/addresses.component'
+
+
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'dashboard',  component: DashboardComponent },
-  { path: 'dashboard/:id',  component: DashboardComponent },
+  { path: 'dashboard/:id',  component: AddressesComponent },
   { path: 'detail/:id', component: HeroDetailComponent },
   { path: 'heroes',     component: HeroesComponent },
   { path: 'login',     component: AuthenticateComponent }
