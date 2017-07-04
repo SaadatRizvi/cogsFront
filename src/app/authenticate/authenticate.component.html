@@ -2,6 +2,8 @@
 
 <div  class="login">
   <h1>Login</h1>
+
+  <p *ngIf="failure" >{{failure}}</p>
   <form>
     <input [(ngModel)]="loginData.email" name="email" placeholder="email" />
     <input [(ngModel)]="loginData.password" name="password" placeholder="password" />

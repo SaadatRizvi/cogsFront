@@ -15,8 +15,14 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
   title = 'COGS';
   isLogged: boolean;
+ private static token: string;
 
   ngOnInit(): void {
     this.isLogged = false;
+    AppComponent.token=null;
+  }
+
+ static  setToken(token: string){
+    this.token=token;
   }
 }
