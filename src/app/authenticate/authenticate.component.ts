@@ -22,18 +22,20 @@ export class AuthenticateComponent implements OnInit{
 
   ngOnInit(): void {
     this.loginData = new LoginRequest();
-    this.loginData.email = "";
-    this.loginData.password="";
+    this.loginData.email = '';
+    this.loginData.password = '';
     this.loginRes = new LoginRes();
-    this.loginRes.token = "";
-    this.loginRes.message = "";
+    this.loginRes.token = '';
+    this.loginRes.message = '';
     this.loginRes.success = false;
 
   }
 
-  submit(){
+  submit() {
     this.authenticateService.authenticateUser(this.loginData);
   }
-
+  get() {
+    this.authenticateService.authenticateGet();
+  }
 
 }
