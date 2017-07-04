@@ -9,10 +9,11 @@ import {Token} from "../token";
 @Injectable()
 export class AuthenticateService  {
 
-   private url=Token.baseUrl + 'authenticate';
+   private url=this.token.baseUrl + 'authenticate';
   private headers=new Headers({'Content-Type': 'application/json'});
 
-  constructor(private http: Http) { }
+  constructor(private http: Http,
+              private token: Token) { }
 
   authenticateUser(data: LoginRequest): Promise<LoginRes> {
 console.log(data)
