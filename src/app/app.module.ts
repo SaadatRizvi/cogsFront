@@ -19,6 +19,7 @@ import { AuthenticateComponent } from './authenticate/authenticate.component';
 import { ProjectsComponent } from './dashboard/projects/projects.component';
 import { EmployeeComponent } from './dashboard/employee/employee.component';
 import { AddressesComponent } from './dashboard/addresses/addresses.component';
+import { ContactDetailsComponent } from './dashboard/contact-details/contact-details.component';
 
 @NgModule({
   imports: [
@@ -37,6 +38,7 @@ import { AddressesComponent } from './dashboard/addresses/addresses.component';
     ProjectsComponent,
     EmployeeComponent,
     AddressesComponent,
+    ContactDetailsComponent,
   ],
   providers: [ HeroService, Token],
   bootstrap: [ AppComponent ]
