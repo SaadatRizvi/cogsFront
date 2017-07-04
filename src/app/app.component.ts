@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
-import {LocalStorageService} from "angular2-localstorage/LocalStorageEmitter";
+import { CoolLocalStorage } from 'angular2-cool-storage';
 
 
 @Component({
@@ -14,19 +13,23 @@ import {LocalStorageService} from "angular2-localstorage/LocalStorageEmitter";
     <router-outlet></router-outlet>
   `,
   styleUrls: ['./app.component.css'],
-  providers: [LocalStorageService]
+  providers: []
 })
 export class AppComponent implements OnInit {
+  localStorage: CoolLocalStorage;
+
+  constructor(localStorage: CoolLocalStorage) {
+    this.localStorage = localStorage;
+  }
+
   title = 'COGS';
   isLogged: boolean;
 
   ngOnInit(): void {
+
     this.isLogged = false;
   }
 
-  constructor(storageService: LocalStorageService){}
 
 
-  static  setToken(token: string){
-  }
 }
