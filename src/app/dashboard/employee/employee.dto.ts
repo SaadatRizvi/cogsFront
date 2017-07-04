@@ -1,4 +1,5 @@
 export class Employee {
+  id: number;
   code: number;
   name: string;
   designation: string;
