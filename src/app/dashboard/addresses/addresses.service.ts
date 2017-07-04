@@ -6,16 +6,24 @@ import {Token}  from '../../token'
 
 
 import 'rxjs/add/operator/toPromise';
+import {CoolLocalStorage} from "angular2-cool-storage";
 
 
 @Injectable()
 export class AddressesService {
-  private url=this.token.baseUrl + 'address';
-  private headers = new Headers({'Content-Type': 'application/json',
-    'x-access-token': this.token.getToken()});
+  localStorage: CoolLocalStorage;
+
 
   constructor(private http: Http,
-              private token: Token) { }
+              private token: Token,
+              localStorage: CoolLocalStorage
+  ) {     this.localStorage = localStorage;
+  }
+  private url=this.token.baseUrl + 'address';
+  private headers = new Headers({'Content-Type': 'application/json',
+    'x-access-token': 'aaaa'});
+
+  //this.localStorage.getItem('token')
 
   // authenticateUser(data: Addresses): Promise<LoginRes> {
   //   console.log(data)
@@ -34,8 +42,7 @@ export class AddressesService {
 
   getAddresses(id: number): Promise<Addresses> {
     this.url+='?EmployeeId='+id;
-   this.headers = new Headers({'Content-Type': 'application/json',
-      'x-access-token': this.token.getToken()});
+    this.headers.set('x-access-token',this.localStorage.getItem('token'));
     console.log(this.url);
     console.log(this.headers);
     return this.http

@@ -4,7 +4,9 @@ import {LoginRequest} from './loginRequest.dto';
 import { Observable }        from 'rxjs/Observable';
 import {AuthenticateService} from './authenticate.service'
 import {LoginRes} from './loginRes.dto';
-import {Token} from '../token'
+import {Token} from '../token';
+import { CoolLocalStorage } from 'angular2-cool-storage';
+
 
 
 @Component({
@@ -19,12 +21,19 @@ export class AuthenticateComponent implements OnInit{
   loginData: LoginRequest;
   loginRes: LoginRes;
   failure: string;
+  localStorage: CoolLocalStorage;
 
   constructor(
     private router: Router,
     private authenticateService: AuthenticateService,
-    private token: Token
-    ) { }
+    private token: Token,
+    localStorage: CoolLocalStorage
+    ) {     this.localStorage = localStorage;
+  }
+
+
+
+
 
 
   ngOnInit(): void {
@@ -52,7 +61,9 @@ export class AuthenticateComponent implements OnInit{
         }
         else {
           this.loginRes=loginRes;
-          this.token.setToken(loginRes.token);
+         // this.token.setToken(loginRes.token);
+          this.localStorage.setItem('token', loginRes.token);
+          console.log('Authenticate Component.ts -->'+this.localStorage.getItem('token'));
 
           this.failure = null;
           this.gotoDashboard();
