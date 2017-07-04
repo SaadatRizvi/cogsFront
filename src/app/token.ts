@@ -1,20 +1,19 @@
 import { OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
+import {LocalStorage, SessionStorage} from "angular2-localstorage/WebStorage";
+
+@Injectable()
+export class Token  {
+
+  @LocalStorage() public   token: string='';
+   baseUrl='http://localhost:4100/';
 
 
-export class Token implements OnInit {
 
-  private static token: string;
-  static baseUrl= 'http://localhost:4100/';
-
-  ngOnInit(): void {
-    Token.token=null;
-   // Token.baseUrl=;
+  setToken(token: string){
+    this.token=token;
   }
-
-  static  setToken(token: string){
-    Token.token=token;
-  }
-  static  getToken(){
-    return Token.token
+    getToken(){
+    return this.token;
   }
 }
