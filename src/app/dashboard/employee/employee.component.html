@@ -1,4 +1,8 @@
-<p>
+
   employee works!
   {{employee.name}}
-</p>
+  <nav >
+    <a routerLink="/education/{{employee.id}}" routerLinkActive="active">Education</a>
+  </nav>
+  <router-outlet></router-outlet>
+

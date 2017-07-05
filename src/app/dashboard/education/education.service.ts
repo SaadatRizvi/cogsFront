@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
-import {Employee} from './employee.dto';
+import {Education} from './education.dto';
 import {Token}  from '../../token'
 
 
@@ -10,7 +10,7 @@ import {CoolLocalStorage} from 'angular2-cool-storage';
 
 
 @Injectable()
-export class EmployeeService {
+export class EducationService {
   localStorage: CoolLocalStorage;
 
 
@@ -19,7 +19,7 @@ export class EmployeeService {
               localStorage: CoolLocalStorage
   ) {     this.localStorage = localStorage;
   }
-  private url=this.token.baseUrl + 'employees';
+  private url=this.token.baseUrl + 'education';
   private headers = new Headers({'Content-Type': 'application/json'});
 
   // authenticateUser(data: Projects): Promise<LoginRes> {
@@ -37,9 +37,9 @@ export class EmployeeService {
     return Promise.reject(error.message || error);
   }
 
-  getEmployee(id: number): Promise<Employee> {
-    this.url += '/' + id;
-    this.headers.set('x-access-token',this.localStorage.getItem('token'));
+  getEducation(id: number): Promise<Education> {
+    this.url += '?EmployeeId=' + id;
+    this.headers.set('x-access-token', this.localStorage.getItem('token'));
     console.log(this.url);
     console.log();
     return this.http
@@ -47,7 +47,7 @@ export class EmployeeService {
       .toPromise()
       .then(res => {
         console.log(res.json());
-        return res.json() as Employee})
+        return res.json() as Education})
       .catch(this.handleError);
   }
 }

@@ -20,6 +20,7 @@ import { ProjectsComponent } from './dashboard/projects/projects.component';
 import { EmployeeComponent } from './dashboard/employee/employee.component';
 import { AddressesComponent } from './dashboard/addresses/addresses.component';
 import { ContactDetailsComponent } from './dashboard/contact-details/contact-details.component';
+import {EducationComponent} from './dashboard/education/education.component';
 
 @NgModule({
   imports: [
@@ -39,6 +40,7 @@ import { ContactDetailsComponent } from './dashboard/contact-details/contact-det
     EmployeeComponent,
     AddressesComponent,
     ContactDetailsComponent,
+    EducationComponent
   ],
   providers: [ HeroService, Token],
   bootstrap: [ AppComponent ]
