@@ -26,6 +26,7 @@ export class ProjectsComponent implements OnInit {
     this.route.paramMap
       .switchMap((params: ParamMap) => this.projectService.getProjects(+params.get('id')))
       .subscribe(projects => this.projects = projects);
+    console.log(this.projects);
   }
 
 }

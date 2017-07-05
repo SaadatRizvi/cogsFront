@@ -5,7 +5,7 @@ import {Employee} from './employee.dto'
 import {EmployeeService} from './employee.service'
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-employee',
   templateUrl: './employee.component.html',
   styleUrls: ['./employee.component.css'],
   providers: [ EmployeeService ]

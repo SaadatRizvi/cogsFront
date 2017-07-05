@@ -13,8 +13,11 @@ import {EducationComponent} from './dashboard/education/education.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'projects/:id',  component: ProjectsComponent },
+  { path: 'addresses/:id',  component: AddressesComponent },
+  { path: 'contactDetails/:id',  component: ContactDetailsComponent },
   { path: 'dashboard',  component: DashboardComponent },
-  { path: 'dashboard/:id',  component: EmployeeComponent },
+  { path: 'dashboard/:id',  component: DashboardComponent },
   { path: 'education/:id',  component: EducationComponent},
   { path: 'detail/:id', component: HeroDetailComponent },
   { path: 'heroes',     component: HeroesComponent },

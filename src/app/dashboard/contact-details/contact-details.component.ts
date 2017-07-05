@@ -4,9 +4,6 @@ import { Location } from '@angular/common';
 import {ContactDetails} from './contact-details.dto';
 import 'rxjs/add/operator/switchMap';
 
-import { CoolLocalStorage } from 'angular2-cool-storage';
-
-
 import {ContactDetailsService} from './contact-details.service'
 
 @Component({
@@ -18,16 +15,12 @@ import {ContactDetailsService} from './contact-details.service'
 export class ContactDetailsComponent implements OnInit {
   contactDetails: ContactDetails;
 
-  localStorage: CoolLocalStorage;
 
 
   constructor(
     private addressService: ContactDetailsService,
     private route: ActivatedRoute,
-    private location: Location,
-    localStorage: CoolLocalStorage
-  ) {     this.localStorage = localStorage;
-  }
+    private location: Location){ }
 
   ngOnInit(): void {
 
