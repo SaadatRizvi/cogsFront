@@ -32,15 +32,6 @@ export class AuthenticateService  {
     return Promise.reject(error.message || error);
   }
 
-  authenticateGet(): Promise<LoginRes> {
- //   console.log(this.url);
-    return this.http
-      .get(this.url)
-      .toPromise()
-      .then(res => {
-  //      console.log(res.json());
-        return res.json() as LoginRes})
-      .catch(this.handleError);
-  }
+
 }
 

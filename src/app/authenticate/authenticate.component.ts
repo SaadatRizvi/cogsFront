@@ -77,8 +77,6 @@ export class AuthenticateComponent implements OnInit{
      this.router.navigate(['/dashboard',this.loginRes.id]);
    }
 
-  get() {
-    this.authenticateService.authenticateGet();
-  }
+
 
 }
