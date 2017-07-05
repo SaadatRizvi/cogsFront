@@ -21,7 +21,7 @@ export class ContactDetailsService {
   }
   private url=this.token.baseUrl + 'contactDetail';
   private headers = new Headers({'Content-Type': 'application/json',
-    'x-access-token': 'aaaa'});
+    'x-access-token': 'NotSet'});
 
   //this.localStorage.getItem('token')
 
@@ -43,13 +43,13 @@ export class ContactDetailsService {
   getContactDetails(id: number): Promise<ContactDetails> {
     this.url+='?EmployeeId='+id;
     this.headers.set('x-access-token',this.localStorage.getItem('token'));
-    console.log(this.url);
-    console.log(this.headers);
+   // console.log(this.url);
+   // console.log(this.headers);
     return this.http
       .get(this.url, {headers: this.headers})
       .toPromise()
       .then(res => {
-        console.log(res.json());
+    //    console.log(res.json());
         return res.json() as ContactDetails})
       .catch(this.handleError);
   }

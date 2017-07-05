@@ -6,9 +6,11 @@ import { CoolLocalStorage } from 'angular2-cool-storage';
   selector: 'app-root',
   template: `
     <h1>{{title}}</h1>
-    <nav >
-      <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
-      <a routerLink="/heroes" routerLinkActive="active">Heroes</a>
+
+    
+    <nav *ngIf='isLogged'>
+     
+
     </nav>
     <router-outlet></router-outlet>
   `,
@@ -28,7 +30,10 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.isLogged = false;
+
+
+    this.isLogged = true;
+
   }
 
 

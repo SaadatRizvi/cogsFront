@@ -1,5 +1,14 @@
 <h3>Dashboard</h3>
 <div class="grid grid-pad">
 
+<app-employee></app-employee>
 
+  <nav >
+    <a routerLink="/education/{{employee.id}}" routerLinkActive="active">Education</a>
+    <a routerLink="/dashboard/{{employee.id}}" routerLinkActive="active">Dashboard</a>
+    <a routerLink="/projects/{{employee.id}}" routerLinkActive="active">Projects</a>
+    <a routerLink="/addresses/{{employee.id}}" routerLinkActive="active">Addresses</a>
+    <a routerLink="/contactDetails/{{employee.id}}" routerLinkActive="active">ContactDetails</a>
+  </nav>
+  <router-outlet></router-outlet>
 </div>
