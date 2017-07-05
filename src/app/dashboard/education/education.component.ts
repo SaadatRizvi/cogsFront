@@ -16,12 +16,16 @@ export class EducationComponent implements OnInit {
   constructor(
     private educationService: EducationService,
     private route: ActivatedRoute,
-  ) {}
 
-  ngOnInit() {
+  ){
+}
+  getEducation() {
     this.route.paramMap
-      .switchMap((params: ParamMap) => this.educationService.getEducation(+params.get('id')))
-      .subscribe(education => this.education = education);
+    .switchMap((params: ParamMap) => this.educationService.getEducation(+params.get('id')))
+    .subscribe(education => this.education = education)
+}
+  ngOnInit() {
+    this.getEducation();
   }
 
 }
