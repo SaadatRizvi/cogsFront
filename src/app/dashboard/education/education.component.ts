@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {Education} from './education.dto';
 import {EducationService} from './education.service';
+import {CoolLocalStorage} from "angular2-cool-storage";
 
 @Component({
   selector: 'app-education',
@@ -13,19 +14,17 @@ import {EducationService} from './education.service';
 export class EducationComponent implements OnInit {
 
   education: Education;
+
   constructor(
     private educationService: EducationService,
     private route: ActivatedRoute,
+    private localStorage: CoolLocalStorage
+  ) {
+  }
 
-  ){
-}
-  getEducation() {
-    this.route.paramMap
-    .switchMap((params: ParamMap) => this.educationService.getEducation(+params.get('id')))
-    .subscribe(education => this.education = education)
-}
   ngOnInit() {
-    this.getEducation();
+    this.educationService.getEducation(+this.localStorage.getItem('id'))
+      .then(education =>  this.education=education);
   }
 
 }

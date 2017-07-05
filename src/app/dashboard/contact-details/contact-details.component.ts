@@ -5,6 +5,7 @@ import {ContactDetails} from './contact-details.dto';
 import 'rxjs/add/operator/switchMap';
 
 import {ContactDetailsService} from './contact-details.service'
+import {CoolLocalStorage} from "angular2-cool-storage";
 
 @Component({
   selector: 'app-contact-details',
@@ -13,20 +14,25 @@ import {ContactDetailsService} from './contact-details.service'
   providers: [ContactDetailsService]
 })
 export class ContactDetailsComponent implements OnInit {
+
   contactDetails: ContactDetails;
 
 
 
   constructor(
-    private addressService: ContactDetailsService,
+    private contactDetailsService: ContactDetailsService,
     private route: ActivatedRoute,
-    private location: Location){ }
+    private localStorage: CoolLocalStorage
+  ) {
+
+  }
+
 
   ngOnInit(): void {
 
-    this.route.paramMap
-      .switchMap((params: ParamMap) => this.addressService.getContactDetails(+params.get('id')))
-      .subscribe(contactDetails => this.contactDetails = contactDetails);
+    this.contactDetailsService.getContactDetails(+this.localStorage.getItem('id'))
+      .then(contactDetails =>  this.contactDetails=contactDetails);
+
   }
 
 }
