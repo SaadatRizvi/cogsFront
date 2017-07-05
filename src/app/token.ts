@@ -7,13 +7,13 @@ export class Token  {
 
 
 
-   // public   token: string='';
-   baseUrl='http://localhost:4100/';
+   // public   token: string = '';
+   baseUrl = 'http://localhost:4100/';
 
 
   //
   // setToken(token: string){
-  //   this.token=token;
+  //   this.token = token;
   // }
   //   getToken(){
   //   return this.token;

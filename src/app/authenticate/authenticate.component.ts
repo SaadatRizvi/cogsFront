@@ -6,7 +6,7 @@ import {AuthenticateService} from './authenticate.service'
 import {LoginRes} from './loginRes.dto';
 import {Token} from '../token';
 import { CoolLocalStorage } from 'angular2-cool-storage';
-
+import {AppComponent} from "../app.component";
 
 
 @Component({
@@ -64,7 +64,6 @@ export class AuthenticateComponent implements OnInit{
          // this.token.setToken(loginRes.token);
           this.localStorage.setItem('token', loginRes.token);
           console.log('Authenticate Component.ts -->'+this.localStorage.getItem('token'));
-
           this.failure = null;
           this.gotoDashboard();
 
