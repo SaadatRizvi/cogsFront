@@ -1,14 +1,14 @@
 
 
 <div  class="login">
-  <h1>Login</h1>
+  <h1>User-Login</h1>
 
   <p *ngIf="failure" >{{failure}}</p>
   <form>
     <input [(ngModel)]="loginData.email" name="email" placeholder="email" />
-    <input [(ngModel)]="loginData.password" name="password" placeholder="password" />
-    <button (click)="submit()">Save</button>
-    <button (click)="get()">Get</button>
+    <input [(ngModel)]="loginData.password" name="password" placeholder="password" type="password" />
+    <button (click)="submit()">Login</button>
+
 
   </form>
 </div>
