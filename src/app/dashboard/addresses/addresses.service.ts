@@ -43,7 +43,7 @@ export class AddressesService {
   getAddresses(id: number): Promise<Addresses> {
     this.url+='?EmployeeId='+id;
     this.headers.set('x-access-token',this.localStorage.getItem('token'));
-  //  console.log(this.url);
+   // console.log(this.url);
    // console.log(this.headers);
     return this.http
       .get(this.url, {headers: this.headers})

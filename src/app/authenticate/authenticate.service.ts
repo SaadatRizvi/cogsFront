@@ -16,14 +16,14 @@ export class AuthenticateService  {
               private token: Token) { }
 
   authenticateUser(data: LoginRequest): Promise<LoginRes> {
-console.log(data)
-    console.log(this.url)
+//console.log(data)
+ //   console.log(this.url)
 
     return this.http
       .post(this.url, data, {headers: this.headers})
       .toPromise()
       .then(res => {
-        console.log(res.json());
+     //   console.log(res.json());
         return res.json() as LoginRes})
       .catch(this.handleError);
   }
@@ -33,12 +33,12 @@ console.log(data)
   }
 
   authenticateGet(): Promise<LoginRes> {
-    console.log(this.url);
+ //   console.log(this.url);
     return this.http
       .get(this.url)
       .toPromise()
       .then(res => {
-        console.log(res.json());
+  //      console.log(res.json());
         return res.json() as LoginRes})
       .catch(this.handleError);
   }

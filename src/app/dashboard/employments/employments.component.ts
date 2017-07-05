@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, ParamMap} from "@angular/router";
-import {Employments} from "./employment.dto";
-import {EmploymentService} from "./employment.service";
+import {Employments} from "./employments.dto";
+import {EmploymentService} from "./employments.service";
+import {CoolLocalStorage} from "angular2-cool-storage";
 
 @Component({
   selector: 'app-employments',
@@ -12,14 +13,17 @@ import {EmploymentService} from "./employment.service";
 export class EmploymentsComponent implements OnInit {
 
   employment: Employments;
+
   constructor(
     private employmentService: EmploymentService,
     private route: ActivatedRoute,
-  ) {}
+    private localStorage: CoolLocalStorage
+  ) {
+  }
   ngOnInit() {
-    this.route.paramMap
-      .switchMap((params: ParamMap) => this.employmentService.getEmployment(+params.get('id')))
-      .subscribe(employment => this.employment = employment);
+
+    this.employmentService.getEmployment(+this.localStorage.getItem('id'))
+      .then(employment =>  this.employment=employment);
   }
 
 }

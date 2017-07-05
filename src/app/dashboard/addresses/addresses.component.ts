@@ -7,6 +7,7 @@ import 'rxjs/add/operator/switchMap';
 
 
 import {AddressesService} from './addresses.service'
+import {CoolLocalStorage} from "angular2-cool-storage";
 
 @Component({
   selector: 'app-addresses',
@@ -23,17 +24,23 @@ export class AddressesComponent implements OnInit {
   constructor(
     private addressService: AddressesService,
     private route: ActivatedRoute,
-    private location: Location) {  }
+    private localStorage: CoolLocalStorage
+  ) {
+  }
 
   ngOnInit(): void {
    // console.log('Address.component.ts');
    // console.log(this.localStorage.getItem('token'));
 
-    this.route.paramMap
-      .switchMap((params: ParamMap) => this.addressService.getAddresses(+params.get('id')))
-      .subscribe(addresses => {
- //       console.log("addresses: "+addresses);
-        this.addresses = addresses});
+    this.addressService.getAddresses(+this.localStorage.getItem('id'))
+      .then(addresses =>  this.addresses=addresses);
+
+
+ //    this.route.paramMap
+ //      .switchMap((params: ParamMap) => this.addressService.getAddresses(+params.get('id')))
+ //      .subscribe(addresses => {
+ // //       console.log("addresses: "+addresses);
+ //        this.addresses = addresses});
 
   }
 

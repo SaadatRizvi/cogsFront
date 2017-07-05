@@ -48,7 +48,7 @@ export class ProjectService {
       .get(this.url, {headers: this.headers})
       .toPromise()
       .then(res => {
-       console.log(res.json());
+    //   console.log(res.json());
         return res.json() as Projects})
       .catch(this.handleError);
   }

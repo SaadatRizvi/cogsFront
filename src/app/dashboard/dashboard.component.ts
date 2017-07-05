@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Hero } from '../hero';
-import {AppComponent} from '../app.component';
+import {CoolLocalStorage} from "angular2-cool-storage";
 @Component({
   selector: 'my-dashboard',
   templateUrl: './dashboard.component.html',
@@ -8,12 +7,16 @@ import {AppComponent} from '../app.component';
 })
 export class DashboardComponent implements OnInit {
 
-  heroes: Hero[] = [];
+  EmployeeId: string;
 
-  constructor() { }
+  constructor( private localStorage: CoolLocalStorage) {
+    this.EmployeeId= this.localStorage.getItem('id');
+  }
 
-  ngOnInit(): void {  }
+  ngOnInit(): void {
+
+  }
 }
 
 
-//a
+
