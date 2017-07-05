@@ -21,7 +21,7 @@ export class ProjectService {
   }
   private url=this.token.baseUrl + 'projects';
   private headers = new Headers({'Content-Type': 'application/json',
-    'x-access-token': this.localStorage.getItem('token')});
+    'x-access-token': 'NotSet'});
 
   // authenticateUser(data: Projects): Promise<LoginRes> {
   //   console.log(data)
@@ -40,13 +40,15 @@ export class ProjectService {
 
   getProjects(id: number): Promise<Projects> {
     this.url+='?EmployeeId='+id;
-    console.log(this.url);
-    console.log();
+    this.headers.set('x-access-token',this.localStorage.getItem('token'));
+
+ //   console.log(this.url);
+  //  console.log();
     return this.http
       .get(this.url, {headers: this.headers})
       .toPromise()
       .then(res => {
-        console.log(res.json());
+    //   console.log(res.json());
         return res.json() as Projects})
       .catch(this.handleError);
   }

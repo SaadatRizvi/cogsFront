@@ -4,10 +4,10 @@ import { Location } from '@angular/common';
 import {Addresses} from './addresses.dto';
 import 'rxjs/add/operator/switchMap';
 
-import { CoolLocalStorage } from 'angular2-cool-storage';
 
 
 import {AddressesService} from './addresses.service'
+import {CoolLocalStorage} from "angular2-cool-storage";
 
 @Component({
   selector: 'app-addresses',
@@ -18,26 +18,29 @@ import {AddressesService} from './addresses.service'
 export class AddressesComponent implements OnInit {
   addresses: Addresses;
 
-  localStorage: CoolLocalStorage;
+
 
 
   constructor(
     private addressService: AddressesService,
     private route: ActivatedRoute,
-    private location: Location,
-    localStorage: CoolLocalStorage
-  ) {     this.localStorage = localStorage;
+    private localStorage: CoolLocalStorage
+  ) {
   }
 
   ngOnInit(): void {
-    console.log('Address.component.ts');
-    console.log(this.localStorage.getItem('token'));
+   // console.log('Address.component.ts');
+   // console.log(this.localStorage.getItem('token'));
 
-    this.route.paramMap
-      .switchMap((params: ParamMap) => this.addressService.getAddresses(+params.get('id')))
-      .subscribe(addresses => {
-        console.log("addresses: "+addresses);
-        this.addresses = addresses});
+    this.addressService.getAddresses(+this.localStorage.getItem('id'))
+      .then(addresses =>  this.addresses=addresses);
+
+
+ //    this.route.paramMap
+ //      .switchMap((params: ParamMap) => this.addressService.getAddresses(+params.get('id')))
+ //      .subscribe(addresses => {
+ // //       console.log("addresses: "+addresses);
+ //        this.addresses = addresses});
 
   }
 

@@ -40,13 +40,13 @@ export class EmployeeService {
   getEmployee(id: number): Promise<Employee> {
     this.url += '/' + id;
     this.headers.set('x-access-token',this.localStorage.getItem('token'));
-    console.log(this.url);
-    console.log();
+   // console.log(this.url);
+   // console.log();
     return this.http
       .get(this.url, {headers: this.headers})
       .toPromise()
       .then(res => {
-        console.log(res.json());
+        // console.log(res.json());
         return res.json() as Employee})
       .catch(this.handleError);
   }

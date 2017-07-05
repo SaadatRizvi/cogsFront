@@ -11,16 +11,29 @@ import {ContactDetailsComponent} from './dashboard/contact-details/contact-detai
 import {EmployeeComponent} from './dashboard/employee/employee.component';
 import {EducationComponent} from './dashboard/education/education.component';
 import {EmploymentsComponent} from "./dashboard/employments/employments.component";
+import {PageNotFoundComponent} from "./page-not-found/page-not-found.component";
+import {CanActivateViaAuthGuard} from "./Guards/can-activate-via-auth-guard";
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'dashboard',  component: DashboardComponent },
-  { path: 'dashboard/:id',  component: EmployeeComponent },
-  { path: 'education/:id',  component: EducationComponent},
-  { path: 'employments/:id',  component: EmploymentsComponent},
-  { path: 'detail/:id', component: HeroDetailComponent },
-  { path: 'heroes',     component: HeroesComponent },
-  { path: 'login',     component: AuthenticateComponent }
+  { path: 'dashboard/:id',  component: DashboardComponent,
+    canActivate: [
+      CanActivateViaAuthGuard
+    ],
+    children: [
+      { path: 'addresses', component: AddressesComponent },
+      { path: 'contactDetails', component: ContactDetailsComponent},
+      { path: 'employments', component: EmploymentsComponent },
+      { path: 'projects', component: ProjectsComponent },
+      { path: 'education', component: EducationComponent },
+      { path: 'projects', component: ProjectsComponent },
+
+    ]},
+
+
+  { path: 'login',     component: AuthenticateComponent },
+  { path: '**', component: PageNotFoundComponent }
+
 
 ];
 

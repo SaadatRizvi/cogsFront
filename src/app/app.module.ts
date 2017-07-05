@@ -22,6 +22,8 @@ import { AddressesComponent } from './dashboard/addresses/addresses.component';
 import { ContactDetailsComponent } from './dashboard/contact-details/contact-details.component';
 import {EducationComponent} from './dashboard/education/education.component';
 import { EmploymentsComponent } from './dashboard/employments/employments.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import {CanActivateViaAuthGuard} from "app/Guards/can-activate-via-auth-guard";
 
 @NgModule({
   imports: [
@@ -42,9 +44,10 @@ import { EmploymentsComponent } from './dashboard/employments/employments.compon
     AddressesComponent,
     ContactDetailsComponent,
     EducationComponent,
-    EmploymentsComponent
+    EmploymentsComponent,
+    PageNotFoundComponent
   ],
-  providers: [ HeroService, Token],
+  providers: [ HeroService, Token, CanActivateViaAuthGuard],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

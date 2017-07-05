@@ -3,9 +3,10 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
 import {Employee} from './employee.dto'
 import {EmployeeService} from './employee.service'
+import {CoolLocalStorage} from "angular2-cool-storage";
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-employee',
   templateUrl: './employee.component.html',
   styleUrls: ['./employee.component.css'],
   providers: [ EmployeeService ]
@@ -15,13 +16,13 @@ export class EmployeeComponent implements OnInit {
   constructor(
     private employeeService: EmployeeService,
     private route: ActivatedRoute,
-    private location: Location
-  ) {}
+    private localStorage: CoolLocalStorage
+  ) {
+  }
 
   ngOnInit() {
-    this.route.paramMap
-      .switchMap((params: ParamMap) => this.employeeService.getEmployee(+params.get('id')))
-      .subscribe(employee => this.employee = employee);
+    this.employeeService.getEmployee(+this.localStorage.getItem('id'))
+      .then(employee =>  this.employee=employee);
   }
 
 }

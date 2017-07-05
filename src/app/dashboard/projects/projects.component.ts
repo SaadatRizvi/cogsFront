@@ -5,6 +5,7 @@ import {Projects} from './projects.dto';
 import 'rxjs/add/operator/switchMap';
 
 import {ProjectService} from './projects.service'
+import {CoolLocalStorage} from "angular2-cool-storage";
 
 @Component({
   selector: 'app-projects',
@@ -18,14 +19,16 @@ export class ProjectsComponent implements OnInit {
   constructor(
     private projectService: ProjectService,
     private route: ActivatedRoute,
-    private location: Location
-  ) {}
+   private localStorage: CoolLocalStorage
+  ) {
+  }
 
 
   ngOnInit(): void {
-    this.route.paramMap
-      .switchMap((params: ParamMap) => this.projectService.getProjects(+params.get('id')))
-      .subscribe(projects => this.projects = projects);
+    this.projectService.getProjects(+this.localStorage.getItem('id'))
+      .then(projects =>  this.projects=projects);
+
   }
+
 
 }

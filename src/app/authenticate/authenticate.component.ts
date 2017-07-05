@@ -63,7 +63,9 @@ export class AuthenticateComponent implements OnInit{
           this.loginRes=loginRes;
          // this.token.setToken(loginRes.token);
           this.localStorage.setItem('token', loginRes.token);
-          console.log('Authenticate Component.ts -->'+this.localStorage.getItem('token'));
+          this.localStorage.setItem('id', ''+loginRes.id);
+
+     //     console.log('Authenticate Component.ts -->'+this.localStorage.getItem('token'));
           this.failure = null;
           this.gotoDashboard();
 

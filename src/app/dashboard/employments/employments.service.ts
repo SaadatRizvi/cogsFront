@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
-import { Employments} from './employment.dto';
+import { Employments} from './employments.dto';
 import {Token}  from '../../token'
 
 
@@ -38,15 +38,15 @@ export class EmploymentService {
   }
 
   getEmployment(id: number): Promise<Employments> {
-    this.url += '/' + id;
+    this.url += '?EmployeeId=' + id;
     this.headers.set('x-access-token',this.localStorage.getItem('token'));
-    console.log(this.url);
-    console.log();
+    // console.log(this.url);
+    // console.log();
     return this.http
       .get(this.url, {headers: this.headers})
       .toPromise()
       .then(res => {
-        console.log(res.json());
+      //  console.log(res.json());
         return res.json() as Employments})
       .catch(this.handleError);
   }

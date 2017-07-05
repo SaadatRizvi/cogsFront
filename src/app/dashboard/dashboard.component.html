@@ -1,5 +1,23 @@
-<h3>Dashboard</h3>
+<h3>
+  <nav>
+    <a routerLink="/dashboard/{{EmployeeId}}" routerLinkActive="active">Dashboard</a>
+  </nav>
+</h3>
 <div class="grid grid-pad">
 
 
+  <app-employee>
+
+  </app-employee>
+
+  <nav>
+    <a routerLink="/dashboard/{{EmployeeId}}/education" routerLinkActive="active">Education</a>
+    <a routerLink="/dashboard/{{EmployeeId}}/employments" routerLinkActive="active">Employment History</a>
+    <a routerLink="/dashboard/{{EmployeeId}}/projects" routerLinkActive="active">Projects</a>
+    <a routerLink="/dashboard/{{EmployeeId}}/addresses" routerLinkActive="active">Addresses</a>
+    <a routerLink="/dashboard/{{EmployeeId}}/contactDetails" routerLinkActive="active">ContactDetails</a>
+  </nav>
+  <div>
+    <router-outlet></router-outlet>
+  </div>
 </div>
