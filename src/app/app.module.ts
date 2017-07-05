@@ -21,6 +21,7 @@ import { EmployeeComponent } from './dashboard/employee/employee.component';
 import { AddressesComponent } from './dashboard/addresses/addresses.component';
 import { ContactDetailsComponent } from './dashboard/contact-details/contact-details.component';
 import {EducationComponent} from './dashboard/education/education.component';
+import { EmploymentsComponent } from './dashboard/employments/employments.component';
 
 @NgModule({
   imports: [
@@ -40,7 +41,8 @@ import {EducationComponent} from './dashboard/education/education.component';
     EmployeeComponent,
     AddressesComponent,
     ContactDetailsComponent,
-    EducationComponent
+    EducationComponent,
+    EmploymentsComponent
   ],
   providers: [ HeroService, Token],
   bootstrap: [ AppComponent ]

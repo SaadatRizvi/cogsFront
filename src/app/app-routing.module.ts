@@ -10,12 +10,14 @@ import {AddressesComponent} from './dashboard/addresses/addresses.component'
 import {ContactDetailsComponent} from './dashboard/contact-details/contact-details.component'
 import {EmployeeComponent} from './dashboard/employee/employee.component';
 import {EducationComponent} from './dashboard/education/education.component';
+import {EmploymentsComponent} from "./dashboard/employments/employments.component";
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'dashboard',  component: DashboardComponent },
   { path: 'dashboard/:id',  component: EmployeeComponent },
   { path: 'education/:id',  component: EducationComponent},
+  { path: 'employments/:id',  component: EmploymentsComponent},
   { path: 'detail/:id', component: HeroDetailComponent },
   { path: 'heroes',     component: HeroesComponent },
   { path: 'login',     component: AuthenticateComponent }
