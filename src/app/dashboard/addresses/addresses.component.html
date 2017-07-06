@@ -51,7 +51,7 @@
              required
              [(ngModel)]="tempAddress.street" name="street"
              #street="ngModel" >
-      <div [hidden]="street.valid || street.pristine"
+      <div [hidden]="street.valid || street.pristine || validateStreet()"
            class="alert alert-danger">
         street is required
       </div>
@@ -62,7 +62,7 @@
              required
              [(ngModel)]="tempAddress.city" name="city"
              #city="ngModel">
-      <div [hidden]="city.valid || city.pristine "
+      <div [hidden]="city.valid || city.pristine || validateCity()"
            class="alert alert-danger">
         city is required
       </div>
@@ -73,7 +73,7 @@
              required
              [(ngModel)]="tempAddress.country" name="country"
              #country="ngModel">
-      <div [hidden]="country.valid || country.pristine"
+      <div [hidden]="country.valid || country.pristine || validateCountry()"
            class="alert alert-danger">
         country is required
       </div>
@@ -87,7 +87,8 @@
               #type="ngModel">
         <option *ngFor="let type of types" [value]="type" def>{{type}}</option>
       </select>
-      <div [hidden]="type.valid || type.pristine" class="alert alert-danger">
+      <div [hidden]="type.valid || type.pristine || validateType()"
+           class="alert alert-danger">
         Type is required
       </div>
     </div>

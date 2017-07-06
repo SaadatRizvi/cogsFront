@@ -8,6 +8,7 @@ import 'rxjs/add/operator/switchMap';
 
 import {AddressesService} from './addresses.service'
 import {CoolLocalStorage} from "angular2-cool-storage";
+import {Validator} from "../../common/lib/validator";
 
 @Component({
   selector: 'app-addresses',
@@ -28,7 +29,7 @@ export class AddressesComponent implements OnInit {
     private addressService: AddressesService,
     private route: ActivatedRoute,
     private router: Router,
-    private localStorage: CoolLocalStorage
+    private localStorage: CoolLocalStorage,
   ) {
   }
 
@@ -130,6 +131,19 @@ export class AddressesComponent implements OnInit {
     this.addressService.create(newData).then(res=> this.addresses.push(res as Addresses));
     this.disableAdd()   ;
 
+  }
+
+  validateStreet(): boolean{
+    return Validator.isAlpha(this.tempAddress.street);
+  }
+  validateCity(): boolean{
+    return Validator.isAlpha(this.tempAddress.city);
+  }
+  validateCountry(): boolean{
+    return Validator.isAlpha(this.tempAddress.country);
+  }
+  validateType(): boolean{
+    return Validator.isAlpha(this.tempAddress.type);
   }
 
 }

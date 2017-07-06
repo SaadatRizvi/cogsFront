@@ -1,13 +1,10 @@
 
-import {Injectable} from "@angular/core";
-
-@Injectable()
 export class Validator {
 
   constructor() { }
 
   static isAscii(data: string): boolean{
-    let ck_name = /^[A-Za-z0-9!@#$%^&*()_ ]{0,50}$/;
+    let ck_name = /^[A-Za-z0-9!@#$%^&*()_ ]{0,100}$/;
     if (!ck_name.test(data)) {
       return false;
     }
@@ -16,7 +13,7 @@ export class Validator {
     }
   }
   static isAlphaNumeric(data: string) : boolean{
-    let ck_name = /^[A-Za-z0-9]{0,50}$/;
+    let ck_name = /^[A-Za-z0-9]{0,100}$/;
     if (!ck_name.test(data)) {
       return false;
     }
@@ -25,7 +22,7 @@ export class Validator {
     }
   }
   static isAlpha(data: string) : boolean{
-    let ck_name = /^[A-Za-z]{0,50}$/;
+    let ck_name = /^[A-Za-z]{0,100}$/;
     if (!ck_name.test(data)) {
       return false;
     }
@@ -34,7 +31,7 @@ export class Validator {
     }
   }
   static isNumber(data: string) : boolean{
-    let ck_name = /^[0-9]{0,50}$/;
+    let ck_name = /^[0-9]{0,100}$/;
     if (!ck_name.test(data)) {
       return false;
     }
