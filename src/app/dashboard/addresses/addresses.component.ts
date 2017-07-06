@@ -16,7 +16,8 @@ import {CoolLocalStorage} from "angular2-cool-storage";
   providers: [AddressesService]
 })
 export class AddressesComponent implements OnInit {
-  addresses: Addresses;
+  addresses: Addresses[];
+ // address: Addresses;
   isEditEnabled: boolean;
   tempAddress: Addresses;
   isAddEnabled: boolean;
@@ -38,7 +39,9 @@ export class AddressesComponent implements OnInit {
     this.isAddEnabled=false;
     this.resetTemp();
     this.addressService.getAddresses(+this.localStorage.getItem('id'))
-      .then(addresses =>  this.addresses=addresses);
+      .then((result) => {
+        this.addresses=result;
+    });
 
 
  //    this.route.paramMap
@@ -54,8 +57,12 @@ export class AddressesComponent implements OnInit {
     this.tempAddress = new Addresses();
   }
 
-  enableEdit(): void{
+  enableEdit(index: number): void{
     this.isEditEnabled = true;
+
+     this.tempAddress=this.addresses[index];
+
+
     this.isAddEnabled=false;
   }
 
@@ -64,12 +71,15 @@ export class AddressesComponent implements OnInit {
     //(
 
      this.router.navigate([this.router.url]);
-     console.log()
+
+    this.tempAddress=new Addresses();
   }
 
   update(): void{
-    this.addressService.update(this.addresses);
-}
+    this.addressService.update(this.tempAddress);
+    this.tempAddress=new Addresses();
+
+  }
   enableAdd(): void{
     this.isAddEnabled = true;
     this.isEditEnabled=false;
@@ -79,16 +89,21 @@ export class AddressesComponent implements OnInit {
     this.resetTemp();
   }
   add(): void{
-    let data={
-      street: this.tempAddress.street,
-      city: this.tempAddress.city,
-      country: this.tempAddress.country,
-      type: this.tempAddress.type,
-      EmployeeId:this.localStorage.getItem('id')
-    };
+    // let data={
+    //   street: this.tempAddress.street,
+    //   city: this.tempAddress.city,
+    //   country: this.tempAddress.country,
+    //   type: this.tempAddress.type,
+    //   EmployeeId:this.localStorage.getItem('id')
+    // };
+    // this.tempAddress.EmployeeId = this.localStorage.getItem('id');
+    //this.addresses.push(this.tempAddress);
+    let data = JSON.stringify(this.tempAddress);
+    let newData = Object.assign({EmployeeId: this.localStorage.getItem('id')} , this.tempAddress);
 
-    this.addressService.create(data).then(res=>console.log(res));
-    this.disableAdd();
+    console.log(newData)
+    this.addressService.create(newData).then(res=> this.addresses.push(res as Addresses));
+    this.disableAdd()   ;
 
   }
 

@@ -16,8 +16,6 @@ export class AuthenticateService  {
               private token: Token) { }
 
   authenticateUser(data: LoginRequest): Promise<LoginRes> {
-//console.log(data)
- //   console.log(this.url)
 
     return this.http
       .post(this.url, data, {headers: this.headers})
