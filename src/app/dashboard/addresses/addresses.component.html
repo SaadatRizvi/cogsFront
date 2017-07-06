@@ -1,8 +1,62 @@
-<p *ngIf="addresses">
+<div *ngIf="addresses && !isEditEnabled">
 
   Street: {{addresses.street}}<br>
   City: {{addresses.city}}<br>
   Country: {{addresses.country}}<br>
   Type: {{addresses.type}}<br>
+  <br>
+  <button (click)="enableAdd()">Add more</button>
+  <button (click)="enableEdit()">Edit</button>
 
-</p>
+</div>
+
+<!--=================== EDIT ========================-->
+
+<div *ngIf="isEditEnabled" >
+
+
+<div>
+  <label>addresses street: </label>
+  <input [(ngModel)]="addresses.street" placeholder="street">
+</div>
+  <div>
+    <label>addresses city: </label>
+    <input [(ngModel)]="addresses.city" placeholder="city">
+  </div>
+  <div>
+    <label>addresses country: </label>
+    <input [(ngModel)]="addresses.country" placeholder="country">
+  </div>
+  <div>
+    <label>addresses type: </label>
+    {{addresses.type}}
+  </div>
+<button (click)="disableEdit()">Undo Changes</button>
+<button (click)="update()">Save</button>
+
+</div>
+
+<!--=================== ADD ========================-->
+<div *ngIf="isAddEnabled" >
+
+  <div>
+    <label>addresses street: </label>
+    <input [(ngModel)]="tempAddress.street" placeholder="street">
+  </div>
+  <div>
+    <label>addresses city: </label>
+    <input [(ngModel)]="tempAddress.city" placeholder="city">
+  </div>
+  <div>
+    <label>addresses country: </label>
+    <input [(ngModel)]="tempAddress.country" placeholder="country">
+  </div>
+  <div>
+    <label>addresses type: </label>
+    <input [(ngModel)]="tempAddress.type" placeholder="type">
+  </div>
+  <button (click)="disableAdd()">Close</button>
+  <button (click)="add()">Save</button>
+
+</div>
+

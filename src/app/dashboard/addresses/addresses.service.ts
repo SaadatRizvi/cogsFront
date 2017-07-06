@@ -25,32 +25,50 @@ export class AddressesService {
 
   //this.localStorage.getItem('token')
 
-  // authenticateUser(data: Addresses): Promise<LoginRes> {
-  //   console.log(data)
-  //   return this.http
-  //     .post(this.url, data, {headers: this.headers})
-  //     .toPromise()
-  //     .then(res => {
-  //       console.log(res.json());
-  //       return res.json() as LoginRes})
-  //     .catch(this.handleError);
-  // }
+  create(data: any): Promise<Addresses> {
+    //console.log(data)
+    this.headers.set('x-access-token',this.localStorage.getItem('token'));
+
+    return this.http
+      .post(this.url, data, {headers: this.headers})
+      .toPromise()
+      .then(res => {
+        console.log(res.json());
+        return res.json() as Addresses})
+      .catch(this.handleError);
+  }
   private handleError(error: any): Promise<any> {
     console.log('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);
   }
 
   getAddresses(id: number): Promise<Addresses> {
-    this.url+='?EmployeeId='+id;
+    let localUrl=this.url+'?EmployeeId='+id;
     this.headers.set('x-access-token',this.localStorage.getItem('token'));
    // console.log(this.url);
    // console.log(this.headers);
     return this.http
-      .get(this.url, {headers: this.headers})
+      .get(localUrl, {headers: this.headers})
       .toPromise()
       .then(res => {
     //    console.log(res.json());
         return res.json() as Addresses})
       .catch(this.handleError);
+  }
+
+  update(data: Addresses){
+    let localUrl=this.url+'/'+data.id;
+    delete data.id;
+    this.headers.set('x-access-token',this.localStorage.getItem('token'));
+
+    return this.http
+      .put(localUrl, data,{headers: this.headers})
+      .toPromise()
+      .then(res => {
+        //    console.log(res.json());
+        return res.json() as Addresses})
+      .catch(this.handleError);
+
+
   }
 }
