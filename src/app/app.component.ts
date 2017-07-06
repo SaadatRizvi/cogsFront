@@ -9,8 +9,8 @@ import {isNullOrUndefined} from "util";
   template: `
     <h1>{{title}}</h1>
     
-    <button *ngIf="isLogged()" style="float: right;" (click)="logout()">Logout</button>
-    <button *ngIf="showLoginButton()" style="float: right;" (click)="login()">Login</button>
+    <button class="logButton logout" *ngIf="isLoggedIn()" style="float: right;" (click)="logout()">Logout</button>
+    <button class="logButton login" *ngIf="showLoginButton()" style="float: right;" (click)="login()">Login</button>
 
 
     <router-outlet></router-outlet>
@@ -42,7 +42,7 @@ export class AppComponent implements OnInit {
 
   }
 
-  isLogged(): boolean{
+  isLoggedIn(): boolean{
 
     return !isNullOrUndefined(this.localStorage.getItem('token'));
   }
@@ -56,6 +56,10 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+    if( this.isLoggedIn()){
+      this.login();
+    }
 
   }
 
