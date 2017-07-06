@@ -1,7 +1,12 @@
 export class Addresses {
-  id : number;
-  street: string;
-  city: string;
-  country: string;
-  type: string;
+
+ constructor(
+   public id : number,
+  public street: string,
+  public city: string,
+  public country: string,
+  public type: string
+ ){}
+
+
 }

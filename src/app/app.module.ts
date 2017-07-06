@@ -8,7 +8,6 @@ import { CoolStorageModule } from 'angular2-cool-storage';
 
 import { AppRoutingModule } from './app-routing.module';
 
-// Imports for loading & configuring the in-memory web api
 
 import { AppComponent }         from './app.component';
 import { DashboardComponent }   from './dashboard/dashboard.component';

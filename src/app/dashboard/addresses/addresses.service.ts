@@ -57,6 +57,8 @@ export class AddressesService {
   }
 //response.json().data as Hero[]
   update(data: Addresses){
+
+   console.log("In service update... id:"+data.id);
     let localUrl=this.url+'/'+data.id;
     delete data.id;
     this.headers.set('x-access-token',this.localStorage.getItem('token'));
@@ -65,7 +67,7 @@ export class AddressesService {
       .put(localUrl, data,{headers: this.headers})
       .toPromise()
       .then(res => {
-        //    console.log(res.json());
+    //       console.log(res.json() as Addresses);
         return res.json() as Addresses})
       .catch(this.handleError);
 

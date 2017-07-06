@@ -22,6 +22,7 @@ export class AddressesComponent implements OnInit {
   tempAddress: Addresses;
   isAddEnabled: boolean;
 
+  types = ['Temporary', 'Permanent'];
 
   constructor(
     private addressService: AddressesService,
@@ -54,30 +55,63 @@ export class AddressesComponent implements OnInit {
 
   resetTemp(): void{
 
-    this.tempAddress = new Addresses();
+    this.tempAddress = new Addresses(null,null,null,null,null);
   }
 
   enableEdit(index: number): void{
+    this.isAddEnabled=false;
+    this.tempAddress=Object.assign({},this.addresses[index]);
     this.isEditEnabled = true;
 
-     this.tempAddress=this.addresses[index];
 
+    console.log('EnableEdit id-->  '+this.tempAddress.id);
 
-    this.isAddEnabled=false;
   }
 
   disableEdit(): void{
     this.isEditEnabled=false;
     //(
 
+
      this.router.navigate([this.router.url]);
 
-    this.tempAddress=new Addresses();
+    this.tempAddress = new Addresses(null,null,null,null,null);
+
+
+
   }
 
   update(): void{
-    this.addressService.update(this.tempAddress);
-    this.tempAddress=new Addresses();
+    console.log('before() id--> '+ this.tempAddress.id )
+
+    let id=this.tempAddress.id;
+    this.addressService.update(this.tempAddress)
+      .then(res=> {
+      console.log('update() --> '+res );
+      console.log('after() --> '+ this.tempAddress.id );
+      console.log('after() --> '+ this.tempAddress.city );
+
+
+        if(res == 1){
+
+        for(let i=0;i<this.addresses.length;i++){
+          console.log("for i= "+i);
+          console.log("this.addresses[i].id= "+this.addresses[i].id);
+          console.log("this.tempAddress.id= "+this.tempAddress.id);
+          if (this.addresses[i].id===this.tempAddress.id){
+
+            this.addresses[i]=this.tempAddress;
+            console.log("done");break;
+
+          }
+        }
+      }
+    }).then(()=>{
+      this.tempAddress = new Addresses(null,null,null,null,null);
+    });
+
+  //
+    this.isEditEnabled = false;
 
   }
   enableAdd(): void{
@@ -89,15 +123,6 @@ export class AddressesComponent implements OnInit {
     this.resetTemp();
   }
   add(): void{
-    // let data={
-    //   street: this.tempAddress.street,
-    //   city: this.tempAddress.city,
-    //   country: this.tempAddress.country,
-    //   type: this.tempAddress.type,
-    //   EmployeeId:this.localStorage.getItem('id')
-    // };
-    // this.tempAddress.EmployeeId = this.localStorage.getItem('id');
-    //this.addresses.push(this.tempAddress);
     let data = JSON.stringify(this.tempAddress);
     let newData = Object.assign({EmployeeId: this.localStorage.getItem('id')} , this.tempAddress);
 
