@@ -33,7 +33,7 @@ export class AddressesService {
       .post(this.url, data, {headers: this.headers})
       .toPromise()
       .then(res => {
-        console.log(res.json());
+       // console.log(res.json());
         return res.json() as Addresses})
       .catch(this.handleError);
   }
@@ -42,7 +42,7 @@ export class AddressesService {
     return Promise.reject(error.message || error);
   }
 
-  getAddresses(id: number): Promise<Addresses> {
+  getAddresses(id: number): Promise<Addresses[]> {
     let localUrl=this.url+'?EmployeeId='+id;
     this.headers.set('x-access-token',this.localStorage.getItem('token'));
    // console.log(this.url);
@@ -51,11 +51,11 @@ export class AddressesService {
       .get(localUrl, {headers: this.headers})
       .toPromise()
       .then(res => {
-    //    console.log(res.json());
-        return res.json() as Addresses})
+        //console.log(res.json());
+        return res.json() as Addresses[]})
       .catch(this.handleError);
   }
-
+//response.json().data as Hero[]
   update(data: Addresses){
     let localUrl=this.url+'/'+data.id;
     delete data.id;
