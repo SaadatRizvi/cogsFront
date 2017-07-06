@@ -7,6 +7,7 @@ import {LoginRes} from './loginRes.dto';
 import {Token} from '../token';
 import { CoolLocalStorage } from 'angular2-cool-storage';
 import {AppComponent} from "../app.component";
+import {isNullOrUndefined} from "util";
 
 
 @Component({
@@ -29,17 +30,27 @@ export class AuthenticateComponent implements OnInit{
     private token: Token,
     localStorage: CoolLocalStorage
     ) {     this.localStorage = localStorage;
+
   }
 
 
-
+    isLoggedIn(): boolean{
+      return !isNullOrUndefined(this.localStorage.getItem('token'));
+    }
 
 
 
   ngOnInit(): void {
+
+     if( this.isLoggedIn() ){
+       this.gotoDashboard();
+     }
+
+
     this.loginData = new LoginRequest();
     this.loginData.email = null;
     this.loginData.password = null;
+
 
 
     this.loginRes = new LoginRes();
@@ -49,6 +60,7 @@ export class AuthenticateComponent implements OnInit{
     this.loginRes.id=null;
 
     this.failure=null;
+
   }
 
 
@@ -73,8 +85,9 @@ export class AuthenticateComponent implements OnInit{
       });
   }
 
-   gotoDashboard(): void {
-     this.router.navigate(['/dashboard',this.loginRes.id]);
+   gotoDashboard(): boolean {
+     this.router.navigate(['/dashboard',this.localStorage.getItem('id')]);
+     return true;
    }
 
 
