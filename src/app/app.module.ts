@@ -6,6 +6,7 @@ import {Token} from './token'
 import { CoolStorageModule } from 'angular2-cool-storage';
 
 
+
 import { AppRoutingModule } from './app-routing.module';
 
 // Imports for loading & configuring the in-memory web api
@@ -24,7 +25,7 @@ import {EducationComponent} from './dashboard/education/education.component';
 import { EmploymentsComponent } from './dashboard/employments/employments.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import {CanActivateViaAuthGuard} from "app/Guards/can-activate-via-auth-guard";
-
+import {AddressFormComponent} from './dashboard/addresses/address.form.component'
 @NgModule({
   imports: [
     BrowserModule,
@@ -45,7 +46,8 @@ import {CanActivateViaAuthGuard} from "app/Guards/can-activate-via-auth-guard";
     ContactDetailsComponent,
     EducationComponent,
     EmploymentsComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    AddressFormComponent
   ],
   providers: [ HeroService, Token, CanActivateViaAuthGuard],
   bootstrap: [ AppComponent ]

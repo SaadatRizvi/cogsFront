@@ -1,0 +1,39 @@
+<div class="container">
+  <h1>Hero Form</h1>
+  <form #addressForm="ngForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="Street">Street</label>
+      <input type="text" class="form-control" id="street"
+             required
+             [(ngModel)]="address.street" name="street"
+             #street="ngModel" (keypress)="validateStreet()">
+      <div [hidden]="street.valid || street.pristine"
+           class="alert alert-danger">
+        Street is required
+      </div>
+
+
+    </div>
+    <div class="form-group">
+      <label for="Street">City</label>
+      <input type="text" class="form-control" id="city"
+             required
+             [(ngModel)]="address.city" name="city"
+             #city="ngModel" (keyup)="validateCity()">
+      <p>{{error}}</p>
+      <div [hidden]="city.valid || city.pristine || city.touched || validateCity()"
+           class="alert alert-danger">
+        City is required
+      </div>
+
+
+    </div>
+    <div class="form-group">
+      <label for="alterEgo">Alter Ego</label>
+      <input type="text" class="form-control" id="alterEgo">
+    </div>
+
+    <button type="submit" class="btn btn-success" [disabled]="!addressForm.form.valid || isDisabled">Submit</button>
+
+  </form>
+</div>

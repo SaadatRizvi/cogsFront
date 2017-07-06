@@ -43,24 +43,25 @@
 <!--=================== ADD ========================-->
 <div *ngIf="isAddEnabled" >
 
-  <div>
-    <label>addresses street: </label>
-    <input [(ngModel)]="tempAddress.street" placeholder="street">
-  </div>
-  <div>
-    <label>addresses city: </label>
-    <input [(ngModel)]="tempAddress.city" placeholder="city">
-  </div>
-  <div>
-    <label>addresses country: </label>
-    <input [(ngModel)]="tempAddress.country" placeholder="country">
-  </div>
-  <div>
-    <label>addresses type: </label>
-    <input [(ngModel)]="tempAddress.type" placeholder="type">
-  </div>
-  <button (click)="disableAdd()">Close</button>
-  <button (click)="add()">Save</button>
+  <!--<div>-->
+    <!--<label>addresses street: </label>-->
+    <!--<input [(ngModel)]="tempAddress.street" placeholder="street">-->
+  <!--</div>-->
+  <!--<div>-->
+    <!--<label>addresses city: </label>-->
+    <!--<input [(ngModel)]="tempAddress.city" placeholder="city">-->
+  <!--</div>-->
+  <!--<div>-->
+    <!--<label>addresses country: </label>-->
+    <!--<input [(ngModel)]="tempAddress.country" placeholder="country">-->
+  <!--</div>-->
+  <!--<div>-->
+    <!--<label>addresses type: </label>-->
+    <!--<input [(ngModel)]="tempAddress.type" placeholder="type">-->
+  <!--</div>-->
+  <!--<button (click)="disableAdd()">Close</button>-->
+  <!--<button (click)="add()">Save</button>-->
 
+  <address-form></address-form>
 </div>
 
