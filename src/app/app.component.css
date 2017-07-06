@@ -1,3 +1,31 @@
+
+.logButton {
+  background-color: #33afaa; /* Green */
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.login:hover {
+  background-color: #3eaf24;
+  color: white;
+}
+
+.logout:hover {
+  background-color: #af0c0e;
+  color: white;
+}
+
+
+
 h1 {
   font-size: 1.2em;
   color: #999;
