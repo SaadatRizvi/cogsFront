@@ -1,0 +1,166 @@
+<div *ngIf="addresses && !isEditEnabled">
+
+  <div *ngFor="let address of addresses; let i = index">
+
+    Street: {{address.street}}<br>
+    City: {{address.city}}<br>
+    Country: {{address.country}}<br>
+    Type: {{address.type}}<br>
+    <button  (click)="enableEdit(i)">Edit</button>
+    <br><br>
+  </div>
+  <br>
+  <button (click)="enableAdd()">Add more</button>
+
+
+</div>
+
+<!--=================== EDIT ========================-->
+
+<div *ngIf="isEditEnabled">
+
+
+  <div>
+    <label>addresses street: </label>
+    <input [(ngModel)]="tempAddress.street" placeholder="street">
+  </div>
+  <div>
+    <label>addresses city: </label>
+    <input [(ngModel)]="tempAddress.city" placeholder="city">
+  </div>
+  <div>
+    <label>addresses country: </label>
+    <input [(ngModel)]="tempAddress.country" placeholder="country">
+  </div>
+  <div>
+    <label>addresses type: </label>
+    <input [(ngModel)]="tempAddress.type" placeholder="country">
+  </div>
+  <button (click)="disableEdit()">Undo Changes</button>
+  <button (click)="update()">Save</button>
+
+</div>
+
+<!--=================== ADD ========================-->
+<div *ngIf="isAddEnabled" class="container">
+
+  <form (ngSubmit)="add()" #addressForm="ngForm">
+    <div class="form-group">
+      <label for="street">street</label>
+      <input type="text" class="form-control" id="street"
+             required
+             [(ngModel)]="tempAddress.street" name="street"
+             #street="ngModel" >
+      <div [hidden]="street.valid || street.pristine"
+           class="alert alert-danger">
+        street is required
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="city">city</label>
+      <input type="text" class="form-control" id="city"
+             required
+             [(ngModel)]="tempAddress.city" name="city"
+             #city="ngModel">
+      <div [hidden]="city.valid || city.pristine "
+           class="alert alert-danger">
+        city is required
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="country">country</label>
+      <input type="text" class="form-control" id="country"
+             required
+             [(ngModel)]="tempAddress.country" name="country"
+             #country="ngModel">
+      <div [hidden]="country.valid || country.pristine"
+           class="alert alert-danger">
+        country is required
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="type">Type</label>
+      <select class="form-control" id="type"
+              required
+              [(ngModel)]="tempAddress.type" name="type"
+              #type="ngModel">
+        <option *ngFor="let type of types" [value]="type" def>{{type}}</option>
+      </select>
+      <div [hidden]="type.valid || type.pristine" class="alert alert-danger">
+        Type is required
+      </div>
+    </div>
+
+
+    <button type="submit" class="btn btn-success" [disabled]="!addressForm.form.valid">Submit</button>
+  </form>
+</div>
+
+
+<!--<div *ngIf="addresses && !isEditEnabled" >-->
+
+<!--<div *ngFor="let address of addresses; let i = index">-->
+
+<!--Street: {{address.street}}<br>-->
+<!--City: {{address.city}}<br>-->
+<!--Country: {{address.country}}<br>-->
+<!--Type: {{address.type}}<br>-->
+<!--<button style="align-content: flex-end" (click)="enableEdit(i)">Edit</button><br><br>-->
+<!--</div>-->
+<!--<br>-->
+<!--<button (click)="enableAdd()">Add more</button>-->
+
+
+<!--</div>-->
+
+<!--&lt;!&ndash;=================== EDIT ========================&ndash;&gt;-->
+
+<!--<div *ngIf="isEditEnabled" >-->
+
+
+<!--<div>-->
+<!--<label>addresses street: </label>-->
+<!--<input [(ngModel)]="tempAddress.street" placeholder="street">-->
+<!--</div>-->
+<!--<div>-->
+<!--<label>addresses city: </label>-->
+<!--<input [(ngModel)]="tempAddress.city" placeholder="city">-->
+<!--</div>-->
+<!--<div>-->
+<!--<label>addresses country: </label>-->
+<!--<input [(ngModel)]="tempAddress.country" placeholder="country">-->
+<!--</div>-->
+<!--<div>-->
+<!--<label>addresses type: </label>-->
+<!--<input [(ngModel)]="tempAddress.type" placeholder="country">-->
+<!--</div>-->
+<!--<button (click)="disableEdit()">Undo Changes</button>-->
+<!--<button (click)="update()">Save</button>-->
+
+<!--</div>-->
+
+<!--&lt;!&ndash;=================== ADD ========================&ndash;&gt;-->
+<!--<div *ngIf="isAddEnabled" >-->
+
+<!--<div>-->
+<!--<label>addresses street: </label>-->
+<!--<input [(ngModel)]="tempAddress.street" placeholder="street">-->
+<!--</div>-->
+<!--<div>-->
+<!--<label>addresses city: </label>-->
+<!--<input [(ngModel)]="tempAddress.city" placeholder="city">-->
+<!--</div>-->
+<!--<div>-->
+<!--<label>addresses country: </label>-->
+<!--<input [(ngModel)]="tempAddress.country" placeholder="country">-->
+<!--</div>-->
+<!--<div>-->
+<!--<label>addresses type: </label>-->
+<!--<input [(ngModel)]="tempAddress.type" placeholder="type">-->
+<!--</div>-->
+<!--<button (click)="disableAdd()">Close</button>-->
+<!--<button (click)="add()">Save</button>-->
+
+<!--</div>-->
+
