@@ -23,6 +23,8 @@ import {EducationComponent} from './dashboard/education/education.component';
 import { EmploymentsComponent } from './dashboard/employments/employments.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import {CanActivateViaAuthGuard} from "app/Guards/can-activate-via-auth-guard";
+import {AddressFormComponent} from './dashboard/addresses/address.form.component'
+import {Validator} from './common/lib/validator'
 
 @NgModule({
   imports: [
@@ -44,9 +46,10 @@ import {CanActivateViaAuthGuard} from "app/Guards/can-activate-via-auth-guard";
     ContactDetailsComponent,
     EducationComponent,
     EmploymentsComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    AddressFormComponent
   ],
-  providers: [ HeroService, Token, CanActivateViaAuthGuard],
+  providers: [ HeroService, Token, CanActivateViaAuthGuard, Validator],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
