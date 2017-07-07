@@ -31,7 +31,7 @@ const routes: Routes = [
     ]},
 
 
-  { path: 'login',     component: AuthenticateComponent },
+  { path: 'login', component: AuthenticateComponent },
   { path: '**', component: PageNotFoundComponent }
 
 
