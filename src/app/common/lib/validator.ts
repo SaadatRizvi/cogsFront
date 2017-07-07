@@ -1,4 +1,5 @@
 
+import {isNullOrUndefined} from "util";
 export class Validator {
 
   constructor() { }
@@ -48,4 +49,9 @@ export class Validator {
       return true;
     }
   }
+
+  static isNullOrUndefined(data: string){
+      return isNullOrUndefined(data) || (''=== data);
+  }
+
 }
