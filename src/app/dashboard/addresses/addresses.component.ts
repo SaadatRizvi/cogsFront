@@ -58,8 +58,9 @@ export class AddressesComponent implements OnInit {
   @ViewChild('addressForm') currentForm: NgForm;
 
   ngAfterViewChecked() {
-    console.log('1');
+    console.log('ngAfterViewChecked()');
     this.formChanged();
+    this.isSubmitable();
   }
 
   formChanged() {
@@ -205,6 +206,11 @@ export class AddressesComponent implements OnInit {
     // console.log('Address.component.ts');
     // console.log(this.localStorage.getItem('token'));
     this.enableSubmitable=new Array(4);
+    for(let i=0;i<this.enableSubmitable.length;i++){
+      this.enableSubmitable[i] = false;
+    }
+    console.log("enableSubmit -- > ");
+    console.log(this.enableSubmitable);
     this.isEditEnabled = false;
     this.isAddEnabled = false;
     this.resetTemp();
@@ -331,23 +337,53 @@ export class AddressesComponent implements OnInit {
   }
 
 
+  // 'street' -----0
+  // 'city'-----1
+  // 'country'-----2
+  // 'type'-----3
 
-  isSubmitable(): boolean{
 
+    isSubmitable(): boolean{
+//sequence of errors is the same as sequence of validation messages
 
     for(let key in this.formErrors) {
-      if (this.formErrors[key]==='' || this.formErrors[key]===null) {
-        console.log("True hai");
-        console.log(key);
-        console.log(this.formErrors[key]);
+      if (this.formErrors[key]==='') {
+      //  console.log("True hai");
+        if(key === 'street' )this.enableSubmitable[0] = true;
+        if(key === 'city' )this.enableSubmitable[1] = true;
+        if(key === 'country' )this.enableSubmitable[2] = true;
+        if(key === 'type' )this.enableSubmitable[3] = true;
+        // console.log(key);
+        // console.log(this.formErrors[key]);
+        //
+        // console.log("True hai");
 
-        console.log("True hai");
-        return true;
       }
-      console.log("False hai");
-      return false;
+      else{
+
+        if(key === 'street' )this.enableSubmitable[0] = false;
+        if(key === 'city' )this.enableSubmitable[1] = false;
+        if(key === 'country' )this.enableSubmitable[2] = false;
+        if(key === 'type' )this.enableSubmitable[3] = false;
+
+      }
+      //console.log("False hai");
+
     }
+      for(let i=0;i<this.enableSubmitable.length;i++){
+        console.log(this.enableSubmitable[i]);
+
+      if(this.enableSubmitable[i]===false) {
+        console.log(this.enableSubmitable[i]);
+        return false;
+
+      }
+      }
+      return true;
   }
+
+
+
 
 
 }
