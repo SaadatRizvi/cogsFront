@@ -19,13 +19,42 @@ export class AddressesService {
               localStorage: CoolLocalStorage
   ) {     this.localStorage = localStorage;
   }
+
+
+  public formErrors = {
+    'street': '',
+    'city': '',
+    'country': '',
+    'type': ''
+  };
+
+  public validationMessages = {
+    'street': {
+      'required': 'Required.',
+      'alpha': 'Must contain alphabets only'
+    },
+    'city': {
+      'required': 'Required.',
+      'alpha': 'Must contain alphabets only'
+    },
+    'country': {
+      'required': 'Required.',
+      'alpha': 'Must contain alphabets only'
+    },
+    'type': {
+      'required': 'Required.',
+      'alpha': 'Must contain alphabets only'
+    }
+  };
+
+
   private url=this.token.baseUrl + 'address';
   private headers = new Headers({'Content-Type': 'application/json',
     'x-access-token': 'NotSet'});
 
   //this.localStorage.getItem('token')
 
-  create(data: any): Promise<Addresses> {
+  create(data: any): Promise<any> {
     //console.log(data)
     this.headers.set('x-access-token',this.localStorage.getItem('token'));
 
@@ -34,7 +63,7 @@ export class AddressesService {
       .toPromise()
       .then(res => {
        // console.log(res.json());
-        return res.json() as Addresses})
+        return res.json() })
       .catch(this.handleError);
   }
   private handleError(error: any): Promise<any> {
@@ -55,6 +84,7 @@ export class AddressesService {
         return res.json() as Addresses[]})
       .catch(this.handleError);
   }
+
 //response.json().data as Hero[]
   update(data: Addresses){
 
@@ -73,4 +103,20 @@ export class AddressesService {
 
 
   }
+
+  delete(id:number){
+    let localUrl=this.url+'/'+id;
+    this.headers.set('x-access-token',this.localStorage.getItem('token'));
+    return this.http
+      .delete(localUrl,{headers: this.headers})
+      .toPromise()
+      .then(res => {
+        //       console.log(res.json() as Addresses);
+        return res.json()})
+      .catch(this.handleError);
+
+
+
+  }
+
 }
