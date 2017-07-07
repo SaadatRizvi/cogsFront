@@ -24,6 +24,7 @@ import { EmploymentsComponent } from './dashboard/employments/employments.compon
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import {CanActivateViaAuthGuard} from "app/Guards/can-activate-via-auth-guard";
 
+
 @NgModule({
   imports: [
     BrowserModule,

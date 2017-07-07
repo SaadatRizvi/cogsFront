@@ -1,5 +1,7 @@
 
+
 import {isNullOrUndefined} from "util";
+
 export class Validator {
 
   constructor() { }
