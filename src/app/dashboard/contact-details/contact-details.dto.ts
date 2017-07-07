@@ -1,4 +1,5 @@
 export class ContactDetails {
+  id: number;
   cnic: string;
   personalEmail: string;
   skype: string;

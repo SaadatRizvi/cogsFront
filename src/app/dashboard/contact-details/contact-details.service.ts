@@ -53,4 +53,18 @@ export class ContactDetailsService {
         return res.json() as ContactDetails})
       .catch(this.handleError);
   }
-}
+
+  update(data: ContactDetails){
+
+    let localUrl=this.url+'/'+data.id;
+    this.headers.set('x-access-token',this.localStorage.getItem('token'));
+    return this.http
+      .put(localUrl, data,{headers: this.headers})
+      .toPromise()
+      .then(res => {
+        //       console.log(res.json() as Addresses);
+        return res.json()})
+      .catch(this.handleError);
+
+
+  }}

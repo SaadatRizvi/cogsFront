@@ -12,7 +12,6 @@ import {CoolLocalStorage} from "angular2-cool-storage";
 @Component({
   selector: 'app-addresses',
   templateUrl: './addresses.component.html',
-  styleUrls: ['./addresses.component.css'],
   providers: [AddressesService]
 })
 export class AddressesComponent implements OnInit {
