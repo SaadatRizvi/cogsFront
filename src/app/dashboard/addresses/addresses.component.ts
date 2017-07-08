@@ -105,7 +105,7 @@ export class AddressesComponent implements OnInit {
           this.formErrors[field] += messages[key] + ' ';
         }
       }
-           }
+    }
   }
 
   validateStreet(errors: Array<any>): boolean {

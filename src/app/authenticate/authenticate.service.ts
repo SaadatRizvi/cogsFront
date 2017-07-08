@@ -16,12 +16,13 @@ export class AuthenticateService  {
               private token: Token) { }
 
   authenticateUser(data: LoginRequest): Promise<LoginRes> {
+    console.log(data);
 
     return this.http
       .post(this.url, data, {headers: this.headers})
       .toPromise()
       .then(res => {
-     //   console.log(res.json());
+        console.log(res.json());
         return res.json() as LoginRes})
       .catch(this.handleError);
   }
