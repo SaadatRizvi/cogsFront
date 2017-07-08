@@ -1,19 +1,21 @@
 <div *ngIf="addresses && !isEditEnabled">
 
+   
   <div  *ngFor="let address of addresses;  let i = index">
-
-    Street: {{address.street}}<br>
-    City: {{address.city}}<br>
-    Country: {{address.country}}<br>
-    Type: {{address.type}}<br>
-    <button (click)="enableEdit(i)">Edit</button>
-
+    <br><br>
+    <div style="display: inline-block">
+      Street: {{address.street}}<br>
+      City: {{address.city}}<br>
+      Country: {{address.country}}<br>
+      Type: {{address.type}}<br>
+    </div>
+    <button style="float: right;" (click)="enableEdit(i)">Edit</button>
     <button class="delete"
             (click)="delete(i); $event.stopPropagation()">x</button>
     <br><br>
   </div>
   <br>
-  <button (click)="enableAdd()">Add more</button>
+  <button  (click)="enableAdd()">Add more</button>
 
 
 </div>

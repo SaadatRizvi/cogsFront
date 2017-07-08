@@ -1,12 +1,121 @@
-<p *ngIf="contactDetails">
 
-  Cnic: {{contactDetails.cnic}}<br>
-  Personal Email: {{contactDetails.personalEmail}}<br>
-  Mobile Number: {{contactDetails.mobileNumber}}<br>
-  Phone Number: {{contactDetails.phoneNumber}}<br>
-  Skype: {{contactDetails.skype}}<br>
-  Emergency Address: {{contactDetails.emergencyAddress}}<br>
-  Emergency Name: {{contactDetails.emergencyName}}<br>
-  Emergency Number: {{contactDetails.emergencyNumber}}<br>
-  Emergency Relation: {{contactDetails.emergencyRelation}}<br>
-</p>
+<div *ngIf="contactDetails && !isEditEnabled">
+
+  <div *ngFor="let contactDetail of contactDetails; let i = index">
+    <br>
+    <div style="display: inline-block">
+      Cnic: {{contactDetails.cnic}}<br>
+      Personal Email: {{contactDetails.personalEmail}}<br>
+      Mobile Number: {{contactDetails.mobileNumber}}<br>
+      Phone Number: {{contactDetails.phoneNumber}}<br>
+      Skype: {{contactDetails.skype}}<br>
+      <br>
+      Emergency Address: {{contactDetails.emergencyName}}<br>
+      Emergency Name: {{contactDetails.emergencyAddress}}<br>
+      Emergency Number: {{contactDetails.emergencyNumber}}<br>
+      Emergency Relation: {{contactDetails.emergencyRelation}}<br>
+    </div>
+    <button style="float: right;" (click)="enableEdit()">Edit</button>
+    <br><br>
+  </div>
+  <br>
+
+</div>
+
+<!--=================== EDIT ========================-->
+
+<div *ngIf="isEditEnabled">
+
+  <form (ngSubmit)="update()" #contactForm="ngForm">
+
+    <div>
+      <label>Cnic: </label>
+      {{tempDetails.cnic}}<br>
+    </div>
+    <div>
+      <label for="personalEmail">Personal Email: </label>
+      <input type="text" class="form-control" id="personalEmail"
+             required
+             [(ngModel)]="tempDetails.personalEmail" placeholder="email"
+             #personalEmail="ngModel">
+      <div [hidden]="personalEmail.valid || personalEmail.pristine"
+           class="alert alert-danger">
+        Personal Email is required
+      </div>
+    </div>
+    <div>
+      <label for="mobileNumber">Mobile Number: </label>
+      <input type="text" class="form-control" id="mobileNumber"
+             required
+             [(ngModel)]="tempDetails.mobileNumber" placeholder="mobile"
+             #mobileNumber="ngModel">
+      <div [hidden]="mobileNumber.valid || mobileNumber.pristine"
+           class="alert alert-danger">
+        Mobile Number is required
+      </div>
+    </div>
+    <div>
+      <label for="phoneNumber">Phone Number : </label>
+      <input type="text" class="form-control" id="phoneNumber"
+             required
+             [(ngModel)]="tempDetails.phoneNumber" placeholder="phone"
+             #phoneNumber="ngModel">
+      <div [hidden]="phoneNumber.valid || phoneNumber.pristine"
+           class="alert alert-danger">
+        Phone Number is required
+      </div>
+    </div>
+    <div>
+      <label for="skype">Phone Number : </label>
+      <input type="text" class="form-control" id="skype"
+             required
+             [(ngModel)]="tempDetails.skype" placeholder="skype"
+             #skype="ngModel">
+    </div>
+    <div>
+      <label for="emergencyName">Emergency Name: </label>
+      <input type="text" class="form-control" id="emergencyName"
+             required
+             [(ngModel)]="tempDetails.emergencyName" placeholder="emergency name"
+             #emergencyName="ngModel">
+      <div [hidden]="emergencyName.valid || emergencyName.pristine"
+           class="alert alert-danger">
+        Emergency Name is required
+      </div>
+    </div>
+    <div>
+      <label for="emergencyAddress">Emergency Address: </label>
+      <input type="text" class="form-control" id="emergencyAddress"
+             required
+             [(ngModel)]="tempDetails.emergencyAddress" placeholder="emergency address"
+             #emergencyAddress="ngModel">
+      <div [hidden]="emergencyAddress.valid || emergencyAddress.pristine"
+           class="alert alert-danger">
+        Emergency Address is required
+      </div>
+    </div>
+    <div>
+      <label for="emergencyNumber">Emergency Address: </label>
+      <input type="text" class="form-control" id="emergencyNumber"
+             required
+             [(ngModel)]="tempDetails.emergencyNumber" placeholder="emergency address"
+             #emergencyNumber="ngModel">
+      <div [hidden]="emergencyNumber.valid || emergencyNumber.pristine"
+           class="alert alert-danger">
+        Emergency Number is required
+      </div>
+    </div>
+    <div>
+      <label for="emergencyRelation">Emergency Relation: </label>
+      <input type="text" class="form-control" id="emergencyRelation"
+             required
+             [(ngModel)]="tempDetails.emergencyRelation" placeholder="emergency Relation"
+             #emergencyNumber="ngModel">
+    </div>
+    <button (click)="disableEdit()">Undo Changes</button>
+
+    <button type="submit" class="btn btn-success" [disabled]="!contactForm.form.valid">Update</button>
+
+  </form>
+
+</div>
