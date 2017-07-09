@@ -53,51 +53,8 @@ export const validationMessages = {
 export var isDisabled: boolean =true  ;
 
 export class ContactDetailsValidator {
-  // formErrors = {
-  //   personalEmail: null,
-  //   mobileNumber: null,
-  //   phoneNumber: null,
-  //   skype: null,
-  //   emergencyName: null,
-  //   emergencyAddress: null,
-  //   emergencyNumber: null,
-  //   emergencyRelation: null
-  // };
-  //
-  // validationMessages = {
-  //   'personalEmail': {
-  //     'required': 'Required.',
-  //     'email': 'Must be an email'
-  //   },
-  //   'mobileNumber': {
-  //     'required': 'Required.',
-  //     'number': 'Must only contain numbers'
-  //   },
-  //   'phoneNumber': {
-  //     'number': 'Must only contain numbers'
-  //   },
-  //   'skype': {
-  //     'ascii': 'Must only contain ascii characters'
-  //   },
-  //   'emergencyName': {
-  //     'required': 'Required.',
-  //     'alpha': 'Must contain alphabets only',
-  //   },
-  //   'emergencyNumber': {
-  //     'required': 'Required.',
-  //     'number': 'Must only contain numbers'
-  //   },
-  //   'emergencyAddress': {
-  //     'required': 'Required.',
-  //     'ascii': 'Must only contain ascii characters'
-  //   },
-  //   'emergencyRelation': {
-  //     'required': 'Required.',
-  //     'alpha': 'Must contain alphabets only',
-  //   }
-  // };
 
-  constructor(){
+    constructor(){
     isDisabled=true;
   }
 
