@@ -37,17 +37,57 @@ export class EducationService {
     return Promise.reject(error.message || error);
   }
 
-  getEducation(id: number): Promise<Education> {
-    this.url += '?EmployeeId=' + id;
+  getEducation(id: number): Promise<Education[]> {
+    let localUrl=this.url + '?EmployeeId=' + id;
     this.headers.set('x-access-token', this.localStorage.getItem('token'));
    // console.log(this.url);
    // console.log();
     return this.http
-      .get(this.url, {headers: this.headers})
+      .get(localUrl, {headers: this.headers})
       .toPromise()
       .then(res => {
      //   console.log(res.json());
-        return res.json() as Education})
+        return res.json() as Education[]})
       .catch(this.handleError);
+  }
+  update(data: Education){
+
+    let localUrl=this.url+'/'+data.id;
+    this.headers.set('x-access-token',this.localStorage.getItem('token'));
+    return this.http
+      .put(localUrl, data,{headers: this.headers})
+      .toPromise()
+      .then(res => {
+        //       console.log(res.json() as Addresses);
+        return res.json()})
+      .catch(this.handleError);
+
+
+  }
+  create(data: any): Promise<any> {
+    //console.log(data)
+    this.headers.set('x-access-token',this.localStorage.getItem('token'));
+
+    return this.http
+      .post(this.url, data, {headers: this.headers})
+      .toPromise()
+      .then(res => {
+        // console.log(res.json());
+        return res.json() })
+      .catch(this.handleError);
+  }
+  delete(id:number){
+    let localUrl=this.url+'/'+id;
+    this.headers.set('x-access-token',this.localStorage.getItem('token'));
+    return this.http
+      .delete(localUrl,{headers: this.headers})
+      .toPromise()
+      .then(res => {
+        //       console.log(res.json() as Addresses);
+        return res.json()})
+      .catch(this.handleError);
+
+
+
   }
 }
