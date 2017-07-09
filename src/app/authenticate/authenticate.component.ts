@@ -30,7 +30,9 @@ export class AuthenticateComponent implements OnInit{
     private token: Token,
     localStorage: CoolLocalStorage
     ) {     this.localStorage = localStorage;
-
+    this.loginData = new LoginRequest();
+    this.loginData.email = null;
+    this.loginData.password = null;
   }
 
 
@@ -66,12 +68,14 @@ export class AuthenticateComponent implements OnInit{
 
 
   submit() {
+    console.log(this.loginData);
     this.authenticateService.authenticateUser(this.loginData)
       .then(loginRes=>{
         if(!loginRes.success){
           this.failure=loginRes.message;
         }
         else {
+
           this.loginRes=loginRes;
          // this.token.setToken(loginRes.token);
           this.localStorage.setItem('token', loginRes.token);

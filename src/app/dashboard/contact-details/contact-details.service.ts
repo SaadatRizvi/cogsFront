@@ -40,17 +40,21 @@ export class ContactDetailsService {
     return Promise.reject(error.message || error);
   }
 
-  getContactDetails(id: number): Promise<ContactDetails> {
-    this.url+='?EmployeeId='+id;
+  getContactDetails(id: number): Promise<any> {
+    let localUrl=this.url+'?EmployeeId='+id;
+
     this.headers.set('x-access-token',this.localStorage.getItem('token'));
    // console.log(this.url);
    // console.log(this.headers);
     return this.http
-      .get(this.url, {headers: this.headers})
+      .get(localUrl, {headers: this.headers})
       .toPromise()
       .then(res => {
-    //    console.log(res.json());
-        return res.json() as ContactDetails})
+        console.log(res.json());
+        if(res.json().length > 0)
+          return res.json() as ContactDetails;
+        else return false;
+      })
       .catch(this.handleError);
   }
 
@@ -67,4 +71,18 @@ export class ContactDetailsService {
       .catch(this.handleError);
 
 
-  }}
+  }
+  create(data: any): Promise<any> {
+    //console.log(data)
+    this.headers.set('x-access-token',this.localStorage.getItem('token'));
+
+    return this.http
+      .post(this.url, data, {headers: this.headers})
+      .toPromise()
+      .then(res => {
+        // console.log(res.json());
+        return res.json() })
+      .catch(this.handleError);
+  }
+
+}
