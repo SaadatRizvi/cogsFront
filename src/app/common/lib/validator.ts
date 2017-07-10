@@ -51,6 +51,15 @@ export class Validator {
       return true;
     }
   }
+
+  // return true if dataA is greater than dataB
+  static compareDates(dataA: string, dataB: string): boolean{
+    if(dataA && dataB) {
+      return (new Date(dataA).getTime() > new Date(dataB).getTime() );
+    }
+    return true;
+  }
+
   static isEmail(data: string) : boolean{
     var ck_name = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
     if (!ck_name.test(data)) {

@@ -2,6 +2,7 @@ import {Validator} from "../../common/lib/validator";
 export var formErrors = {
   company: null,
   location: null,
+  title: null,
   joiningDate: null,
   leavingDate: null
 };
@@ -15,13 +16,18 @@ export const validationMessages = {
     'required': 'Required.',
     'alpha': 'Must contain alphabets only'
   },
-  'joiningDate': {
+  'title': {
     'required': 'Required.',
     'alpha': 'Must contain alphabets only'
   },
+  'joiningDate': {
+    'required': 'Required.',
+    'date': 'Must be a date in the following format: YYYY/MM/DD'
+  },
   'leavingDate': {
     'required': 'Required.',
-    'alpha': 'Must contain alphabets only',
+    'date': 'Must be a date in the following format: YYYY/MM/DD',
+    'notBeforeJoiningDate': 'Leaving Date must be after Joining Date'
 
   }
 };
@@ -29,7 +35,7 @@ export const validationMessages = {
 
 export var isDisabled: boolean = true;
 
-export class AddressesValidator {
+export class EmploymentsValidator {
 
   constructor() {
     isDisabled = true;
@@ -40,16 +46,34 @@ export class AddressesValidator {
   }
 
 
-  validate(fieldName: String, errors: Array<any>, data: string): boolean {
+  validate(fieldName: String, errors: Array<any>, data: string, date2?: string): boolean {
     if (fieldName === 'company') return this.validateCompany(errors, data);
     if (fieldName === 'location') return this.validateLocation(errors, data);
+    if (fieldName === 'title') return this.validateTitle(errors, data);
     if (fieldName === 'joiningDate') return this.validateJoiningDate(errors, data);
-    if (fieldName === 'leavingDate') return this.validateLeavingDate(errors, data);
+    if (fieldName === 'leavingDate') return this.validateLeavingDate(errors, data, date2);
 
   }
 
 
   validateCompany(errors: Array<any>, data: string): boolean {
+    let returnVal = true;
+
+    if (!Validator.isAlpha(data)) {
+      errors.push('alpha');
+      returnVal = false;
+    }
+
+    if (Validator.isNullOrUndefined(data)) {
+      errors.push('required');
+      returnVal = false;
+    }
+    isDisabled = returnVal && isDisabled;
+    return returnVal;
+
+  }
+
+  validateTitle(errors: Array<any>, data: string): boolean {
     let returnVal = true;
 
     if (!Validator.isAlpha(data)) {
@@ -86,8 +110,8 @@ export class AddressesValidator {
   validateJoiningDate(errors: Array<any>, data: string): boolean {
     let returnVal = true;
 
-    if (!Validator.isAlphaNumeric(data)) {
-      errors.push('alpha');
+    if (!Validator.isDate(data)) {
+      errors.push('date');
       returnVal = false;
     }
 
@@ -95,17 +119,17 @@ export class AddressesValidator {
       errors.push('required');
       returnVal = false;
     }
-    isDisabled = returnVal && isDisabled;
+    isDisabled=returnVal && isDisabled;
     return returnVal;
 
   }
 
-  validateLeavingDate(errors: Array<any>, data: string): boolean {
+  validateLeavingDate(errors: Array<any>, data: string, date2: string): boolean {
 
     let returnVal = true;
 
-    if (!Validator.isAlpha(data)) {
-      errors.push('alpha');
+    if (!Validator.isDate(data)) {
+      errors.push('date');
       returnVal = false;
     }
 
@@ -113,8 +137,12 @@ export class AddressesValidator {
       errors.push('required');
       returnVal = false;
     }
+    if (!Validator.compareDates(data,date2)){
+      errors.push('notBeforeJoiningDate');
+      returnVal = false;
+    }
 
-    isDisabled = returnVal && isDisabled;
+    isDisabled=returnVal && isDisabled;
     return returnVal;
 
   }

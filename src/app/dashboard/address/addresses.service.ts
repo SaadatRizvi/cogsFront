@@ -20,43 +20,14 @@ export class AddressService {
   }
 
 
-  public formErrors = {
-    'street': '',
-    'city': '',
-    'country': '',
-    'type': ''
-  };
-
-  public validationMessages = {
-    'street': {
-      'required': 'Required.',
-      'alpha': 'Must contain alphabets only'
-    },
-    'city': {
-      'required': 'Required.',
-      'alpha': 'Must contain alphabets only'
-    },
-    'country': {
-      'required': 'Required.',
-      'alpha': 'Must contain alphabets only'
-    },
-    'type': {
-      'required': 'Required.',
-      'alpha': 'Must contain alphabets only'
-    }
-  };
-
-
   private url = this.token.baseUrl + 'address';
   private headers = new Headers({
     'Content-Type': 'application/json',
     'x-access-token': 'NotSet'
   });
 
-  //this.localStorage.getItem('token')
 
   create(data: any): Promise<any> {
-    //console.log(data)
     this.headers.set('x-access-token', this.localStorage.getItem('token'));
 
     return this.http
@@ -85,19 +56,16 @@ export class AddressService {
   getAddress(id: number): Promise<Address[]> {
     let localUrl = this.url + '?EmployeeId=' + id;
     this.headers.set('x-access-token', this.localStorage.getItem('token'));
-    // console.log(this.url);
-    // console.log(this.headers);
+
     return this.http
       .get(localUrl, {headers: this.headers})
       .toPromise()
       .then(res => {
-        //console.log(res.json());
         return res.json() as Address[]
       })
       .catch(this.handleError);
   }
 
-//response.json().data as Hero[]
   update(data: Address) {
 
     console.log("In service update... id:" + data.id);
@@ -109,7 +77,6 @@ export class AddressService {
       .put(localUrl, data, {headers: this.headers})
       .toPromise()
       .then(res => {
-        //       console.log(res.json() as Address);
         return res.json() as Address
       })
       .catch(this.handleError);
@@ -124,7 +91,6 @@ export class AddressService {
       .delete(localUrl, {headers: this.headers})
       .toPromise()
       .then(res => {
-        //       console.log(res.json() as Address);
         return res.json()
       })
       .catch(this.handleError);
