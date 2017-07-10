@@ -43,7 +43,7 @@ export class Validator {
     }
   }
   static isFloat(data: string) : boolean{
-    let ck_name =/ ^\d{0,2}(\.\d{0,2}){0,1}$/;
+    let ck_name =/^\d{0,2}(\.\d{0,5}){0,1}$/;
     if (!ck_name.test(data)) {
       return false;
     }
@@ -59,6 +59,14 @@ export class Validator {
     else {
       return true;
     }
+  }
+  static isDate(data: string) {
+  var date_regex = /^(19|20)\d{2}\-(0[1-9]|1[0-2])\-(0[1-9]|1\d|2\d|3[01])$/;
+  if(!(date_regex.test(data)))
+  {
+    return false;
+  }
+  return true
   }
 
   static isNullOrUndefined(data: string){

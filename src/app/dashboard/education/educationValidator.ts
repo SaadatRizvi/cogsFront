@@ -25,6 +25,10 @@ export const validationMessages = {
   'gpa': {
     'required': 'Required.',
     'number': 'Must contain number only',
+  },
+  'passingDate': {
+    'required': 'Required.',
+    'date': 'Must be a date in the following format: YYYY/MM/DD',
   }
 };
 
@@ -71,6 +75,40 @@ export class EducationValidator {
     return returnVal;
 
   }
+  validateDate(errors: Array<any>,data: string): boolean {
+
+    let returnVal = true;
+
+    if (!Validator.isDate(data)) {
+      errors.push('date');
+      returnVal = false;
+    }
+
+    if (Validator.isNullOrUndefined(data)) {
+      errors.push('required');
+      returnVal = false;
+    }
+    isDisabled=returnVal && isDisabled;
+    return returnVal;
+
+  }
+  validateAscii(errors: Array<any>,data: string): boolean {
+
+    let returnVal = true;
+
+    if (!Validator.isAscii(data)) {
+      errors.push('date');
+      returnVal = false;
+    }
+
+    if (Validator.isNullOrUndefined(data)) {
+      errors.push('required');
+      returnVal = false;
+    }
+    isDisabled=returnVal && isDisabled;
+    return returnVal;
+
+  }
 
   setDisabled(){
     isDisabled=true;
@@ -78,7 +116,12 @@ export class EducationValidator {
 
   validate(fieldName: String, errors: Array<any>,data: string): boolean {
      if (fieldName === 'gpa') return this.validateGpa(errors, data);
-     else return this.validateAlpha(errors, data);
+     if (fieldName === 'passingDate') return this.validateDate(errors, data);
+     if (fieldName === 'field') return this.validateAscii(errors, data);
+     if (fieldName === 'institute') return this.validateAscii(errors, data);
+     if (fieldName === 'degree') return this.validateAscii(errors, data);
+
+    else return this.validateAlpha(errors, data);
   }
 
 
