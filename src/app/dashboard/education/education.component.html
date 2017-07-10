@@ -1,10 +1,10 @@
-<p *ngIf="education">
-  Institute: {{education.institute}}<br>
-  Degree: {{education.degree}}<br>
-  Field: {{education.field}}<br>
-  GPA: {{education.gpa}}<br>
-  Passing Date: {{education.passingDate}}<br>
-</p>
+<!--<p *ngIf="education">-->
+  <!--Institute: {{education.institute}}<br>-->
+  <!--Degree: {{education.degree}}<br>-->
+  <!--Field: {{education.field}}<br>-->
+  <!--GPA: {{education.gpa}}<br>-->
+  <!--Passing Date: {{education.passingDate}}<br>-->
+<!--</p>-->
 
 <div *ngIf="!isEditEnabled">
 
@@ -34,101 +34,65 @@
 
 <div *ngIf="isEditEnabled">
 
-  <form (ngSubmit)="update()" #contactForm="ngForm">
+  <form (ngSubmit)="update()" #educationForm  ="ngForm">
 
-    <div>
-      <label>Cnic: </label>
-      {{tempEducation.cnic}}<br>
-    </div>
+
     <div class="form-group">
-      <label for="personalEmail">Personal Email: </label>
-      <input type="text" class="form-control" id="personalEmail"
-             [class.controlError]="formErrors.personalEmail"
-             [class.noControlError]="!formErrors.personalEmail"
-             [(ngModel)]="tempEducation.personalEmail" placeholder="email"
-             #personalEmail="ngModel" name="personalEmail">
-      <div *ngIf="formErrors.personalEmail && (personalEmail.touched)" class="alert alert-danger">
-        {{ formErrors.personalEmail }}
+      <label for="institute">Institute: </label>
+      <input type="text" class="form-control" id="institute"
+             [class.controlError]="formErrors.institute"
+             [class.noControlError]="!formErrors.institute"
+             [(ngModel)]="tempEducation.institute" placeholder="institute"
+             #institute="ngModel" name="institute">
+      <div *ngIf="formErrors.institute && (institute.touched)" class="alert alert-danger">
+        {{ formErrors.institute }}
       </div>
     </div>
 
     <div class="form-group">
-      <label for="mobileNumber">Mobile Number: </label>
-      <input type="text" class="form-control" id="mobileNumber"
-             [class.controlError]="formErrors.mobileNumber"
-             [class.noControlError]="!formErrors.mobileNumber"
-             [(ngModel)]="tempEducation.mobileNumber" placeholder="email"
-             #mobileNumber="ngModel" name="mobileNumber">
-      <div *ngIf="formErrors.mobileNumber && (mobileNumber.touched)" class="alert alert-danger">
-        {{ formErrors.mobileNumber }}
+      <label for="degree">Degree: </label>
+      <input type="text" class="form-control" id="degree"
+             [class.controlError]="formErrors.degree"
+             [class.noControlError]="!formErrors.degree"
+             [(ngModel)]="tempEducation.degree" placeholder="degree"
+             #degree="ngModel" name="degree">
+      <div *ngIf="formErrors.degree && (degree.touched)" class="alert alert-danger">
+        {{ formErrors.degree }}
       </div>
     </div>
 
     <div class="form-group">
-      <label for="phoneNumber">Phone Number: </label>
-      <input type="text" class="form-control" id="phoneNumber"
-             [class.controlError]="formErrors.phoneNumber"
-             [class.noControlError]="!formErrors.phoneNumber"
-             [(ngModel)]="tempEducation.phoneNumber" placeholder="email"
-             #phoneNumber="ngModel" name="phoneNumber">
-      <div *ngIf="formErrors.phoneNumber && (phoneNumber.touched)" class="alert alert-danger">
-        {{ formErrors.phoneNumber }}
+      <label for="field">Field: </label>
+      <input type="text" class="form-control" id="field"
+             [class.controlError]="formErrors.field"
+             [class.noControlError]="!formErrors.field"
+             [(ngModel)]="tempEducation.field" placeholder="field"
+             #field="ngModel" name="field">
+      <div *ngIf="formErrors.field && (field.touched)" class="alert alert-danger">
+        {{ formErrors.field }}
       </div>
     </div>
     <div class="form-group">
-      <label for="skype">Skype: </label>
-      <input type="text" class="form-control" id="skype"
-             [class.controlError]="formErrors.skype"
-             [class.noControlError]="!formErrors.skype"
-             [(ngModel)]="tempEducation.skype" placeholder="email"
-             #skype="ngModel" name="skype">
-      <div *ngIf="formErrors.skype && (skype.touched)" class="alert alert-danger">
-        {{ formErrors.skype }}
+      <label for="gpa">Gpa: </label>
+      <input type="text" class="form-control" id="gpa"
+             [class.controlError]="formErrors.gpa"
+             [class.noControlError]="!formErrors.gpa"
+             [(ngModel)]="tempEducation.gpa" placeholder="gpa"
+             #gpa="ngModel" name="gpa">
+      <div *ngIf="formErrors.gpa && (gpa.touched)" class="alert alert-danger">
+        {{ formErrors.gpa }}
       </div>
     </div>
 
     <div class="form-group">
-      <label for="emergencyName">Emergency Name: </label>
-      <input type="text" class="form-control" id="emergencyName"
-             [class.controlError]="formErrors.emergencyName"
-             [class.noControlError]="!formErrors.emergencyName"
-             [(ngModel)]="tempEducation.emergencyName" placeholder="email"
-             #emergencyName="ngModel" name="emergencyName">
-      <div *ngIf="formErrors.emergencyName && (emergencyName.touched)" class="alert alert-danger">
-        {{ formErrors.emergencyName }}
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="emergencyNumber">Emergeny Number: </label>
-      <input type="text" class="form-control" id="emergencyNumber"
-             [class.controlError]="formErrors.emergencyNumber"
-             [class.noControlError]="!formErrors.emergencyNumber"
-             [(ngModel)]="tempEducation.emergencyNumber" placeholder="email"
-             #emergencyNumber="ngModel" name="emergencyNumber">
-      <div *ngIf="formErrors.emergencyNumber && (emergencyNumber.touched)" class="alert alert-danger">
-        {{ formErrors.emergencyNumber }}
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="emergencyAddress">Emergency Address: </label>
-      <input type="text" class="form-control" id="emergencyAddress"
-             [class.controlError]="formErrors.emergencyAddress"
-             [class.noControlError]="!formErrors.emergencyAddress"
-             [(ngModel)]="tempEducation.emergencyAddress" placeholder="email"
-             #emergencyAddress="ngModel" name="emergencyAddress">
-      <div *ngIf="formErrors.emergencyAddress && (emergencyAddress.touched)" class="alert alert-danger">
-        {{ formErrors.emergencyAddress }}
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="emergencyRelation">Emergency Relation: </label>
-      <input type="text" class="form-control" id="emergencyRelation"
-             [class.controlError]="formErrors.emergencyRelation"
-             [class.noControlError]="!formErrors.emergencyRelation"
-             [(ngModel)]="tempEducation.emergencyRelation" placeholder="email"
-             #emergencyRelation="ngModel" name="emergencyRelation">
-      <div *ngIf="formErrors.emergencyRelation && (emergencyRelation.touched)" class="alert alert-danger">
-        {{ formErrors.emergencyRelation }}
+      <label for="passingDate">Passing Date: </label>
+      <input type="date" class="form-control" id="passingDate"
+             [class.controlError]="formErrors.passingDate"
+             [class.noControlError]="!formErrors.passingDate"
+             [(ngModel)]="tempEducation.passingDate" placeholder="Passing Date"
+             #passingDate="ngModel" name="passingDate">
+      <div *ngIf="formErrors.passingDate && (passingDate.touched)" class="alert alert-danger">
+        {{ formErrors.passingDate }}
       </div>
     </div>
     <button (click)="disableEdit()">Undo Changes</button>
@@ -144,108 +108,65 @@
 
 <div *ngIf="isAddEnabled">
 
-  <form (ngSubmit)="add()" #contactForm="ngForm">
+  <form (ngSubmit)="add()" #educationForm="ngForm">
+
 
     <div class="form-group">
-      <label for="add_cnic">CNIC: </label>
-      <input type="text" class="form-control" id="add_cnic"
-             [class.controlError]="formErrors.cnic"
-             [class.noControlError]="!formErrors.cnic"
-             [(ngModel)]="tempEducation.cnic" placeholder="cnic"
-             #cnic="ngModel" name="cnic">
-      <div *ngIf="formErrors.cnic && (cnic.touched)" class="alert alert-danger">
-        {{ formErrors.cnic }}
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="add_personalEmail">Personal Email: </label>
-      <input type="text" class="form-control" id="add_personalEmail"
-             [class.controlError]="formErrors.personalEmail"
-             [class.noControlError]="!formErrors.personalEmail"
-             [(ngModel)]="tempEducation.personalEmail" placeholder="email"
-             #personalEmail="ngModel" name="personalEmail">
-      <div *ngIf="formErrors.personalEmail && (personalEmail.touched)" class="alert alert-danger">
-        {{ formErrors.personalEmail }}
+      <label for="add_institute">Institute: </label>
+      <input type="text" class="form-control" id="add_institute"
+             [class.controlError]="formErrors.institute"
+             [class.noControlError]="!formErrors.institute"
+             [(ngModel)]="tempEducation.institute" placeholder="institute"
+             #institute="ngModel" name="institute">
+      <div *ngIf="formErrors.institute && (institute.touched)" class="alert alert-danger">
+        {{ formErrors.institute }}
       </div>
     </div>
 
     <div class="form-group">
-      <label for="add_mobileNumber">Mobile Number: </label>
-      <input type="text" class="form-control" id="add_mobileNumber"
-             [class.controlError]="formErrors.mobileNumber"
-             [class.noControlError]="!formErrors.mobileNumber"
-             [(ngModel)]="tempEducation.mobileNumber" placeholder="Mobile Number"
-             #mobileNumber="ngModel" name="mobileNumber">
-      <div *ngIf="formErrors.mobileNumber && (mobileNumber.touched)" class="alert alert-danger">
-        {{ formErrors.mobileNumber }}
+      <label for="add_degree">Degree: </label>
+      <input type="text" class="form-control" id="add_degree"
+             [class.controlError]="formErrors.degree"
+             [class.noControlError]="!formErrors.degree"
+             [(ngModel)]="tempEducation.degree" placeholder="degree"
+             #degree="ngModel" name="degree">
+      <div *ngIf="formErrors.degree && (degree.touched)" class="alert alert-danger">
+        {{ formErrors.degree }}
       </div>
     </div>
 
     <div class="form-group">
-      <label for="add_phoneNumber">Phone Number: </label>
-      <input type="text" class="form-control" id="add_phoneNumber"
-             [class.controlError]="formErrors.phoneNumber"
-             [class.noControlError]="!formErrors.phoneNumber"
-             [(ngModel)]="tempEducation.phoneNumber" placeholder="Phone Number"
-             #phoneNumber="ngModel" name="phoneNumber">
-      <div *ngIf="formErrors.phoneNumber && (phoneNumber.touched)" class="alert alert-danger">
-        {{ formErrors.phoneNumber }}
+      <label for="add_field">Field: </label>
+      <input type="text" class="form-control" id="add_field"
+             [class.controlError]="formErrors.field"
+             [class.noControlError]="!formErrors.field"
+             [(ngModel)]="tempEducation.field" placeholder="field"
+             #field="ngModel" name="field">
+      <div *ngIf="formErrors.field && (field.touched)" class="alert alert-danger">
+        {{ formErrors.field }}
       </div>
     </div>
     <div class="form-group">
-      <label for="add_skype">Skype: </label>
-      <input type="text" class="form-control" id="add_skype"
-             [class.controlError]="formErrors.skype"
-             [class.noControlError]="!formErrors.skype"
-             [(ngModel)]="tempEducation.skype" placeholder="Skype"
-             #skype="ngModel" name="skype">
-      <div *ngIf="formErrors.skype && (skype.touched)" class="alert alert-danger">
-        {{ formErrors.skype }}
+      <label for="add_gpa">Gpa: </label>
+      <input type="text" class="form-control" id="add_gpa"
+             [class.controlError]="formErrors.gpa"
+             [class.noControlError]="!formErrors.gpa"
+             [(ngModel)]="tempEducation.gpa" placeholder="gpa"
+             #gpa="ngModel" name="gpa">
+      <div *ngIf="formErrors.gpa && (gpa.touched)" class="alert alert-danger">
+        {{ formErrors.gpa }}
       </div>
     </div>
 
     <div class="form-group">
-      <label for="add_emergencyName">Emergency Name: </label>
-      <input type="text" class="form-control" id="add_emergencyName"
-             [class.controlError]="formErrors.emergencyName"
-             [class.noControlError]="!formErrors.emergencyName"
-             [(ngModel)]="tempEducation.emergencyName" placeholder="Emergency Name"
-             #emergencyName="ngModel" name="emergencyName">
-      <div *ngIf="formErrors.emergencyName && (emergencyName.touched)" class="alert alert-danger">
-        {{ formErrors.emergencyName }}
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="add_emergencyNumber">Emergeny Number: </label>
-      <input type="text" class="form-control" id="add_emergencyNumber"
-             [class.controlError]="formErrors.emergencyNumber"
-             [class.noControlError]="!formErrors.emergencyNumber"
-             [(ngModel)]="tempEducation.emergencyNumber" placeholder="Emergeny Number"
-             #emergencyNumber="ngModel" name="emergencyNumber">
-      <div *ngIf="formErrors.emergencyNumber && (emergencyNumber.touched)" class="alert alert-danger">
-        {{ formErrors.emergencyNumber }}
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="add_emergencyAddress">Emergency Address: </label>
-      <input type="text" class="form-control" id="add_emergencyAddress"
-             [class.controlError]="formErrors.emergencyAddress"
-             [class.noControlError]="!formErrors.emergencyAddress"
-             [(ngModel)]="tempEducation.emergencyAddress" placeholder="Emergency Address"
-             #emergencyAddress="ngModel" name="emergencyAddress">
-      <div *ngIf="formErrors.emergencyAddress && (emergencyAddress.touched)" class="alert alert-danger">
-        {{ formErrors.emergencyAddress }}
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="add_emergencyRelation">Emergency Relation: </label>
-      <input type="text" class="form-control" id="add_emergencyRelation"
-             [class.controlError]="formErrors.emergencyRelation"
-             [class.noControlError]="!formErrors.emergencyRelation"
-             [(ngModel)]="tempEducation.emergencyRelation" placeholder="Emergency Relation"
-             #emergencyRelation="ngModel" name="emergencyRelation">
-      <div *ngIf="formErrors.emergencyRelation && (emergencyRelation.touched)" class="alert alert-danger">
-        {{ formErrors.emergencyRelation }}
+      <label for="add_passingDate">Passing Date: </label>
+      <input type="date" class="form-control" id="add_passingDate"
+             [class.controlError]="formErrors.passingDate"
+             [class.noControlError]="!formErrors.passingDate"
+             [(ngModel)]="this.tempEducation.passingDate" placeholder="Passing Date"
+             #passingDate="ngModel" name="passingDate">
+      <div *ngIf="formErrors.passingDate && (passingDate.touched)" class="alert alert-danger">
+        {{ formErrors.passingDate }}
       </div>
     </div>
     <button  type="submit" class="btn btn-success" [disabled]="!isDisabled()">Add</button>

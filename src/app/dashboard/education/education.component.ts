@@ -25,7 +25,7 @@ export class EducationComponent implements OnInit {
   validationMessages: any;
   educationValidator: EducationValidator;
   updateError: string;
-
+  date:any;
   constructor(
     private educationService: EducationService,
     private route: ActivatedRoute,
@@ -71,7 +71,8 @@ export class EducationComponent implements OnInit {
     this.resetTemp();
   }
   update(): void{
-    this.educationService.update(this.tempEducation)
+    let newData = Object.assign({}, this.tempEducation);
+    this.educationService.update(newData)
       .then(res=> {
         if(res == 1){
           this.educations.push(this.tempEducation);
@@ -97,16 +98,20 @@ export class EducationComponent implements OnInit {
         // console.log('res; ');
         //
         // console.log(res);
-        if (res) {
-          //console.log(this.contactDetails);
-          this.educations.push(this.tempEducation);
+        if (!res.message) {
+          console.log(res);
+          this.educations.push(res);
           this.disableAdd();
+        }
+        else{
+          this.updateError=res.message;
         }
       });
   }
 
   delete(index: number):void{
     let id= this.educations[index].id;
+    console.log(id)
     this.tempEducation=this.educations[index];
     this.educationService.delete(id)
       .then(res=>{
@@ -167,7 +172,11 @@ export class EducationComponent implements OnInit {
     }
   }
 
-
+  // formatDate(){
+  //   let newDate=this.date.split('-');
+  //   this.tempEducation.passingDate=newDate.join('/');
+  //   console.log(this.tempEducation.passingDate  )
+  // }
 
 
 }

@@ -73,7 +73,14 @@ export class EducationService {
       .toPromise()
       .then(res => {
         // console.log(res.json());
-        return res.json() })
+        if(res.json().created){
+          let newData=res.json();
+          delete newData.created;
+          return newData
+        }
+        else
+        return {message:'There was a problem'};
+      })
       .catch(this.handleError);
   }
   delete(id:number){
