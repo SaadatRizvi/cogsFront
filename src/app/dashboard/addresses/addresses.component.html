@@ -1,6 +1,6 @@
 <div *ngIf="addresses && !isEditEnabled">
 
-   
+
   <div  *ngFor="let address of addresses;  let i = index">
     <br><br>
     <div style="display: inline-block">
@@ -15,34 +15,75 @@
     <br><br>
   </div>
   <br>
-  <button  (click)="enableAdd()">Add more</button>
+  <button *ngIf="checkToAddMore()" (click)="enableAdd()">Add more</button>
 
 
 </div>
 
 <!--=================== EDIT ========================-->
 
-<div *ngIf="isEditEnabled">
+<div *ngIf="isEditEnabled" class="container">
 
+  <form (ngSubmit)="update()" #addressForm="ngForm">
 
-  <div>
-    <label>addresses street: </label>
-    <input [(ngModel)]="tempAddress.street" placeholder="street">
+  <div class="form-group" >
+    <label for="streetE">street</label>
+    <input type="text" class="form-control"
+           id="streetE"
+           [class.controlError]="formErrors.street"
+           [class.noControlError]="!formErrors.street"
+           [(ngModel)]="tempAddress.street" name="street"
+           #street="ngModel">
+    <div *ngIf="formErrors.street && (street.touched || street.dirty || street.dirty)" class="alert alert-danger">
+      {{ formErrors.street }}
+    </div>
   </div>
-  <div>
-    <label>addresses city: </label>
-    <input [(ngModel)]="tempAddress.city" placeholder="city">
+
+  <div class="form-group" >
+    <label for="cityE">city</label>
+    <input type="text" class="form-control"
+           id="cityE"
+           [class.controlError]="formErrors.city"
+           [class.noControlError]="!formErrors.city"
+           [(ngModel)]="tempAddress.city" name="city"
+           #city="ngModel">
+    <div *ngIf="formErrors.city && (city.touched || city.dirty)" class="alert alert-danger">
+      {{ formErrors.city }}
+
+    </div>
   </div>
-  <div>
-    <label>addresses country: </label>
-    <input [(ngModel)]="tempAddress.country" placeholder="country">
+  <div class="form-group" >
+    <label for="countryE">country</label>
+    <input type="text" class="form-control"
+           id="countryE"
+           [class.controlError]="formErrors.country"
+           [class.noControlError]="!formErrors.country"
+           [(ngModel)]="tempAddress.country" name="country"
+           #country="ngModel">
+    <div *ngIf="formErrors.country && (country.touched || country.dirty)" class="alert alert-danger">
+      {{ formErrors.country }}
+
+    </div>
   </div>
-  <div>
-    <label>addresses type: </label>
-    <input [(ngModel)]="tempAddress.type" placeholder="country">
+
+  <div class="form-group">
+    <label for="typeE">Type</label>
+    <select [disabled]="!checkToAddMore()"   class="form-control" id="typeE"
+            [class.controlError]="formErrors.type"
+            [class.noControlError]="!formErrors.type"
+            [(ngModel)]="tempAddress.type" name="type"
+            #type="ngModel">
+      <option *ngFor="let type of types" [value]="type" >{{type}}</option>
+    </select>
+    <div *ngIf="formErrors.type && (type.touched || type.dirty)" class="alert alert-danger">
+      {{ formErrors.type }}
+
+    </div>
   </div>
+
   <button (click)="disableEdit()">Undo Changes</button>
-  <button (click)="update()">Save</button>
+     <button type="submit" class="btn btn-success" [disabled]="!isDisabled()">Submit</button>
+  </form>
 
 </div>
 
@@ -59,7 +100,7 @@
              [class.noControlError]="!formErrors.street"
              [(ngModel)]="tempAddress.street" name="street"
              #street="ngModel">
-      <div *ngIf="formErrors.street && (street.touched)" class="alert alert-danger">
+      <div *ngIf="formErrors.street && (street.touched || street.dirty)" class="alert alert-danger">
         {{ formErrors.street }}
       </div>
     </div>
@@ -72,7 +113,7 @@
              [class.noControlError]="!formErrors.city"
              [(ngModel)]="tempAddress.city" name="city"
              #city="ngModel">
-      <div *ngIf="formErrors.city && (city.touched)" class="alert alert-danger">
+      <div *ngIf="formErrors.city && (city.touched || city.dirty)" class="alert alert-danger">
         {{ formErrors.city }}
 
       </div>
@@ -85,7 +126,7 @@
              [class.noControlError]="!formErrors.country"
              [(ngModel)]="tempAddress.country" name="country"
              #country="ngModel">
-      <div *ngIf="formErrors.country && (country.touched)" class="alert alert-danger">
+      <div *ngIf="formErrors.country && (country.touched || country.dirty)" class="alert alert-danger">
         {{ formErrors.country }}
 
       </div>
@@ -100,81 +141,14 @@
               #type="ngModel">
         <option *ngFor="let type of types" [value]="type" def>{{type}}</option>
       </select>
-      <div *ngIf="formErrors.type && (type.touched)" class="alert alert-danger">
+      <div *ngIf="formErrors.type && (type.touched || type.dirty)" class="alert alert-danger">
         {{ formErrors.type }}
 
       </div>
     </div>
 
 
-    <button type="submit" class="btn btn-success" [disabled]="!isSubmitable()">Submit</button>
+    <button type="submit" class="btn btn-success" [disabled]="!isDisabled()">Submit</button>
   </form>
+  <div *ngIf="updateError"> {{updateError}}</div>
 </div>
-
-
-<!--<div *ngIf="addresses && !isEditEnabled" >-->
-
-<!--<div *ngFor="let address of addresses; let i = index">-->
-
-<!--Street: {{address.street}}<br>-->
-<!--City: {{address.city}}<br>-->
-<!--Country: {{address.country}}<br>-->
-<!--Type: {{address.type}}<br>-->
-<!--<button style="align-content: flex-end" (click)="enableEdit(i)">Edit</button><br><br>-->
-<!--</div>-->
-<!--<br>-->
-<!--<button (click)="enableAdd()">Add more</button>-->
-
-
-<!--</div>-->
-
-<!--&lt;!&ndash;=================== EDIT ========================&ndash;&gt;-->
-
-<!--<div *ngIf="isEditEnabled" >-->
-
-
-<!--<div>-->
-<!--<label>addresses street: </label>-->
-<!--<input [(ngModel)]="tempAddress.street" placeholder="street">-->
-<!--</div>-->
-<!--<div>-->
-<!--<label>addresses city: </label>-->
-<!--<input [(ngModel)]="tempAddress.city" placeholder="city">-->
-<!--</div>-->
-<!--<div>-->
-<!--<label>addresses country: </label>-->
-<!--<input [(ngModel)]="tempAddress.country" placeholder="country">-->
-<!--</div>-->
-<!--<div>-->
-<!--<label>addresses type: </label>-->
-<!--<input [(ngModel)]="tempAddress.type" placeholder="country">-->
-<!--</div>-->
-<!--<button (click)="disableEdit()">Undo Changes</button>-->
-<!--<button (click)="update()">Save</button>-->
-
-<!--</div>-->
-
-<!--&lt;!&ndash;=================== ADD ========================&ndash;&gt;-->
-<!--<div *ngIf="isAddEnabled" >-->
-
-<!--<div>-->
-<!--<label>addresses street: </label>-->
-<!--<input [(ngModel)]="tempAddress.street" placeholder="street">-->
-<!--</div>-->
-<!--<div>-->
-<!--<label>addresses city: </label>-->
-<!--<input [(ngModel)]="tempAddress.city" placeholder="city">-->
-<!--</div>-->
-<!--<div>-->
-<!--<label>addresses country: </label>-->
-<!--<input [(ngModel)]="tempAddress.country" placeholder="country">-->
-<!--</div>-->
-<!--<div>-->
-<!--<label>addresses type: </label>-->
-<!--<input [(ngModel)]="tempAddress.type" placeholder="type">-->
-<!--</div>-->
-<!--<button (click)="disableAdd()">Close</button>-->
-<!--<button (click)="add()">Save</button>-->
-
-<!--</div>-->
-

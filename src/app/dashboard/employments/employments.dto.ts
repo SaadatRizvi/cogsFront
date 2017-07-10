@@ -1,7 +1,11 @@
 export class Employments {
-  company: string;
-  title: string;
-  location: string;
-  joiningDate: string;
-  leavingDate: string;
+
+  constructor(
+    public id : number,
+    public company: string,
+    public location: string,
+    public joiningDate: string,
+    public leavingDate: string
+  ){}
+
 }
