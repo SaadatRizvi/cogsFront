@@ -226,7 +226,6 @@ export class AddressesComponent implements OnInit {
 
     this.tempAddress = new Addresses(null, null, null, null, null);
   }
-
   enableEdit(index: number): void {
     this.isAddEnabled = false;
     this.tempAddress = Object.assign({}, this.addresses[index]);
