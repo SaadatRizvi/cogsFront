@@ -5,5 +5,5 @@ export class Education {
   passingDate: string;
   degree: string;
   field: string;
-  gpa: number;
+  gpa: string;
 }

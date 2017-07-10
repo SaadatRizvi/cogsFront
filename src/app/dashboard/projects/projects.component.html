@@ -1,8 +1,168 @@
-<p *ngIf="projects">
-  Name: {{projects.name}}<br>
-  Role: {{projects.role}}<br>
-  Technologies: {{projects.technologies}}<br>
-  Joining Date: {{projects.joiningDate}}<br>
-  Leaving Date: {{projects.leavingDate}}<br>
 
-</p>
+<div *ngIf="!isEditEnabled">
+
+  <div *ngFor="let project of projects;let i = index">
+    <br>
+    <div style="display: inline-block" >
+      Name: {{project.name}}<br>
+      Role: {{project.role}}<br>
+      Technologies: {{project.technologies}}<br>
+      Joining Date: {{project.joiningDate}}<br>
+      Leaving Date: {{project.leavingDate}}<br>
+    </div>
+    <button style="float: right;" (click)="enableEdit(i)">Edit</button>
+    <button class="delete"
+            (click)="delete(i); $event.stopPropagation()">x</button>
+    <br><br>
+  </div>
+  <br><br>
+  <button (click)="enableAdd()">Add More</button>
+
+  <br>
+
+</div>
+
+<!--=================== EDIT ========================-->
+
+<div *ngIf="isEditEnabled">
+
+  <form (ngSubmit)="update()" #projectForm  ="ngForm">
+
+
+    <div class="form-group">
+      <label for="name">Name: </label>
+      <input type="text" class="form-control" id="name"
+             [class.controlError]="formErrors.name"
+             [class.noControlError]="!formErrors.name"
+             [(ngModel)]="temp.name" placeholder="name"
+             #name="ngModel" name="name">
+      <div *ngIf="formErrors.name && (name.touched)" class="alert alert-danger">
+        {{ formErrors.name }}
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="role">Role: </label>
+      <input type="text" class="form-control" id="role"
+             [class.controlError]="formErrors.role"
+             [class.noControlError]="!formErrors.role"
+             [(ngModel)]="temp.role" placeholder="role"
+             #role="ngModel" name="role">
+      <div *ngIf="formErrors.role && (role.touched)" class="alert alert-danger">
+        {{ formErrors.role }}
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="technologies">Technologies: </label>
+      <input type="text" class="form-control" id="technologies"
+             [class.controlError]="formErrors.technologies"
+             [class.noControlError]="!formErrors.technologies"
+             [(ngModel)]="temp.technologies" placeholder="technologies"
+             #technologies="ngModel" name="technologies">
+      <div *ngIf="formErrors.technologies && (technologies.touched)" class="alert alert-danger">
+        {{ formErrors.technologies }}
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="joiningDate">Joining Date: </label>
+      <input type="date" class="form-control" id="joiningDate"
+             [class.controlError]="formErrors.joiningDate"
+             [class.noControlError]="!formErrors.joiningDate"
+             [(ngModel)]="temp.joiningDate" placeholder="joiningDate"
+             #joiningDate="ngModel" name="joiningDate">
+      <div *ngIf="formErrors.joiningDate && (joiningDate.touched)" class="alert alert-danger">
+        {{ formErrors.joiningDate }}
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="leavingDate">Leaving Date: </label>
+      <input type="date" class="form-control" id="leavingDate"
+             [class.controlError]="formErrors.leavingDate"
+             [class.noControlError]="!formErrors.leavingDate"
+             [(ngModel)]="temp.leavingDate" placeholder="Passing Date"
+             #leavingDate="ngModel" name="leavingDate">
+      <div *ngIf="formErrors.leavingDate && (leavingDate.touched)" class="alert alert-danger">
+        {{ formErrors.leavingDate }}
+      </div>
+    </div>
+    <button (click)="disableEdit()">Undo Changes</button>
+
+    <button type="submit" class="btn btn-success" [disabled]="!isDisabled()">Update</button>
+
+  </form>
+
+</div>
+
+<!--=================== Add ========================-->
+
+
+<div *ngIf="isAddEnabled">
+
+  <form (ngSubmit)="add()" #projectForm="ngForm">
+
+
+
+    <div class="form-group">
+      <label for="add_name">Name: </label>
+      <input type="text" class="form-control" id="add_name"
+             [class.controlError]="formErrors.name"
+             [class.noControlError]="!formErrors.name"
+             [(ngModel)]="temp.name" placeholder="name"
+             #name="ngModel" name="name">
+      <div *ngIf="formErrors.name && (name.touched)" class="alert alert-danger">
+        {{ formErrors.name }}
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="add_role">Role: </label>
+      <input type="text" class="form-control" id="add_role"
+             [class.controlError]="formErrors.role"
+             [class.noControlError]="!formErrors.role"
+             [(ngModel)]="temp.role" placeholder="role"
+             #role="ngModel" name="role">
+      <div *ngIf="formErrors.role && (role.touched)" class="alert alert-danger">
+        {{ formErrors.role }}
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="add_technologies">Technologies: </label>
+      <input type="text" class="form-control" id="add_technologies"
+             [class.controlError]="formErrors.technologies"
+             [class.noControlError]="!formErrors.technologies"
+             [(ngModel)]="temp.technologies" placeholder="technologies"
+             #technologies="ngModel" name="technologies">
+      <div *ngIf="formErrors.technologies && (technologies.touched)" class="alert alert-danger">
+        {{ formErrors.technologies }}
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="add_joiningDate">Joining Date: </label>
+      <input type="date" class="form-control" id="add_joiningDate"
+             [class.controlError]="formErrors.joiningDate"
+             [class.noControlError]="!formErrors.joiningDate"
+             [(ngModel)]="temp.joiningDate" placeholder="joiningDate"
+             #joiningDate="ngModel" name="joiningDate">
+      <div *ngIf="formErrors.joiningDate && (joiningDate.touched)" class="alert alert-danger">
+        {{ formErrors.joiningDate }}
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="add_leavingDate">Leaving Date: </label>
+      <input type="date" class="form-control" id="add_leavingDate"
+             [class.controlError]="formErrors.leavingDate"
+             [class.noControlError]="!formErrors.leavingDate"
+             [(ngModel)]="temp.leavingDate" placeholder="Passing Date"
+             #leavingDate="ngModel" name="leavingDate">
+      <div *ngIf="formErrors.leavingDate && (leavingDate.touched)" class="alert alert-danger">
+        {{ formErrors.leavingDate }}
+      </div>
+    </div>
+    <button  type="submit" class="btn btn-success" [disabled]="!isDisabled()">Add</button>
+  </form>
+<p *ngIf="updateError">{{updateError}}</p>
+</div>

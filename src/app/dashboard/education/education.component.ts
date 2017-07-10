@@ -4,10 +4,10 @@ import {Education} from './education.dto';
 import {EducationService} from './education.service';
 import {CoolLocalStorage} from "angular2-cool-storage";
 import {NgForm} from "@angular/forms";
-import {formErrors} from './educationValidator';
-import {validationMessages} from './educationValidator';
-import {EducationValidator} from './educationValidator';
-import {isDisabled} from './educationValidator';
+import {formErrors} from './education.validator';
+import {validationMessages} from './education.validator';
+import {EducationValidator} from './education.validator';
+import {isDisabled} from './education.validator';
 @Component({
   selector: 'app-education',
   templateUrl: './education.component.html',
@@ -72,13 +72,22 @@ export class EducationComponent implements OnInit {
   }
   update(): void{
     let newData = Object.assign({}, this.tempEducation);
+    console.log(newData);
+    let id=this.tempEducation.id;
     this.educationService.update(newData)
       .then(res=> {
-        if(res == 1){
-          this.educations.push(this.tempEducation);
-        }
-        else{
-          this.updateError="There was some problem updating";
+        if (res == 1) {
+          for (let i = 0; i < this.educations.length; i++) {
+            // console.log("for i= "+i);
+            // console.log("this.addresses[i].id= "+this.addresses[i].id);
+            console.log("this.tempEd= "+this.tempEducation);
+            if (this.educations[i].id === id) {
+
+              this.educations[i] = this.tempEducation;
+              console.log(this.tempEducation)
+
+            }
+          }
         }
       }).then(()=>{
       this.tempEducation = new Education();
@@ -87,7 +96,6 @@ export class EducationComponent implements OnInit {
 
   }
   add(): void {
-    let data = JSON.stringify(this.tempEducation);
     let newData = Object.assign({EmployeeId: this.localStorage.getItem('id')}, this.tempEducation);
 
     //this.address.push(this.tempAddress)

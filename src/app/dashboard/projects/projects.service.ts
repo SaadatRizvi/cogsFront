@@ -38,18 +38,64 @@ export class ProjectService {
     return Promise.reject(error.message || error);
   }
 
-  getProjects(id: number): Promise<Projects> {
-    this.url+='?EmployeeId='+id;
+  getProjects(id: number): Promise<Projects[]> {
+    let localUrl=this.url+'?EmployeeId='+id;
     this.headers.set('x-access-token',this.localStorage.getItem('token'));
-
- //   console.log(this.url);
-  //  console.log();
     return this.http
       .get(this.url, {headers: this.headers})
       .toPromise()
       .then(res => {
-    //   console.log(res.json());
-        return res.json() as Projects})
+        return res.json() as Projects[]})
       .catch(this.handleError);
+  }
+  update(data: Projects){
+
+    let localUrl=this.url+'/'+data.id;
+    this.headers.set('x-access-token',this.localStorage.getItem('token'));
+    return this.http
+      .put(localUrl, data,{headers: this.headers})
+      .toPromise()
+      .then(res => {
+        //       console.log(res.json() as Addresses);
+        return res.json()})
+      .catch(this.handleError);
+
+
+  }
+  create(data: any): Promise<any> {
+    //console.log(data)
+    this.headers.set('x-access-token',this.localStorage.getItem('token'));
+
+    return this.http
+      .post(this.url, data, {headers: this.headers})
+      .toPromise()
+      .then(res => {
+        // console.log(res.json());
+        if(res.json().created){
+          let newData=res.json();
+          delete newData.created;
+          return newData
+        }
+        else{
+          console.log(res)
+          return Object.assign({message:'There was a problem'},res.json());
+
+        }
+      })
+      .catch(this.handleError);
+  }
+  delete(id:number){
+    let localUrl=this.url+'/'+id;
+    this.headers.set('x-access-token',this.localStorage.getItem('token'));
+    return this.http
+      .delete(localUrl,{headers: this.headers})
+      .toPromise()
+      .then(res => {
+        //       console.log(res.json() as Addresses);
+        return res.json()})
+      .catch(this.handleError);
+
+
+
   }
 }
