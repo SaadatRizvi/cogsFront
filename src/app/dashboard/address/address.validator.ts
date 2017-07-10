@@ -30,7 +30,7 @@ export const validationMessages = {
 
 export let isDisabled: boolean = true;
 
-export class AddressesValidator {
+export class AddressValidator {
 
   constructor() {
     isDisabled = true;

@@ -106,7 +106,7 @@ export class ContactDetailsComponent implements OnInit {
     let data = JSON.stringify(this.tempDetails);
     let newData = Object.assign({EmployeeId: this.localStorage.getItem('id')}, this.tempDetails);
 
-    //this.addresses.push(this.tempAddress)
+    //this.address.push(this.tempAddress)
 
     console.log(newData)
     this.contactDetailsService.create(newData)

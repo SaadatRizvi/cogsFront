@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Headers, Http} from '@angular/http';
-import {Addresses} from './addresses.dto';
+import {Address} from './address.dto';
 import {Token}  from '../../token'
 
 
@@ -9,7 +9,7 @@ import {CoolLocalStorage} from "angular2-cool-storage";
 
 
 @Injectable()
-export class AddressesService {
+export class AddressService {
   localStorage: CoolLocalStorage;
 
 
@@ -82,7 +82,7 @@ export class AddressesService {
     return Promise.reject(error.message || error);
   }
 
-  getAddresses(id: number): Promise<Addresses[]> {
+  getAddress(id: number): Promise<Address[]> {
     let localUrl = this.url + '?EmployeeId=' + id;
     this.headers.set('x-access-token', this.localStorage.getItem('token'));
     // console.log(this.url);
@@ -92,13 +92,13 @@ export class AddressesService {
       .toPromise()
       .then(res => {
         //console.log(res.json());
-        return res.json() as Addresses[]
+        return res.json() as Address[]
       })
       .catch(this.handleError);
   }
 
 //response.json().data as Hero[]
-  update(data: Addresses) {
+  update(data: Address) {
 
     console.log("In service update... id:" + data.id);
     let localUrl = this.url + '/' + data.id;
@@ -109,8 +109,8 @@ export class AddressesService {
       .put(localUrl, data, {headers: this.headers})
       .toPromise()
       .then(res => {
-        //       console.log(res.json() as Addresses);
-        return res.json() as Addresses
+        //       console.log(res.json() as Address);
+        return res.json() as Address
       })
       .catch(this.handleError);
 
@@ -124,7 +124,7 @@ export class AddressesService {
       .delete(localUrl, {headers: this.headers})
       .toPromise()
       .then(res => {
-        //       console.log(res.json() as Addresses);
+        //       console.log(res.json() as Address);
         return res.json()
       })
       .catch(this.handleError);

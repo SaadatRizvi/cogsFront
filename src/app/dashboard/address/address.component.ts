@@ -1,41 +1,41 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {Location} from '@angular/common';
-import {Addresses} from './addresses.dto';
+import {Address} from './address.dto';
 import 'rxjs/add/operator/switchMap';
 
-import {formErrors} from './addresses.validator';
-import {validationMessages} from './addresses.validator';
-import {isDisabled} from './addresses.validator';
+import {formErrors} from './address.validator';
+import {validationMessages} from './address.validator';
+import {isDisabled} from './address.validator';
 
 
-import {AddressesService} from './addresses.service'
+import {AddressService} from './addresses.service'
 import {CoolLocalStorage} from "angular2-cool-storage";
 import {Validator} from "../../common/lib/validator";
 import {NgForm} from "@angular/forms";
-import {AddressesValidator} from "./addresses.validator";
+import {AddressValidator} from "./address.validator";
 import {isNullOrUndefined} from "util";
 
 @Component({
   selector: 'app-addresses',
-  templateUrl: './addresses.component.html',
-  providers: [AddressesService]
+  templateUrl: './address.component.html',
+  providers: [AddressService]
 })
-export class AddressesComponent implements OnInit {
+export class AddressComponent implements OnInit {
   updateError: string;
-  addresses: Addresses[];
+  addresses: Address[];
 
   isEditEnabled: boolean;
-  tempAddress: Addresses;
+  tempAddress: Address;
   isAddEnabled: boolean;
-  addressesValidator: AddressesValidator;
+  addressesValidator: AddressValidator;
   formErrors: any;
   validationMessages: any;
 
 
   types = ['Temporary', 'Permanent'];
 
-  constructor(private addressService: AddressesService,
+  constructor(private addressService: AddressService,
               private route: ActivatedRoute,
               private router: Router,
               private localStorage: CoolLocalStorage,) {
@@ -47,11 +47,11 @@ export class AddressesComponent implements OnInit {
 
     this.formErrors = formErrors;
     this.validationMessages = validationMessages;
-    this.addressesValidator = new AddressesValidator();
+    this.addressesValidator = new AddressValidator();
     this.isEditEnabled = false;
     this.isAddEnabled = false;
     this.resetTemp();
-    this.addressService.getAddresses(+this.localStorage.getItem('id'))
+    this.addressService.getAddress(+this.localStorage.getItem('id'))
       .then((result) => {
         this.addresses = result;
         this.checkToAddMore();
@@ -138,7 +138,7 @@ export class AddressesComponent implements OnInit {
   }
 
   resetTemp(): void {
-    this.tempAddress = new Addresses(null, null, null, null, null);
+    this.tempAddress = new Address(null, null, null, null, null);
   }
 
   enableEdit(index: number): void {
@@ -198,7 +198,7 @@ export class AddressesComponent implements OnInit {
       .then(res => {
 
         if (isNullOrUndefined(res.message)) {
-          this.addresses.push(res as Addresses)
+          this.addresses.push(res as Address)
           this.disableAdd();
 
           this.checkToAddMore();
@@ -215,7 +215,7 @@ export class AddressesComponent implements OnInit {
 
   delete(index: number): void {
     let id = this.addresses[index].id;
-    let addr: Addresses = this.addresses[index];
+    let addr: Address = this.addresses[index];
 
     this.addressService.delete(id)
       .then((res) => {

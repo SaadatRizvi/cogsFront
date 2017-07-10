@@ -89,7 +89,7 @@ export class EducationComponent implements OnInit {
     let data = JSON.stringify(this.tempEducation);
     let newData = Object.assign({EmployeeId: this.localStorage.getItem('id')}, this.tempEducation);
 
-    //this.addresses.push(this.tempAddress)
+    //this.address.push(this.tempAddress)
 
     console.log(newData)
     this.educationService.create(newData)
@@ -113,7 +113,7 @@ export class EducationComponent implements OnInit {
         if(res.message === "done") {
           console.log("After Delete: ");
           console.log(res);
-          //delete this.addresses[index];
+          //delete this.address[index];
           this.educations = this.educations.filter(h => h !== this.tempEducation);
           this.resetTemp();
         }
