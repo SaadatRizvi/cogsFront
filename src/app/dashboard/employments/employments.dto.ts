@@ -6,7 +6,7 @@ export class Employments {
     public location: string,
     public joiningDate: string,
     public title: string,
-    public leavingDate: string
+    public leavingDate: string,
   ){}
 
 }

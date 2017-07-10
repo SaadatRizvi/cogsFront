@@ -11,7 +11,7 @@
       Leaving Date: {{project.leavingDate}}<br>
     </div>
     <button style="float: right;" (click)="enableEdit(i)">Edit</button>
-    <button class="delete"
+    <button style="float: right;" class="delete"
             (click)="delete(i); $event.stopPropagation()">x</button>
     <br><br>
   </div>
@@ -36,7 +36,7 @@
              [class.noControlError]="!formErrors.name"
              [(ngModel)]="temp.name" placeholder="name"
              #name="ngModel" name="name">
-      <div *ngIf="formErrors.name && (name.touched)" class="alert alert-danger">
+      <div *ngIf="formErrors.name && (name.touched || name.dirty)" class="alert alert-danger">
         {{ formErrors.name }}
       </div>
     </div>
@@ -48,7 +48,7 @@
              [class.noControlError]="!formErrors.role"
              [(ngModel)]="temp.role" placeholder="role"
              #role="ngModel" name="role">
-      <div *ngIf="formErrors.role && (role.touched)" class="alert alert-danger">
+      <div *ngIf="formErrors.role && (role.touched || role.dirty)" class="alert alert-danger">
         {{ formErrors.role }}
       </div>
     </div>
@@ -60,7 +60,7 @@
              [class.noControlError]="!formErrors.technologies"
              [(ngModel)]="temp.technologies" placeholder="technologies"
              #technologies="ngModel" name="technologies">
-      <div *ngIf="formErrors.technologies && (technologies.touched)" class="alert alert-danger">
+      <div *ngIf="formErrors.technologies && (technologies.touched || technologies.dirty)" class="alert alert-danger">
         {{ formErrors.technologies }}
       </div>
     </div>
@@ -71,7 +71,7 @@
              [class.noControlError]="!formErrors.joiningDate"
              [(ngModel)]="temp.joiningDate" placeholder="joiningDate"
              #joiningDate="ngModel" name="joiningDate">
-      <div *ngIf="formErrors.joiningDate && (joiningDate.touched)" class="alert alert-danger">
+      <div *ngIf="formErrors.joiningDate && (joiningDate.touched || joiningDate.dirty)" class="alert alert-danger">
         {{ formErrors.joiningDate }}
       </div>
     </div>
@@ -83,7 +83,7 @@
              [class.noControlError]="!formErrors.leavingDate"
              [(ngModel)]="temp.leavingDate" placeholder="Passing Date"
              #leavingDate="ngModel" name="leavingDate">
-      <div *ngIf="formErrors.leavingDate && (leavingDate.touched)" class="alert alert-danger">
+      <div *ngIf="formErrors.leavingDate && (leavingDate.touched || leavingDate.dirty)" class="alert alert-danger">
         {{ formErrors.leavingDate }}
       </div>
     </div>
@@ -111,7 +111,7 @@
              [class.noControlError]="!formErrors.name"
              [(ngModel)]="temp.name" placeholder="name"
              #name="ngModel" name="name">
-      <div *ngIf="formErrors.name && (name.touched)" class="alert alert-danger">
+      <div *ngIf="formErrors.name && (name.touched || name.dirty)" class="alert alert-danger">
         {{ formErrors.name }}
       </div>
     </div>
@@ -123,7 +123,7 @@
              [class.noControlError]="!formErrors.role"
              [(ngModel)]="temp.role" placeholder="role"
              #role="ngModel" name="role">
-      <div *ngIf="formErrors.role && (role.touched)" class="alert alert-danger">
+      <div *ngIf="formErrors.role && (role.touched || role.dirty)" class="alert alert-danger">
         {{ formErrors.role }}
       </div>
     </div>
@@ -135,7 +135,7 @@
              [class.noControlError]="!formErrors.technologies"
              [(ngModel)]="temp.technologies" placeholder="technologies"
              #technologies="ngModel" name="technologies">
-      <div *ngIf="formErrors.technologies && (technologies.touched)" class="alert alert-danger">
+      <div *ngIf="formErrors.technologies && (technologies.touched || technologies.dirty)" class="alert alert-danger">
         {{ formErrors.technologies }}
       </div>
     </div>
@@ -146,7 +146,7 @@
              [class.noControlError]="!formErrors.joiningDate"
              [(ngModel)]="temp.joiningDate" placeholder="joiningDate"
              #joiningDate="ngModel" name="joiningDate">
-      <div *ngIf="formErrors.joiningDate && (joiningDate.touched)" class="alert alert-danger">
+      <div *ngIf="formErrors.joiningDate && (joiningDate.touched || joiningDate.dirty)" class="alert alert-danger">
         {{ formErrors.joiningDate }}
       </div>
     </div>
@@ -158,7 +158,7 @@
              [class.noControlError]="!formErrors.leavingDate"
              [(ngModel)]="temp.leavingDate" placeholder="Passing Date"
              #leavingDate="ngModel" name="leavingDate">
-      <div *ngIf="formErrors.leavingDate && (leavingDate.touched)" class="alert alert-danger">
+      <div *ngIf="formErrors.leavingDate && (leavingDate.touched || leavingDate.dirty)" class="alert alert-danger">
         {{ formErrors.leavingDate }}
       </div>
     </div>

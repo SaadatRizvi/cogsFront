@@ -72,19 +72,14 @@ export class EducationComponent implements OnInit {
   }
   update(): void{
     let newData = Object.assign({}, this.tempEducation);
-    console.log(newData);
     let id=this.tempEducation.id;
     this.educationService.update(newData)
       .then(res=> {
         if (res == 1) {
           for (let i = 0; i < this.educations.length; i++) {
-            // console.log("for i= "+i);
-            // console.log("this.addresses[i].id= "+this.addresses[i].id);
-            console.log("this.tempEd= "+this.tempEducation);
             if (this.educations[i].id === id) {
 
               this.educations[i] = this.tempEducation;
-              console.log(this.tempEducation)
 
             }
           }
@@ -100,7 +95,6 @@ export class EducationComponent implements OnInit {
 
     //this.address.push(this.tempAddress)
 
-    console.log(newData)
     this.educationService.create(newData)
       .then(res => {
         // console.log('res; ');
@@ -119,14 +113,10 @@ export class EducationComponent implements OnInit {
 
   delete(index: number):void{
     let id= this.educations[index].id;
-    console.log(id)
     this.tempEducation=this.educations[index];
     this.educationService.delete(id)
       .then(res=>{
         if(res.message === "done") {
-          console.log("After Delete: ");
-          console.log(res);
-          //delete this.address[index];
           this.educations = this.educations.filter(h => h !== this.tempEducation);
           this.resetTemp();
         }
@@ -180,11 +170,7 @@ export class EducationComponent implements OnInit {
     }
   }
 
-  // formatDate(){
-  //   let newDate=this.date.split('-');
-  //   this.tempEducation.passingDate=newDate.join('/');
-  //   console.log(this.tempEducation.passingDate  )
-  // }
+
 
 
 }

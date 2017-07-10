@@ -88,7 +88,7 @@ export class AddressValidator {
   validateStreet(errors: Array<any>, data: string): boolean {
     let returnVal = true;
 
-    if (!Validator.isAlphaNumeric(data)) {
+    if (!Validator.isAscii(data)) {
       errors.push('alpha');
       returnVal = false;
     }
