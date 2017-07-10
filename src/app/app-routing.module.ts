@@ -6,7 +6,7 @@ import { HeroesComponent } from './heroes.component';
 import { HeroDetailComponent } from './hero-detail.component';
 import { AuthenticateComponent } from './authenticate/authenticate.component';
 import {ProjectsComponent} from './dashboard/projects/projects.component'
-import {AddressesComponent} from './dashboard/addresses/addresses.component'
+import {AddressComponent} from './dashboard/address/address.component'
 import {ContactDetailsComponent} from './dashboard/contact-details/contact-details.component'
 import {EmployeeComponent} from './dashboard/employee/employee.component';
 import {EducationComponent} from './dashboard/education/education.component';
@@ -21,7 +21,7 @@ const routes: Routes = [
       CanActivateViaAuthGuard
     ],
     children: [
-      { path: 'addresses', component: AddressesComponent },
+      { path: 'addresses', component: AddressComponent },
       { path: 'contactDetails', component: ContactDetailsComponent},
       { path: 'employments', component: EmploymentsComponent },
       { path: 'projects', component: ProjectsComponent },
