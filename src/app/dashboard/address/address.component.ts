@@ -1,40 +1,41 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {Location} from '@angular/common';
-import {Employments} from './employments.dto';
+import {Address} from './address.dto';
 import 'rxjs/add/operator/switchMap';
 
-import {formErrors} from './employment.validator';
-import {validationMessages} from './employment.validator';
-import {isDisabled} from './employment.validator';
+import {formErrors} from './address.validator';
+import {validationMessages} from './address.validator';
+import {isDisabled} from './address.validator';
 
 
-import {EmploymentsService} from './employments.service'
+import {AddressService} from './addresses.service'
 import {CoolLocalStorage} from "angular2-cool-storage";
 import {Validator} from "../../common/lib/validator";
 import {NgForm} from "@angular/forms";
-import {EmploymentsValidator} from "./employment.validator";
+import {AddressValidator} from "./address.validator";
 import {isNullOrUndefined} from "util";
 
 @Component({
-  selector: 'app-employments',
-  templateUrl: './employments.component.html',
-  providers: [EmploymentsService]
+  selector: 'app-addresses',
+  templateUrl: './address.component.html',
+  providers: [AddressService]
 })
-export class EmploymentsComponent implements OnInit {
+export class AddressComponent implements OnInit {
   updateError: string;
-  employments: Employments[];
+  addresses: Address[];
 
   isEditEnabled: boolean;
-  tempEmployments: Employments;
+  tempAddress: Address;
   isAddEnabled: boolean;
-  employmentsValidator: EmploymentsValidator;
+  addressesValidator: AddressValidator;
   formErrors: any;
   validationMessages: any;
 
 
+  types = ['Temporary', 'Permanent'];
 
-  constructor(private employmentService: EmploymentsService,
+  constructor(private addressService: AddressService,
               private route: ActivatedRoute,
               private router: Router,
               private localStorage: CoolLocalStorage,) {
@@ -46,13 +47,14 @@ export class EmploymentsComponent implements OnInit {
 
     this.formErrors = formErrors;
     this.validationMessages = validationMessages;
-    this.employmentsValidator = new EmploymentsValidator();
+    this.addressesValidator = new AddressValidator();
     this.isEditEnabled = false;
     this.isAddEnabled = false;
     this.resetTemp();
-    this.employmentService.getEmployments(+this.localStorage.getItem('id'))
+    this.addressService.getAddress(+this.localStorage.getItem('id'))
       .then((result) => {
-        this.employments = result;
+        this.addresses = result;
+        this.checkToAddMore();
       });
 
 
@@ -64,32 +66,31 @@ export class EmploymentsComponent implements OnInit {
   }
 
 
-  employmentForm: NgForm;
-  @ViewChild('employmentForm') currentForm: NgForm;
+  addressForm: NgForm;
+  @ViewChild('addressForm') currentForm: NgForm;
 
   ngAfterViewChecked() {
     this.formChanged();
   }
 
   formChanged() {
-    if (this.currentForm === this.employmentForm) {
+    if (this.currentForm === this.addressForm) {
       return;
     }
-    this.employmentForm = this.currentForm;
-    if (this.employmentForm) {
-      this.employmentForm.valueChanges
+    this.addressForm = this.currentForm;
+    if (this.addressForm) {
+      this.addressForm.valueChanges
         .subscribe(data => this.onValueChanged(data));
     }
   }
 
 
   onValueChanged(data?: any) {
-    if (!this.employmentForm) {
+    if (!this.addressForm) {
       return;
     }
-
-    const form = this.employmentForm.form;
-    this.employmentsValidator.setDisabled();
+    const form = this.addressForm.form;
+    this.addressesValidator.setDisabled();
 
     for (const field in this.formErrors) {
       this.formErrors[field] = '';
@@ -99,11 +100,17 @@ export class EmploymentsComponent implements OnInit {
 
       let validatonCheck: boolean;
 
-      if (field === 'leavingDate') {
-       validatonCheck = !this.employmentsValidator.validate(field, errors, this.tempEmployments[field],this.tempEmployments.joiningDate);
+      if (field === 'type') {
+        let types = new Array<string>();
+
+        for (let addr of this.addresses) {
+          types.push(addr.type);
+        }
+
+        validatonCheck = !this.addressesValidator.validate(field, errors, this.tempAddress[field], this.addresses.length, types,this.isEditEnabled,)
       }
       else {
-        validatonCheck = !this.employmentsValidator.validate(field, errors, this.tempEmployments[field])
+        validatonCheck = !this.addressesValidator.validate(field, errors, this.tempAddress[field])
 
       }
 
@@ -123,15 +130,20 @@ export class EmploymentsComponent implements OnInit {
   }
 
 
-
+  checkToAddMore(): boolean {
+    if (this.addresses.length >= 2) {
+      return false;
+    }
+    return true;
+  }
 
   resetTemp(): void {
-    this.tempEmployments = new Employments(null, null,null, null, null, null);
+    this.tempAddress = new Address(null, null, null, null, null);
   }
 
   enableEdit(index: number): void {
     this.isAddEnabled = false;
-    this.tempEmployments = Object.assign({}, this.employments[index]);
+    this.tempAddress = Object.assign({}, this.addresses[index]);
 
     this.isEditEnabled = true;
 
@@ -143,15 +155,15 @@ export class EmploymentsComponent implements OnInit {
   }
 
   update(): void {
-    let id = this.tempEmployments.id;
-    this.employmentService.update(this.tempEmployments)
+    let id = this.tempAddress.id;
+    this.addressService.update(this.tempAddress)
       .then(res => {
 
         if (res == 1) {
-          for (let i = 0; i < this.employments.length; i++) {
+          for (let i = 0; i < this.addresses.length; i++) {
 
-            if (this.employments[i].id === id) {
-              this.employments[i] = this.tempEmployments;
+            if (this.addresses[i].id === id) {
+              this.addresses[i] = this.tempAddress;
             }
             else {
               this.updateError = "There was some problem updating";
@@ -179,15 +191,17 @@ export class EmploymentsComponent implements OnInit {
   }
 
   add(): void {
-    let data = JSON.stringify(this.tempEmployments);
-    let newData = Object.assign({EmployeeId: this.localStorage.getItem('id')}, this.tempEmployments);
+    let data = JSON.stringify(this.tempAddress);
+    let newData = Object.assign({EmployeeId: this.localStorage.getItem('id')}, this.tempAddress);
 
-    this.employmentService.create(newData)
+    this.addressService.create(newData)
       .then(res => {
 
         if (isNullOrUndefined(res.message)) {
-          this.employments.push(res as Employments);
+          this.addresses.push(res as Address)
           this.disableAdd();
+
+          this.checkToAddMore();
 
         }
 
@@ -200,14 +214,14 @@ export class EmploymentsComponent implements OnInit {
 
 
   delete(index: number): void {
-    let id = this.employments[index].id;
-    let addr: Employments = this.employments[index];
+    let id = this.addresses[index].id;
+    let addr: Address = this.addresses[index];
 
-    this.employmentService.delete(id)
+    this.addressService.delete(id)
       .then((res) => {
         if (res.message === "done") {
-          this.employments = this.employments.filter(h => h !== addr);
-        }
+          this.addresses = this.addresses.filter(h => h !== addr);
+         }
       })
 
   }

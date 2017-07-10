@@ -48,7 +48,7 @@ export class EducationService {
       .put(localUrl, data,{headers: this.headers})
       .toPromise()
       .then(res => {
-        //       console.log(res.json() as Addresses);
+        //       console.log(res.json() as Address);
         return res.json()})
       .catch(this.handleError);
 
@@ -80,7 +80,7 @@ export class EducationService {
       .delete(localUrl,{headers: this.headers})
       .toPromise()
       .then(res => {
-        //       console.log(res.json() as Addresses);
+        //       console.log(res.json() as Address);
         return res.json()})
       .catch(this.handleError);
 

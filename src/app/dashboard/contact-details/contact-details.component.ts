@@ -7,10 +7,10 @@ import 'rxjs/add/operator/switchMap';
 import {ContactDetailsService} from './contact-details.service'
 import {CoolLocalStorage} from "angular2-cool-storage";
 import {Validator} from '../../common/lib/validator';
-import {formErrors} from './contactDetailsValidator';
-import {validationMessages} from './contactDetailsValidator';
-import {isDisabled} from './contactDetailsValidator';
-import {ContactDetailsValidator} from './contactDetailsValidator';
+import {formErrors} from './contact-details.validator';
+import {validationMessages} from './contact-details.validator';
+import {isDisabled} from './contact-details.validator';
+import {ContactDetailsValidator} from './contact-details.validator';
 import {NgForm} from "@angular/forms";
 @Component({
   selector: 'app-contact-details',
@@ -106,7 +106,7 @@ export class ContactDetailsComponent implements OnInit {
     let data = JSON.stringify(this.tempDetails);
     let newData = Object.assign({EmployeeId: this.localStorage.getItem('id')}, this.tempDetails);
 
-    //this.addresses.push(this.tempAddress)
+    //this.address.push(this.tempAddress)
 
     console.log(newData)
     this.contactDetailsService.create(newData)

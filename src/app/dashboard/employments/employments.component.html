@@ -1,8 +1,180 @@
-<p *ngIf="employment" >
+<div *ngIf="employments && !isEditEnabled">
 
-  Company: {{employment.company}}<br>
-  Title: {{employment.title}}<br>
-  Location: {{employment.location}}<br>
-  Joining Date: {{employment.joiningDate}}<br>
-  Leaving Date: {{employment.leavingDate}}<br>
-</p>
+
+  <div *ngFor="let employment of employments;  let i = index">
+    <br><br>
+    <div style="display: inline-block">
+      Company: {{employment.company}}<br>
+      Location: {{employment.location}}<br>
+      Title: {{employment.title}}<br>
+      JoiningDate: {{employment.joiningDate}}<br>
+      LeavingDate: {{employment.leavingDate}}<br>
+    </div>
+    <button style="float: right;" (click)="enableEdit(i)">Edit</button>
+    <button class="delete"
+            (click)="delete(i); $event.stopPropagation()">x
+    </button>
+    <br><br>
+  </div>
+  <br>
+  <button (click)="enableAdd()">Add more</button>
+
+
+</div>
+
+<!--=================== EDIT ========================-->
+
+<div *ngIf="isEditEnabled" class="container">
+
+  <form (ngSubmit)="update()" #employmentForm="ngForm">
+
+    <div class="form-group">
+      <label for="companyE">company</label>
+      <input type="text" class="form-control"
+             id="companyE"
+             [class.controlError]="formErrors.company"
+             [class.noControlError]="!formErrors.company"
+             [(ngModel)]="tempEmployments.company" name="company"
+             #company="ngModel">
+      <div *ngIf="formErrors.company && (company.touched || company.dirty )" class="alert alert-danger">
+        {{ formErrors.company }}
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="locationE">location</label>
+      <input type="text" class="form-control"
+             id="locationE"
+             [class.controlError]="formErrors.location"
+             [class.noControlError]="!formErrors.location"
+             [(ngModel)]="tempEmployments.location" name="location"
+             #location="ngModel">
+      <div *ngIf="formErrors.location && (location.touched || location.dirty)" class="alert alert-danger">
+        {{ formErrors.location }}
+
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="titleE">title</label>
+      <input type="text" class="form-control"
+             id="titleE"
+             [class.controlError]="formErrors.title"
+             [class.noControlError]="!formErrors.title"
+             [(ngModel)]="tempEmployments.title" name="title"
+             #title="ngModel">
+      <div *ngIf="formErrors.title && (title.touched || title.dirty)" class="alert alert-danger">
+        {{ formErrors.title }}
+
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="joiningDateE">Passing Date: </label>
+      <input type="date" class="form-control" id="joiningDateE"
+             [class.controlError]="formErrors.joiningDate"
+             [class.noControlError]="!formErrors.joiningDate"
+             [(ngModel)]="tempEmployments.joiningDate" placeholder="Passing Date"
+             #joiningDate="ngModel" name="joiningDate">
+      <div *ngIf="formErrors.joiningDate && (joiningDate.touched || joiningDate.dirty)" class="alert alert-danger">
+        {{ formErrors.joiningDate }}
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="leavingDateE">Passing Date: </label>
+      <input type="date" class="form-control" id="leavingDateE"
+             [class.controlError]="formErrors.leavingDate"
+             [class.noControlError]="!formErrors.leavingDate"
+             [(ngModel)]="tempEmployments.leavingDate" placeholder="Passing Date"
+             #leavingDate="ngModel" name="leavingDate">
+      <div *ngIf="formErrors.leavingDate && (leavingDate.touched || leavingDate.dirty)" class="alert alert-danger">
+        {{ formErrors.leavingDate }}
+      </div>
+    </div>
+
+
+
+    <button (click)="disableEdit()">Undo Changes</button>
+    <button type="submit" class="btn btn-success" [disabled]="!isDisabled()">Submit</button>
+  </form>
+
+</div>
+
+<!--=================== ADD ========================-->
+<div *ngIf="isAddEnabled" class="container">
+
+  <form (ngSubmit)="add()" #employmentForm="ngForm">
+
+    <div class="form-group">
+      <label for="company">Company</label>
+      <input type="text" class="form-control"
+             id="company"
+             [class.controlError]="formErrors.company"
+             [class.noControlError]="!formErrors.company"
+             [(ngModel)]="tempEmployments.company" name="company"
+             #company="ngModel">
+      <div *ngIf="formErrors.company && (company.touched || company.dirty)" class="alert alert-danger">
+        {{ formErrors.company }}
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="location">Location</label>
+      <input type="text" class="form-control"
+             id="location"
+             [class.controlError]="formErrors.location"
+             [class.noControlError]="!formErrors.location"
+             [(ngModel)]="tempEmployments.location" name="location"
+             #location="ngModel">
+      <div *ngIf="formErrors.location && (location.touched || location.dirty)" class="alert alert-danger">
+        {{ formErrors.location }}
+
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="title">title</label>
+      <input type="text" class="form-control"
+             id="title"
+             [class.controlError]="formErrors.title"
+             [class.noControlError]="!formErrors.title"
+             [(ngModel)]="tempEmployments.title" name="title"
+             #title="ngModel">
+      <div *ngIf="formErrors.title && (title.touched || title.dirty)" class="alert alert-danger">
+        {{ formErrors.title }}
+
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="joiningDate">Joining Date: </label>
+      <input type="date" class="form-control" id="joiningDate"
+             [class.controlError]="formErrors.joiningDate"
+             [class.noControlError]="!formErrors.joiningDate"
+             [(ngModel)]="tempEmployments.joiningDate" placeholder="Passing Date"
+             #joiningDate="ngModel" name="joiningDate">
+      <div *ngIf="formErrors.joiningDate && (joiningDate.touched || joiningDate.dirty)" class="alert alert-danger">
+        {{ formErrors.joiningDate }}
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="leavingDate">Leaving Date: </label>
+      <input type="date" class="form-control" id="leavingDate"
+             [class.controlError]="formErrors.leavingDate"
+             [class.noControlError]="!formErrors.leavingDate"
+             [(ngModel)]="tempEmployments.leavingDate" placeholder="Passing Date"
+             #leavingDate="ngModel" name="leavingDate">
+      <div *ngIf="formErrors.leavingDate && (leavingDate.touched || leavingDate.dirty)" class="alert alert-danger">
+        {{ formErrors.leavingDate }}
+      </div>
+    </div>
+
+
+
+
+    <button type="submit" class="btn btn-success" [disabled]="!isDisabled()">Submit</button>
+  </form>
+  <div *ngIf="updateError"> {{updateError}}</div>
+</div>
