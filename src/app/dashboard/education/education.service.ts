@@ -22,16 +22,6 @@ export class EducationService {
   private url=this.token.baseUrl + 'education';
   private headers = new Headers({'Content-Type': 'application/json'});
 
-  // authenticateUser(data: Projects): Promise<LoginRes> {
-  //   console.log(data)
-  //   return this.http
-  //     .post(this.url, data, {headers: this.headers})
-  //     .toPromise()
-  //     .then(res => {
-  //       console.log(res.json());
-  //       return res.json() as LoginRes})
-  //     .catch(this.handleError);
-  // }
   private handleError(error: any): Promise<any> {
     console.log('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);
