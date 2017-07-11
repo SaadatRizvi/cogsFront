@@ -1,23 +1,29 @@
-<p *ngIf="employee">
+<md-card >
+  <div *ngIf="employee">
+
+    <md-card-header>
+      <md-card-title><h2 >Employee Information</h2></md-card-title>
+
+    </md-card-header>
+    <md-card-content>
+      <md-list  class="two-columns">
+        <md-list-item><strong>Name:&nbsp;</strong> {{employee.name}}</md-list-item>
+        <md-list-item><strong>Code:&nbsp;</strong> {{employee.code}}</md-list-item>
+        <md-list-item><strong>Designation:&nbsp;</strong> {{employee.designation}}</md-list-item>
+        <md-list-item><strong>Email:&nbsp;</strong> {{employee.email}}</md-list-item>
+        <md-list-item><strong>Tenure:&nbsp;</strong> {{employee.tenure}}</md-list-item>
+        <md-list-item><<strong>Gender:&nbsp;</strong> {{employee.gender}}</md-list-item>
+        <md-list-item><strong>Date of Birth:&nbsp;</strong> {{employee.dob}}</md-list-item>
+        <md-list-item><strong>Marital Status:&nbsp;</strong> {{employee.maritalStatus}}</md-list-item>
+        <md-list-item><strong>Manager:&nbsp;</strong> {{employee.manager}}</md-list-item>
+        <md-list-item><strong>Joining Date:&nbsp;</strong> {{employee.joiningDate}}</md-list-item>
+        <md-list-item><strong>Last Date:&nbsp;</strong>{{employee.lastDate}}</md-list-item>
+        <md-list-item><strong>Status:&nbsp;</strong> {{employee.status}}</md-list-item>
+        <md-list-item><strong>Seat No:&nbsp;</strong> {{employee.seatNo}}</md-list-item>
+        <md-list-item><strong>IsActive:&nbsp;</strong> {{employee.active}}</md-list-item>
+      </md-list>
+    </md-card-content>
 
 
-  Name: {{employee.name}}<br>
-
-  Code: {{employee.code}}<br>
-  Designation: {{employee.designation}}<br>
-  Email: {{employee.email}}<br>
-  Tenure: {{employee.tenure}}<br>
-  Gender: {{employee.gender}}<br>
-  Date of Birth: {{employee.dob}}<br>
-  Marital Status: {{employee.maritalStatus}}<br>
-  Manager: {{employee.manager}}<br>
-  Joining Date: {{employee.joiningDate}}<br>
-  Last Date:{{employee.lastDate}}<br>
-  Status: {{employee.status}}<br>
-  Seat No: {{employee.seatNo}}<br>
-  IsActive: {{employee.active}}<br>
-
-
-
-</p>
-
+  </div>
+</md-card>

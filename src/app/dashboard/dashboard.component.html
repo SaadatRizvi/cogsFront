@@ -1,23 +1,39 @@
-<h3>
-  <nav>
-    <a routerLink="/dashboard/{{EmployeeId}}" routerLinkActive="active">Dashboard</a>
-  </nav>
-</h3>
-<div class="grid grid-pad">
+<!--<h3>-->
+  <!--<nav>-->
+    <!--<a routerLink="/dashboard/{{EmployeeId}}" routerLinkActive="active">Dashboard</a>-->
+  <!--</nav>-->
+<!--</h3>-->
+
+<a style="padding-left: 50%;padding-right: 50%" md-raised-button routerLink="/dashboard/{{EmployeeId}}"
+   routerLinkActive>Dashboard</a>
+
+<br><br><br>
 
 
   <app-employee>
 
   </app-employee>
 
-  <nav>
-    <a routerLink="/dashboard/{{EmployeeId}}/education" routerLinkActive="active">Education</a>
-    <a routerLink="/dashboard/{{EmployeeId}}/employments" routerLinkActive="active">Employment History</a>
-    <a routerLink="/dashboard/{{EmployeeId}}/projects" routerLinkActive="active">Projects</a>
-    <a routerLink="/dashboard/{{EmployeeId}}/addresses" routerLinkActive="active">Addresses</a>
-    <a routerLink="/dashboard/{{EmployeeId}}/contactDetails" routerLinkActive="active">ContactDetails</a>
+<md-card>
+  <nav md-tab-nav-bar>
+    <a md-tab-link
+       *ngFor="let obj of navObj"
+       [routerLink]="obj.link"
+       routerLinkActive #rla="routerLinkActive"
+       [active]="rla.isActive">
+      {{obj.name}}
+    </a>
   </nav>
-  <div>
+
+
+  <!--<nav>-->
+    <!--<a routerLink="/dashboard/{{EmployeeId}}/education" routerLinkActive="active">Education</a>-->
+    <!--<a routerLink="/dashboard/{{EmployeeId}}/employments" routerLinkActive="active">Employment History</a>-->
+    <!--<a routerLink="/dashboard/{{EmployeeId}}/projects" routerLinkActive="active">Projects</a>-->
+    <!--<a routerLink="/dashboard/{{EmployeeId}}/addresses" routerLinkActive="active">Addresses</a>-->
+    <!--<a routerLink="/dashboard/{{EmployeeId}}/contactDetails" routerLinkActive="active">ContactDetails</a>-->
+  <!--</nav>-->
+
     <router-outlet></router-outlet>
-  </div>
-</div>
+
+</md-card>

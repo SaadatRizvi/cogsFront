@@ -55,13 +55,16 @@ export class AddressService {
 
   getAddress(id: number): Promise<Address[]> {
     let localUrl = this.url + '?EmployeeId=' + id;
+    //let localUrl = 'http://slowwly.robertomurray.co.uk/delay/3000/url/http://www.google.co.uk';
     this.headers.set('x-access-token', this.localStorage.getItem('token'));
 
     return this.http
-      .get(localUrl, {headers: this.headers})
+      .get(localUrl,{headers: this.headers})
       .toPromise()
       .then(res => {
-        return res.json() as Address[]
+
+          return res.json() as Address[] ;
+
       })
       .catch(this.handleError);
   }

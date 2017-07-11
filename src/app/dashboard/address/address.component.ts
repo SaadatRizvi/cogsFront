@@ -22,6 +22,22 @@ import {isNullOrUndefined} from "util";
   providers: [AddressService]
 })
 export class AddressComponent implements OnInit {
+
+
+  color = 'primary';
+  mode = 'determinate';
+  value = 50;
+
+
+
+
+
+
+
+
+
+
+
   updateError: string;
   addresses: Address[];
 
@@ -31,7 +47,7 @@ export class AddressComponent implements OnInit {
   addressesValidator: AddressValidator;
   formErrors: any;
   validationMessages: any;
-
+  busy: Promise<any>;
 
   types = ['Temporary', 'Permanent'];
 
@@ -51,11 +67,24 @@ export class AddressComponent implements OnInit {
     this.isEditEnabled = false;
     this.isAddEnabled = false;
     this.resetTemp();
+
+    // this.busy=new Promise(resolve => {
+    //   // Simulate server latency with 2 second delay
+    // //   setTimeout(() =>
+    // //     resolve(this.addressService.getAddress(+this.localStorage.getItem('id'))), 11000);
+    // // });
+
+
+    // setTimeout(function() {
+    //   this.busy=this.addressService.getAddress(+this.localStorage.getItem('id'));
+    // }, 1);
     this.addressService.getAddress(+this.localStorage.getItem('id'))
-      .then((result) => {
-        this.addresses = result;
-        this.checkToAddMore();
-      });
+     .then((result) => {
+
+          this.addresses = result;
+            this.checkToAddMore();
+          });
+
 
 
   }

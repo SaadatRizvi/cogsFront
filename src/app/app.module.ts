@@ -23,6 +23,19 @@ import {EducationComponent} from './dashboard/education/education.component';
 import { EmploymentsComponent } from './dashboard/employments/employments.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import {CanActivateViaAuthGuard} from "app/Guards/can-activate-via-auth-guard";
+import 'hammerjs';
+
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+//be sure to import the Angular Material modules
+//after Angular's BrowserModule,
+// as the import order matters for NgModules.
+import { MdButtonModule, MdCardModule,
+  MdMenuModule, MdToolbarModule, MdIconModule,
+  MdSelectModule,MdInputModule,MdTabsModule,
+  MdListModule} from '@angular/material';
+
+
 
 
 @NgModule({
@@ -31,7 +44,19 @@ import {CanActivateViaAuthGuard} from "app/Guards/can-activate-via-auth-guard";
     FormsModule,
     HttpModule,
     AppRoutingModule,
-    CoolStorageModule
+    CoolStorageModule,
+    BrowserAnimationsModule,
+    MdButtonModule,
+    MdMenuModule,
+    MdCardModule,
+    MdToolbarModule,
+    MdIconModule,
+    MdSelectModule,
+    MdInputModule,
+    MdTabsModule,
+    MdListModule,
+
+
   ],
   declarations: [
     AppComponent,
