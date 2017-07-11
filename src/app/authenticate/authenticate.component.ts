@@ -68,7 +68,6 @@ export class AuthenticateComponent implements OnInit{
 
 
   submit() {
-    console.log(this.loginData);
     this.authenticateService.authenticateUser(this.loginData)
       .then(loginRes=>{
         if(!loginRes.success){

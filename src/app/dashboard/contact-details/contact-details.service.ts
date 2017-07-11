@@ -23,18 +23,7 @@ export class ContactDetailsService {
   private headers = new Headers({'Content-Type': 'application/json',
     'x-access-token': 'NotSet'});
 
-  //this.localStorage.getItem('token')
 
-  // authenticateUser(data: ContactDetails): Promise<LoginRes> {
-  //   console.log(data)
-  //   return this.http
-  //     .post(this.url, data, {headers: this.headers})
-  //     .toPromise()
-  //     .then(res => {
-  //       console.log(res.json());
-  //       return res.json() as LoginRes})
-  //     .catch(this.handleError);
-  // }
   private handleError(error: any): Promise<any> {
     console.log('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);
@@ -44,13 +33,11 @@ export class ContactDetailsService {
     let localUrl=this.url+'?EmployeeId='+id;
 
     this.headers.set('x-access-token',this.localStorage.getItem('token'));
-   // console.log(this.url);
-   // console.log(this.headers);
+
     return this.http
       .get(localUrl, {headers: this.headers})
       .toPromise()
       .then(res => {
-        console.log(res.json());
         if(res.json().length > 0)
           return res.json() as ContactDetails;
         else return false;
@@ -66,22 +53,28 @@ export class ContactDetailsService {
       .put(localUrl, data,{headers: this.headers})
       .toPromise()
       .then(res => {
-        //       console.log(res.json() as Addresses);
         return res.json()})
       .catch(this.handleError);
 
 
   }
   create(data: any): Promise<any> {
-    //console.log(data)
     this.headers.set('x-access-token',this.localStorage.getItem('token'));
 
     return this.http
       .post(this.url, data, {headers: this.headers})
       .toPromise()
       .then(res => {
-        // console.log(res.json());
-        return res.json() })
+        if(res.json().created){
+          let newData=res.json();
+          delete newData.created;
+          return newData
+        }
+        else{
+          console.log(res)
+          return Object.assign({message:'There was a problem'},res.json());
+
+        } })
       .catch(this.handleError);
   }
 

@@ -144,7 +144,9 @@ export class EmploymentsComponent implements OnInit {
 
   update(): void {
     let id = this.tempEmployments.id;
-    this.employmentService.update(this.tempEmployments)
+    let newData = Object.assign({}, this.tempEmployments);
+
+    this.employmentService.update(newData)
       .then(res => {
 
         if (res == 1) {
@@ -179,9 +181,8 @@ export class EmploymentsComponent implements OnInit {
   }
 
   add(): void {
-    let data = JSON.stringify(this.tempEmployments);
     let newData = Object.assign({EmployeeId: this.localStorage.getItem('id')}, this.tempEmployments);
-
+    console.log(this.localStorage.getItem('id'))
     this.employmentService.create(newData)
       .then(res => {
 

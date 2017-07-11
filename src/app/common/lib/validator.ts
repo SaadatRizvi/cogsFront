@@ -7,13 +7,16 @@ export class Validator {
   constructor() { }
 
   static isAscii(data: string): boolean{
-    let ck_name = /[ -~]$/;
-    if (!ck_name.test(data)) {
-      return false;
+    if(data) {
+      let ck_name = /[ -~]$/;
+      if (!ck_name.test(data)) {
+        return false;
+      }
+      else {
+        return true;
+      }
     }
-    else {
-      return true;
-    }
+    return true;
   }
   static isAlphaNumeric(data: string) : boolean{
     let ck_name = /^[A-Za-z0-9]*$/;
@@ -43,7 +46,7 @@ export class Validator {
     }
   }
   static isFloat(data: string) : boolean{
-    let ck_name =/^\d{0,2}(\.\d{0,5}){0,1}$/;
+    let ck_name =/^\d{0,1}(\.\d{0,5}){0,1}$/;
     if (!ck_name.test(data)) {
       return false;
     }

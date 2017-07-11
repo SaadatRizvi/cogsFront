@@ -72,6 +72,7 @@ export class ProjectsComponent implements OnInit {
   }
   update(): void{
     let newData = Object.assign({}, this.temp);
+    debugger;
     console.log(newData);
     let id=this.temp.id;
     this.projectService.update(newData)
@@ -98,15 +99,9 @@ export class ProjectsComponent implements OnInit {
   add(): void {
     let newData = Object.assign({EmployeeId: this.localStorage.getItem('id')}, this.temp);
 
-    //this.addresses.push(this.tempAddress)
-
-    console.log(newData)
-    debugger;
     this.projectService.create(newData)
       .then(res => {
-        // console.log('res; ');
-        //
-        // console.log(res);
+
         if (!res.message) {
           console.log(res);
           this.projects.push(res);
@@ -169,7 +164,19 @@ export class ProjectsComponent implements OnInit {
 
       let errors = [];
 
-      if ((control && control.dirty && !control.valid) || (control && !this.projectsValidator.validate(field, errors,this.temp[field]))) {
+      let validatonCheck: boolean;
+
+      if (field === 'leavingDate') {
+        validatonCheck = !this.projectsValidator.validate(field, errors, this.temp[field],this.temp.joiningDate);
+      }
+      else {
+        validatonCheck = !this.projectsValidator.validate(field, errors, this.temp[field])
+
+      }
+
+
+
+      if ((control && control.dirty && !control.valid) || (control && validatonCheck)) {
         const messages = this.validationMessages[field];
         if (control.errors) {
           errors.push(control.errors);
@@ -180,13 +187,6 @@ export class ProjectsComponent implements OnInit {
       }
     }
   }
-
-  // formatDate(){
-  //   let newDate=this.date.split('-');
-  //   this.temp.passingDate=newDate.join('/');
-  //   console.log(this.temp.passingDate  )
-  // }
-
 
 
 }

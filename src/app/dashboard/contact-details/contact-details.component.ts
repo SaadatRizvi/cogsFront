@@ -103,10 +103,7 @@ export class ContactDetailsComponent implements OnInit {
   }
 
   add(): void {
-    let data = JSON.stringify(this.tempDetails);
     let newData = Object.assign({EmployeeId: this.localStorage.getItem('id')}, this.tempDetails);
-
-    //this.address.push(this.tempAddress)
 
     console.log(newData)
     this.contactDetailsService.create(newData)
@@ -114,10 +111,12 @@ export class ContactDetailsComponent implements OnInit {
         // console.log('res; ');
         //
         // console.log(res);
-        if (res) {
-          //console.log(this.contactDetails);
-          this.contactDetails=this.tempDetails;
+        if (!res.message) {
+          this.contactDetails=res as ContactDetails;
           this.disableAdd();
+        }
+        else{
+          this.updateError=res.Message;
         }
       });
   }

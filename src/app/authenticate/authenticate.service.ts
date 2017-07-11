@@ -16,18 +16,15 @@ export class AuthenticateService  {
               private token: Token) { }
 
   authenticateUser(data: LoginRequest): Promise<LoginRes> {
-    console.log(data);
 
     return this.http
       .post(this.url, data, {headers: this.headers})
       .toPromise()
       .then(res => {
-        console.log(res.json());
         return res.json() as LoginRes})
       .catch(this.handleError);
   }
   private handleError(error: any): Promise<any> {
-    console.log('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);
   }
 

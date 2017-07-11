@@ -42,7 +42,7 @@ export class ProjectService {
     let localUrl=this.url+'?EmployeeId='+id;
     this.headers.set('x-access-token',this.localStorage.getItem('token'));
     return this.http
-      .get(this.url, {headers: this.headers})
+      .get(localUrl, {headers: this.headers})
       .toPromise()
       .then(res => {
         return res.json() as Projects[]})

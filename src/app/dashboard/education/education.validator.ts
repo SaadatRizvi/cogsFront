@@ -12,19 +12,19 @@ export var formErrors = {
 export const validationMessages = {
   'institute': {
     'required': 'Required.',
-    'alpha': 'Must contain alphabets only',
+    'ascii': 'Must contain ascii only',
   },
   'field': {
     'required': 'Required.',
-    'alpha': 'Must contain alphabets only',
+    'ascii': 'Must contain ascii only',
   },
   'degree': {
     'required': 'Required.',
-    'alpha': 'Must contain alphabets only',
+    'ascii': 'Must contain ascii only',
   },
   'gpa': {
     'required': 'Required.',
-    'number': 'Must contain number only',
+    'number': 'Must be in correct format \'D:DDDD\' e.g 3.0443 ',
   },
   'passingDate': {
     'required': 'Required.',
@@ -35,6 +35,7 @@ export const validationMessages = {
 export var isDisabled: boolean =true  ;
 
 export class EducationValidator {
+
 
     constructor(){
     isDisabled=true;
@@ -97,7 +98,7 @@ export class EducationValidator {
     let returnVal = true;
 
     if (!Validator.isAscii(data)) {
-      errors.push('date');
+      errors.push('ascii');
       returnVal = false;
     }
 
