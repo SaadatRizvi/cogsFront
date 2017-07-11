@@ -65,6 +65,7 @@ export class ContactDetailsComponent implements OnInit {
   }
 
   enableEdit(): void{
+    this.isAddEnabled=false;
     this.tempDetails=Object.assign({},this.contactDetails);
     this.isEditEnabled = true;
   }

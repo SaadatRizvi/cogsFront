@@ -50,7 +50,8 @@ export class ProjectsComponent implements OnInit {
   }
 
   enableEdit(index: number): void{
-    this.temp=Object.assign({},this.projects[index]);
+  this.isAddEnabled=false;
+  this.temp=Object.assign({},this.projects[index]);
     this.isEditEnabled = true;
   }
 
@@ -72,21 +73,13 @@ export class ProjectsComponent implements OnInit {
   }
   update(): void{
     let newData = Object.assign({}, this.temp);
-    debugger;
-    console.log(newData);
     let id=this.temp.id;
     this.projectService.update(newData)
       .then(res=> {
         if (res == 1) {
           for (let i = 0; i < this.projects.length; i++) {
-            // console.log("for i= "+i);
-            // console.log("this.addresses[i].id= "+this.addresses[i].id);
-            console.log("this.tempEd= "+this.temp);
             if (this.projects[i].id === id) {
-
               this.projects[i] = this.temp;
-              console.log(this.temp)
-
             }
           }
         }

@@ -47,6 +47,7 @@ import {CanActivateViaAuthGuard} from "app/Guards/can-activate-via-auth-guard";
     EmploymentsComponent,
     PageNotFoundComponent,
 
+
   ],
   providers: [ HeroService, Token, CanActivateViaAuthGuard],
   bootstrap: [ AppComponent ]

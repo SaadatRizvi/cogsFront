@@ -12,7 +12,7 @@ export var formErrors = {
 export const validationMessages = {
   'name': {
     'required': 'Required.',
-    'alphaNumeric': 'Must contain alphabets and numerics only',
+    'ascii': 'Must contain ascii only',
   },
   'role': {
     'required': 'Required.',
@@ -58,8 +58,8 @@ export class ProjectsValidator {
   validateName(errors: Array<any>, data: string): boolean {
     let returnVal = true;
 
-    if (!Validator.isAlphaNumeric(data)) {
-      errors.push('alphaNumeric');
+    if (!Validator.isAscii(data)) {
+      errors.push('ascii');
       returnVal = false;
     }
 

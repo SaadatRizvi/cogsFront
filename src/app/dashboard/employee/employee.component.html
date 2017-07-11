@@ -1,15 +1,60 @@
-<p *ngIf="employee">
+<div *ngIf="employee">
 
 
   Name: {{employee.name}}<br>
 
   Code: {{employee.code}}<br>
   Designation: {{employee.designation}}<br>
-  Email: {{employee.email}}<br>
+  <div >
+    <div *ngIf="!emailEdit">
+      Email:
+      <a style="margin-bottom: 0px" (click)="enableEdit('email');">{{employee.email}}<br></a>
+    </div>
+    <div [hidden]="!emailEdit">
+      <label for="gender">Email: </label>
+      <input [(ngModel)]="tempEmployee.email" type="text" name="email" class="form-control">
+      <button (click)="save('email')">&#10003;</button>
+      <button (click)="disableEdit('email')">&#10005;</button>
+
+    </div>
+  </div>
   Tenure: {{employee.tenure}}<br>
-  Gender: {{employee.gender}}<br>
+  <div #editGender>
+    <div *ngIf="!genderEdit">
+      Gender:
+      <a style="margin-bottom: 0px" (click)="enableEdit('gender');">{{employee.gender}}<br></a>
+    </div>
+    <div [hidden]="!genderEdit" >
+      <label for="gender">Gender: </label>
+      <select id="gender" #gender [(ngModel)]="tempEmployee.gender">
+        <option value="male" [selected]="tempEmployee.gender == 'male'">Male</option>
+        <option value="female" [selected]="tempEmployee.gender == 'female'">Female</option>
+        <option value="other" [selected]="tempEmployee.gender == 'other'">Other</option>
+      </select>
+      <button (click)="save('gender')">&#10003;</button>
+      <button (click)="disableEdit('gender')">&#10005;</button>
+
+    </div>
+  </div>
   Date of Birth: {{employee.dob}}<br>
-  Marital Status: {{employee.maritalStatus}}<br>
+
+  <div #editStatus>
+    <div *ngIf="!maritalEdit">
+      Marital Status:
+      <a style="margin-bottom: 0px" (click)="enableEdit('maritalStatus');">{{employee.maritalStatus}}<br></a>
+    </div>
+    <div [hidden]="!maritalEdit">
+      <label for="maritalStatus">Marital Status: </label>
+      <select id="maritalStatus" [(ngModel)]="tempEmployee.maritalStatus">
+        <option value="single" [selected]="tempEmployee.maritalStatus == 'single'">Single</option>
+        <option value="married" [selected]="tempEmployee.maritalStatus == 'married'">Married</option>
+        <option value="other" [selected]="tempEmployee.maritalStatus == 'other'">Other</option>
+      </select>
+      <button (click)="save('maritalStatus')">&#10003;</button>
+      <button (click)="disableEdit('maritalStatus')">&#10005;</button>
+
+    </div>
+  </div>
   Manager: {{employee.manager}}<br>
   Joining Date: {{employee.joiningDate}}<br>
   Last Date:{{employee.lastDate}}<br>
@@ -18,6 +63,17 @@
   IsActive: {{employee.active}}<br>
 
 
-
-</p>
-
+</div>
+<style>
+  div:focus {
+    /*outline: none;*/
+  }
+</style>
+<script>
+  $("#innerDiv").onblur(function () {
+    console.log('child')
+    if ($(this).has(document.activeElement).length == 0) {
+      console.log('child')
+    }
+  });
+</script>

@@ -22,32 +22,41 @@ export class EmployeeService {
   private url=this.token.baseUrl + 'employees';
   private headers = new Headers({'Content-Type': 'application/json'});
 
-  // authenticateUser(data: Projects): Promise<LoginRes> {
-  //   console.log(data)
-  //   return this.http
-  //     .post(this.url, data, {headers: this.headers})
-  //     .toPromise()
-  //     .then(res => {
-  //       console.log(res.json());
-  //       return res.json() as LoginRes})
-  //     .catch(this.handleError);
-  // }
+
   private handleError(error: any): Promise<any> {
     console.log('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);
   }
 
-  getEmployee(id: number): Promise<Employee> {
-    this.url += '/' + id;
+  getEmployee(id: number): Promise<Employee>{
+
+  let localUrl = this.url +'/' + id;
+
     this.headers.set('x-access-token',this.localStorage.getItem('token'));
    // console.log(this.url);
    // console.log();
     return this.http
-      .get(this.url, {headers: this.headers})
+      .get(localUrl, {headers: this.headers})
       .toPromise()
       .then(res => {
         // console.log(res.json());
         return res.json() as Employee})
       .catch(this.handleError);
+  }
+
+  update(data: any): Promise<any> {
+    let localUrl = this.url + '/' + data.id;
+    delete data.id;
+    this.headers.set('x-access-token', this.localStorage.getItem('token'));
+
+    return this.http
+      .put(localUrl, data, {headers: this.headers})
+      .toPromise()
+      .then(res => {
+        return res.json()
+      })
+      .catch(this.handleError);
+
+
   }
 }

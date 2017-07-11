@@ -50,6 +50,7 @@ export class EducationComponent implements OnInit {
   }
 
   enableEdit(index: number): void{
+    this.isAddEnabled=false;
     this.tempEducation=Object.assign({},this.educations[index]);
     this.isEditEnabled = true;
   }

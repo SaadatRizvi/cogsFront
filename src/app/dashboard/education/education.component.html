@@ -162,6 +162,8 @@
         {{ formErrors.passingDate }}
       </div>
     </div>
+    <button (click)="disableAdd()">Close</button>
+
     <button  type="submit" class="btn btn-success" [disabled]="!isDisabled()">Add</button>
   </form>
 

@@ -132,7 +132,6 @@ export class EmploymentsComponent implements OnInit {
   enableEdit(index: number): void {
     this.isAddEnabled = false;
     this.tempEmployments = Object.assign({}, this.employments[index]);
-
     this.isEditEnabled = true;
 
   }

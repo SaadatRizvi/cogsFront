@@ -144,7 +144,6 @@ export class AddressComponent implements OnInit {
   enableEdit(index: number): void {
     this.isAddEnabled = false;
     this.tempAddress = Object.assign({}, this.addresses[index]);
-
     this.isEditEnabled = true;
 
   }

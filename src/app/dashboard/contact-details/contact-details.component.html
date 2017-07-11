@@ -32,16 +32,23 @@
 
   <form (ngSubmit)="update()" #contactForm="ngForm">
 
-    <div>
-      <label>Cnic: </label>
-      {{tempDetails.cnic}}<br>
+    <div class="form-group">
+      <label for="cnic">CNIC: </label>
+      <input [disabled]="true" type="text" class="form-control" id="cnic"
+             [class.controlError]="formErrors.cnic"
+             [class.noControlError]="!formErrors.cnic"
+             [(ngModel)]="tempDetails.cnic" placeholder="cnic"
+             #cnic="ngModel" name="cnic">
+      <div *ngIf="formErrors.cnic && (cnic.touched || cnic.dirty)" class="alert alert-danger">
+        {{ formErrors.cnic }}
+      </div>
     </div>
     <div class="form-group">
       <label for="personalEmail">Personal Email: </label>
       <input type="text" class="form-control" id="personalEmail"
              [class.controlError]="formErrors.personalEmail"
              [class.noControlError]="!formErrors.personalEmail"
-             [(ngModel)]="tempDetails.personalEmail" placeholder="email"
+             [(ngModel)]="tempDetails.personalEmail" placeholder="personalEmail"
              #personalEmail="ngModel" name="personalEmail">
       <div *ngIf="formErrors.personalEmail && (personalEmail.touched || personalEmail.dirty)" class="alert alert-danger">
         {{ formErrors.personalEmail }}
@@ -53,7 +60,7 @@
       <input type="text" class="form-control" id="mobileNumber"
              [class.controlError]="formErrors.mobileNumber"
              [class.noControlError]="!formErrors.mobileNumber"
-             [(ngModel)]="tempDetails.mobileNumber" placeholder="email"
+             [(ngModel)]="tempDetails.mobileNumber" placeholder="mobileNumber"
              #mobileNumber="ngModel" name="mobileNumber">
       <div *ngIf="formErrors.mobileNumber && (mobileNumber.touched || mobileNumber.dirty)" class="alert alert-danger">
         {{ formErrors.mobileNumber }}
@@ -65,7 +72,7 @@
       <input type="text" class="form-control" id="phoneNumber"
              [class.controlError]="formErrors.phoneNumber"
              [class.noControlError]="!formErrors.phoneNumber"
-             [(ngModel)]="tempDetails.phoneNumber" placeholder="email"
+             [(ngModel)]="tempDetails.phoneNumber" placeholder="phoneNumber"
              #phoneNumber="ngModel" name="phoneNumber">
       <div *ngIf="formErrors.phoneNumber && (phoneNumber.touched || phoneNumber.dirty)" class="alert alert-danger">
         {{ formErrors.phoneNumber }}
@@ -76,7 +83,7 @@
       <input type="text" class="form-control" id="skype"
              [class.controlError]="formErrors.skype"
              [class.noControlError]="!formErrors.skype"
-             [(ngModel)]="tempDetails.skype" placeholder="email"
+             [(ngModel)]="tempDetails.skype" placeholder="skype"
              #skype="ngModel" name="skype">
       <div *ngIf="formErrors.skype && (skype.touched || skype.dirty)" class="alert alert-danger">
         {{ formErrors.skype }}
@@ -88,7 +95,7 @@
       <input type="text" class="form-control" id="emergencyName"
              [class.controlError]="formErrors.emergencyName"
              [class.noControlError]="!formErrors.emergencyName"
-             [(ngModel)]="tempDetails.emergencyName" placeholder="email"
+             [(ngModel)]="tempDetails.emergencyName" placeholder="emergencyName"
              #emergencyName="ngModel" name="emergencyName">
       <div *ngIf="formErrors.emergencyName && (emergencyName.touched || emergencyName.dirty)" class="alert alert-danger">
         {{ formErrors.emergencyName }}
@@ -99,7 +106,7 @@
       <input type="text" class="form-control" id="emergencyNumber"
              [class.controlError]="formErrors.emergencyNumber"
              [class.noControlError]="!formErrors.emergencyNumber"
-             [(ngModel)]="tempDetails.emergencyNumber" placeholder="email"
+             [(ngModel)]="tempDetails.emergencyNumber" placeholder="emergencyNumber"
              #emergencyNumber="ngModel" name="emergencyNumber">
       <div *ngIf="formErrors.emergencyNumber && (emergencyNumber.touched || emergencyNumber.dirty)" class="alert alert-danger">
         {{ formErrors.emergencyNumber }}
@@ -110,7 +117,7 @@
       <input type="text" class="form-control" id="emergencyAddress"
              [class.controlError]="formErrors.emergencyAddress"
              [class.noControlError]="!formErrors.emergencyAddress"
-             [(ngModel)]="tempDetails.emergencyAddress" placeholder="email"
+             [(ngModel)]="tempDetails.emergencyAddress" placeholder="emergencyAddress"
              #emergencyAddress="ngModel" name="emergencyAddress">
       <div *ngIf="formErrors.emergencyAddress && (emergencyAddress.touched || emergencyAddress.dirty)" class="alert alert-danger">
         {{ formErrors.emergencyAddress }}
@@ -121,7 +128,7 @@
       <input type="text" class="form-control" id="emergencyRelation"
              [class.controlError]="formErrors.emergencyRelation"
              [class.noControlError]="!formErrors.emergencyRelation"
-             [(ngModel)]="tempDetails.emergencyRelation" placeholder="email"
+             [(ngModel)]="tempDetails.emergencyRelation" placeholder="emergencyRelation"
              #emergencyRelation="ngModel" name="emergencyRelation">
       <div *ngIf="formErrors.emergencyRelation && (emergencyRelation.touched || emergencyRelation.dirty)" class="alert alert-danger">
         {{ formErrors.emergencyRelation }}
@@ -244,6 +251,8 @@
         {{ formErrors.emergencyRelation }}
       </div>
     </div>
+    <button (click)="disableAdd()">Close</button>
+
     <button  type="submit" class="btn btn-success" [disabled]="!isDisabled()">Add</button>
   </form>
 
