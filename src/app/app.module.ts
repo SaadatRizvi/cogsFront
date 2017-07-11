@@ -17,7 +17,7 @@ import { HeroService }          from './hero.service';
 import { AuthenticateComponent } from './authenticate/authenticate.component';
 import { ProjectsComponent } from './dashboard/projects/projects.component';
 import { EmployeeComponent } from './dashboard/employee/employee.component';
-import { AddressesComponent } from './dashboard/addresses/addresses.component';
+import { AddressComponent } from './dashboard/address/address.component';
 import { ContactDetailsComponent } from './dashboard/contact-details/contact-details.component';
 import {EducationComponent} from './dashboard/education/education.component';
 import { EmploymentsComponent } from './dashboard/employments/employments.component';
@@ -41,7 +41,7 @@ import {CanActivateViaAuthGuard} from "app/Guards/can-activate-via-auth-guard";
     AuthenticateComponent,
     ProjectsComponent,
     EmployeeComponent,
-    AddressesComponent,
+    AddressComponent,
     ContactDetailsComponent,
     EducationComponent,
     EmploymentsComponent,

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Headers, Http} from '@angular/http';
-import {Employments} from './employments.dto';
+import {Address} from './address.dto';
 import {Token}  from '../../token'
 
 
@@ -9,7 +9,7 @@ import {CoolLocalStorage} from "angular2-cool-storage";
 
 
 @Injectable()
-export class EmploymentsService {
+export class AddressService {
   localStorage: CoolLocalStorage;
 
 
@@ -20,7 +20,7 @@ export class EmploymentsService {
   }
 
 
-  private url = this.token.baseUrl + 'employments';
+  private url = this.token.baseUrl + 'address';
   private headers = new Headers({
     'Content-Type': 'application/json',
     'x-access-token': 'NotSet'
@@ -34,9 +34,6 @@ export class EmploymentsService {
       .post(this.url, data, {headers: this.headers})
       .toPromise()
       .then(res => {
-        console.log(res);
-        console.log(res.json());
-
         if (res.json().created === true) {
           delete res.json().created;
           return res.json();
@@ -56,7 +53,7 @@ export class EmploymentsService {
     return Promise.reject(error.message || error);
   }
 
-  getEmployments(id: number): Promise<Employments[]> {
+  getAddress(id: number): Promise<Address[]> {
     let localUrl = this.url + '?EmployeeId=' + id;
     this.headers.set('x-access-token', this.localStorage.getItem('token'));
 
@@ -64,12 +61,12 @@ export class EmploymentsService {
       .get(localUrl, {headers: this.headers})
       .toPromise()
       .then(res => {
-        return res.json() as Employments[]
+        return res.json() as Address[]
       })
       .catch(this.handleError);
   }
 
-  update(data: Employments) {
+  update(data: Address) {
 
     console.log("In service update... id:" + data.id);
     let localUrl = this.url + '/' + data.id;
@@ -80,7 +77,7 @@ export class EmploymentsService {
       .put(localUrl, data, {headers: this.headers})
       .toPromise()
       .then(res => {
-        return res.json() as Employments
+        return res.json() as Address
       })
       .catch(this.handleError);
 

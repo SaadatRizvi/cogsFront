@@ -1,4 +1,4 @@
-export class Addresses {
+export class Address {
 
  constructor(
    public id : number,
