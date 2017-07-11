@@ -115,7 +115,7 @@ export class ContactDetailsValidator {
   validateEmergencyAlpha(errors: Array<any>, data: string): boolean {
     let returnVal = true;
 
-    if (!Validator.isAlpha(data)) {
+    if (!Validator.isAscii(data)) {
       errors.push('alpha');
       returnVal = false;
     }

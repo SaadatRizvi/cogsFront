@@ -12,7 +12,7 @@
 
     </div>
     <button style="float: right;" (click)="enableEdit(i)">Edit</button>
-    <button class="delete"
+    <button style="float: right;" class="delete"
             (click)="delete(i); $event.stopPropagation()">x</button>
     <br><br>
   </div>
@@ -37,7 +37,7 @@
              [class.noControlError]="!formErrors.institute"
              [(ngModel)]="tempEducation.institute" placeholder="institute"
              #institute="ngModel" name="institute">
-      <div *ngIf="formErrors.institute && (institute.touched)" class="alert alert-danger">
+      <div *ngIf="formErrors.institute && (institute.touched || institute.dirty)" class="alert alert-danger">
         {{ formErrors.institute }}
       </div>
     </div>
@@ -49,7 +49,7 @@
              [class.noControlError]="!formErrors.degree"
              [(ngModel)]="tempEducation.degree" placeholder="degree"
              #degree="ngModel" name="degree">
-      <div *ngIf="formErrors.degree && (degree.touched)" class="alert alert-danger">
+      <div *ngIf="formErrors.degree && (degree.touched || degree.dirty)" class="alert alert-danger">
         {{ formErrors.degree }}
       </div>
     </div>
@@ -61,7 +61,7 @@
              [class.noControlError]="!formErrors.field"
              [(ngModel)]="tempEducation.field" placeholder="field"
              #field="ngModel" name="field">
-      <div *ngIf="formErrors.field && (field.touched)" class="alert alert-danger">
+      <div *ngIf="formErrors.field && (field.touched || field.dirty)" class="alert alert-danger">
         {{ formErrors.field }}
       </div>
     </div>
@@ -72,7 +72,7 @@
              [class.noControlError]="!formErrors.gpa"
              [(ngModel)]="tempEducation.gpa" placeholder="gpa"
              #gpa="ngModel" name="gpa">
-      <div *ngIf="formErrors.gpa && (gpa.touched)" class="alert alert-danger">
+      <div *ngIf="formErrors.gpa && (gpa.touched || gpa.dirty)" class="alert alert-danger">
         {{ formErrors.gpa }}
       </div>
     </div>
@@ -84,7 +84,7 @@
              [class.noControlError]="!formErrors.passingDate"
              [(ngModel)]="tempEducation.passingDate" placeholder="Passing Date"
              #passingDate="ngModel" name="passingDate">
-      <div *ngIf="formErrors.passingDate && (passingDate.touched)" class="alert alert-danger">
+      <div *ngIf="formErrors.passingDate && (passingDate.touched || passingDate.dirty)" class="alert alert-danger">
         {{ formErrors.passingDate }}
       </div>
     </div>
@@ -111,7 +111,7 @@
              [class.noControlError]="!formErrors.institute"
              [(ngModel)]="tempEducation.institute" placeholder="institute"
              #institute="ngModel" name="institute">
-      <div *ngIf="formErrors.institute && (institute.touched)" class="alert alert-danger">
+      <div *ngIf="formErrors.institute && (institute.touched || institute.dirty)" class="alert alert-danger">
         {{ formErrors.institute }}
       </div>
     </div>
@@ -123,7 +123,7 @@
              [class.noControlError]="!formErrors.degree"
              [(ngModel)]="tempEducation.degree" placeholder="degree"
              #degree="ngModel" name="degree">
-      <div *ngIf="formErrors.degree && (degree.touched)" class="alert alert-danger">
+      <div *ngIf="formErrors.degree && (degree.touched || degree.dirty)" class="alert alert-danger">
         {{ formErrors.degree }}
       </div>
     </div>
@@ -135,7 +135,7 @@
              [class.noControlError]="!formErrors.field"
              [(ngModel)]="tempEducation.field" placeholder="field"
              #field="ngModel" name="field">
-      <div *ngIf="formErrors.field && (field.touched)" class="alert alert-danger">
+      <div *ngIf="formErrors.field && (field.touched || field.dirty)" class="alert alert-danger">
         {{ formErrors.field }}
       </div>
     </div>
@@ -146,7 +146,7 @@
              [class.noControlError]="!formErrors.gpa"
              [(ngModel)]="tempEducation.gpa" placeholder="gpa"
              #gpa="ngModel" name="gpa">
-      <div *ngIf="formErrors.gpa && (gpa.touched)" class="alert alert-danger">
+      <div *ngIf="formErrors.gpa && (gpa.touched || gpa.dirty)" class="alert alert-danger">
         {{ formErrors.gpa }}
       </div>
     </div>
@@ -158,7 +158,7 @@
              [class.noControlError]="!formErrors.passingDate"
              [(ngModel)]="this.tempEducation.passingDate" placeholder="Passing Date"
              #passingDate="ngModel" name="passingDate">
-      <div *ngIf="formErrors.passingDate && (passingDate.touched)" class="alert alert-danger">
+      <div *ngIf="formErrors.passingDate && (passingDate.touched || passingDate.dirty)" class="alert alert-danger">
         {{ formErrors.passingDate }}
       </div>
     </div>

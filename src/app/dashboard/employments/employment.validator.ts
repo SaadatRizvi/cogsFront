@@ -59,7 +59,7 @@ export class EmploymentsValidator {
   validateCompany(errors: Array<any>, data: string): boolean {
     let returnVal = true;
 
-    if (!Validator.isAlpha(data)) {
+    if (!Validator.isAscii(data)) {
       errors.push('alpha');
       returnVal = false;
     }
@@ -76,7 +76,7 @@ export class EmploymentsValidator {
   validateTitle(errors: Array<any>, data: string): boolean {
     let returnVal = true;
 
-    if (!Validator.isAlpha(data)) {
+    if (!Validator.isAscii(data)) {
       errors.push('alpha');
       returnVal = false;
     }
