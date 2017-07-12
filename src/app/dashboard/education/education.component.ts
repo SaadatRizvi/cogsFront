@@ -50,6 +50,7 @@ export class EducationComponent implements OnInit {
   }
 
   enableEdit(index: number): void{
+    this.disableAdd();
     this.tempEducation=Object.assign({},this.educations[index]);
     this.isEditEnabled = true;
   }
@@ -71,7 +72,10 @@ export class EducationComponent implements OnInit {
     this.resetTemp();
   }
   update(): void{
+    let gpa=this.tempEducation.gpa;
+    //delete this.tempEducation.gpa;
     let newData = Object.assign({}, this.tempEducation);
+    newData.gpa=gpa;
     let id=this.tempEducation.id;
     this.educationService.update(newData)
       .then(res=> {
@@ -80,7 +84,7 @@ export class EducationComponent implements OnInit {
             if (this.educations[i].id === id) {
 
               this.educations[i] = this.tempEducation;
-
+              this.educations[i].gpa=gpa;
             }
           }
         }
